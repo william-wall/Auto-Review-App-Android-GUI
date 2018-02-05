@@ -58,8 +58,9 @@ public class Register extends AppCompatActivity {
             User user = new User(name, email, Integer.parseInt(phone), password);
             userInstance.add(user);
             Log.d("list", user.toString());
+            Intent move = new Intent(Register.this, Correct.class);
+            move.putExtra("message_key", name);
 
-            Intent move = new Intent(Register.this, MainActivity.class);
             startActivity(move);
 
 

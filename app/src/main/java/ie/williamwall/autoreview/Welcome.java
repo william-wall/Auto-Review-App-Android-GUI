@@ -68,16 +68,16 @@ public class Welcome extends AppCompatActivity {
             mImageView.setImageResource(images[position]);
             mTextView.setText(users[position]);
 
-//            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    String selectedItem = (String) parent.getItemAtPosition(position);
-//                    System.out.println("ISUKHFNSUFNSIJFSNIKFJSNIUFFNSJFNISDJNFIUSDJSN");
-//                    Log.d("MyApp","I am here");
-//                    Intent move = new Intent(Welcome.this, Vehicle.class);
-//                    startActivity(move);
-//                }
-//            });
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String selectedItem = (String) parent.getItemAtPosition(position);
+                    System.out.println("ISUKHFNSUFNSIJFSNIKFJSNIUFFNSJFNISDJNFIUSDJSN");
+                    Log.d("MyApp","I am here");
+                    Intent move = new Intent(Welcome.this, Vehicle.class);
+                    startActivity(move);
+                }
+            });
 
 
             return view;

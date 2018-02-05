@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int pos, long id){
                 nameTxt.setText(names.get(pos));
+
             }
         });
 
