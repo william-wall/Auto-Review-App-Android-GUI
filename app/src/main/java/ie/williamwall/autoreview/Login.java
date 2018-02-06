@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.jar.Attributes;
 
 public class Login extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class Login extends AppCompatActivity {
     private Button login;
     private Button register;
     private int counter = 5;
+    private TextView currentTime;
 
 
 
@@ -31,6 +34,10 @@ public class Login extends AppCompatActivity {
         info = (TextView)findViewById(R.id.textView);
         login = (Button)findViewById(R.id.loginButton);
         register = (Button)findViewById(R.id.registerButton);
+        currentTime = (TextView) findViewById(R.id.timeView);
+
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        currentTime.setText(currentDateTimeString);
 
 
         info.setText("No of attempts remaining: 5");

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.williamwall.autoreview.MainMenu"
+    tools:context="ie.williamwall.autoreview.MainMenuUser"
     android:orientation="vertical">
 
     <EditText
@@ -37,12 +37,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Edit" />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/clear"
-            android:text="Delete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
     <ListView
@@ -53,10 +47,11 @@
     </ListView>
 
     <TextView
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:gravity="center"
 
-        android:text="Logged in as Administrator" />
+        android:gravity="center"
+        android:text="Logged in as:" />
 
 </LinearLayout>

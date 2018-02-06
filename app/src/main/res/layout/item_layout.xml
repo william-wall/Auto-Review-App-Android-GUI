@@ -17,13 +17,13 @@
         android:layout_height="wrap_content">
         <TextView
         android:id="@+id/edit_title"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:text="Add title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/edit_desc"
-            android:textSize="20dp"
+            android:textSize="10dp"
             android:text="Add desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

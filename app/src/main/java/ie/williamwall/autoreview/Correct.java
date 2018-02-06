@@ -28,7 +28,7 @@ public class Correct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent Intent = new Intent(Correct.this, MainActivity.class);
+                Intent Intent = new Intent(Correct.this, MainMenuUser.class);
                 startActivity(Intent);
             }
         });

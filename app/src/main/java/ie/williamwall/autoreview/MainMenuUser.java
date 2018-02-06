@@ -1,25 +1,28 @@
 package ie.williamwall.autoreview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainMenu extends AppCompatActivity implements View.OnClickListener {
+public class MainMenuUser extends AppCompatActivity implements View.OnClickListener {
 
     int id =-1;
     ListView mainList;
     EditText editTextTitle;
     EditText editTextDesc;
-    Button addButton, editButton, clearButton;
+    Button addButton, editButton;
+//            clearButton;
     ArrayList<Reviews> someReviews;
     CustomAdapter myadapter;
+    TextView userName;
 
     private void init(){
         mainList = (ListView) findViewById(R.id.list_cars);
@@ -27,11 +30,15 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         editTextDesc = (EditText) findViewById(R.id.edit_desc);
         addButton = (Button) findViewById(R.id.add);
         editButton = (Button) findViewById(R.id.edit);
-        clearButton = (Button) findViewById(R.id.clear);
+//        clearButton = (Button) findViewById(R.id.clear);
+
+
 
         addButton.setOnClickListener(this);
         editButton.setOnClickListener(this);
-        clearButton.setOnClickListener(this);
+//        clearButton.setOnClickListener(this);
+
+
 
 
 
@@ -40,7 +47,16 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main_menu_user);
+
+
+
+                userName = (TextView) findViewById(R.id.userName);
+        String message = getIntent().getStringExtra("message_key");
+        userName.setText(message);
+
+
+
         init();
 
         someReviews=new ArrayList<Reviews>();
@@ -64,17 +80,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        mainList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+//        mainList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+//
+//                someReviews.remove(position);
+//                myadapter.notifyDataSetChanged();
+//                Toast.makeText(MainMenuUser.this, "clear", Toast.LENGTH_SHORT ).show();
+//
+//                return false;
+//            }
+//        });
 
-                someReviews.remove(position);
-                myadapter.notifyDataSetChanged();
-                Toast.makeText(MainMenu.this, "clear", Toast.LENGTH_SHORT ).show();
-
-                return false;
-            }
-        });
     }
 
 //    @Override

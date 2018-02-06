@@ -3,19 +3,22 @@ package ie.williamwall.autoreview;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 
 public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_splash);
         Thread myThread = new Thread() {
             @Override
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    Intent intent = new Intent(getApplicationContext(), MainMenuUser.class);
                     startActivity(intent);
                     finish();
 //                    User me = new User("William", "william@williamwall.ie", 1, "password");
