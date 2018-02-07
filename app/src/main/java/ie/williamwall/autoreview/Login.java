@@ -36,6 +36,10 @@ public class Login extends AppCompatActivity {
         register = (Button)findViewById(R.id.registerButton);
         currentTime = (TextView) findViewById(R.id.timeView);
 
+        final String message = getIntent().getStringExtra("message_key");
+        final String message2 = getIntent().getStringExtra("message_key2");
+
+
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         currentTime.setText(currentDateTimeString);
 
@@ -45,7 +49,10 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validate(name.getText().toString(), password.getText().toString());
+                validate(name.getText().toString(), password.getText().toString(), message, message2);
+//                validate(message, message2);
+
+
             }
         });
 
@@ -61,9 +68,9 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void validate(String userName, String userPassword)
+    private void validate(String userName, String userPassword, String message, String message2)
     {
-        if ((userName.equals("admin"))&&(userPassword.equals("1234")))
+        if ( (userName.equals("admin"))&&(userPassword.equals("1234")) || (userName.equals(message))&&(userPassword.equals(message2)))
         {
             Intent Intent = new Intent(Login.this, MainMenu.class);
             startActivity(Intent);

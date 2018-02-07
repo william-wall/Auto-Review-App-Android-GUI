@@ -18,7 +18,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), MainMenuUser.class);
+                        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                     startActivity(intent);
                     finish();
 //                    User me = new User("William", "william@williamwall.ie", 1, "password");
@@ -26,6 +26,7 @@ public class Splash extends AppCompatActivity {
 //                    me.setName("OtherName");
 //                    System.out.println("My name is:" + me.getName());
                 } catch (InterruptedException e) {
+
                     e.printStackTrace();
                 }
             }

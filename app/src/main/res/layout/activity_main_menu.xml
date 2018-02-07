@@ -8,6 +8,12 @@
     tools:context="ie.williamwall.autoreview.MainMenu"
     android:orientation="vertical">
 
+    <SearchView
+        android:id="@+id/searchCar"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:hint="Search ..." />
+
     <EditText
         android:id="@+id/edit_title"
         android:layout_width="match_parent"
@@ -17,8 +23,8 @@
     <EditText
         android:id="@+id/edit_desc"
         android:layout_width="match_parent"
-        android:hint="Description"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="Description" />
 
     <LinearLayout
         android:orientation="horizontal"
