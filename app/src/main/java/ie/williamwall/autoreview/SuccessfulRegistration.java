@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Correct extends AppCompatActivity {
+public class SuccessfulRegistration extends AppCompatActivity {
 
     private Button continueButton;
 
@@ -16,7 +16,7 @@ public class Correct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_correct);
+        setContentView(R.layout.activity_successful_registration);
 
         String message = getIntent().getStringExtra("message_key");
         continueButton = (Button)findViewById(R.id.continueButton);
@@ -28,7 +28,7 @@ public class Correct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent Intent = new Intent(Correct.this, MainMenuUser.class);
+                Intent Intent = new Intent(SuccessfulRegistration.this, MainMenuUser.class);
                 startActivity(Intent);
             }
         });
