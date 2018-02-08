@@ -44,9 +44,15 @@
             android:layout_weight="1"
             android:text="Edit" />
         <Button
+        android:layout_weight="1"
+        android:id="@+id/clear"
+        android:text="Delete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+        <Button
             android:layout_weight="1"
-            android:id="@+id/clear"
-            android:text="Delete"
+            android:id="@+id/save"
+            android:text="save"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

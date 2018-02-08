@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview;
 
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
@@ -28,7 +33,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     ListView mainList;
     EditText editTextTitle;
     EditText editTextDesc;
-    Button addButton, editButton, clearButton;
+    Button addButton, editButton, clearButton, saveButton;
     ArrayList<Reviews> someReviews;
     CustomAdapter myAdapter;
    ArrayAdapter<Reviews> adapter;
@@ -41,6 +46,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         addButton = (Button) findViewById(R.id.add);
         editButton = (Button) findViewById(R.id.edit);
         clearButton = (Button) findViewById(R.id.clear);
+        saveButton = (Button) findViewById(R.id.save);
         sv = (SearchView) findViewById(R.id.searchCar);
 
 //        fillData();
@@ -52,6 +58,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         addButton.setOnClickListener(this);
         editButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
 
 //        FileInputStream fis;
 //        try {
@@ -99,36 +106,23 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+//        readArrayListFromFile();
+
 
         init();
 
-        someReviews=new ArrayList<Reviews>();
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+        loadData();
+
+
+
+
 
         myAdapter = new CustomAdapter(this, R.layout.item_layout, someReviews);
         mainList.setAdapter(myAdapter);
 
 
 
-        // SEARCH
-//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, someReviews);
-//        mainList.setAdapter(adapter);
-//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                adapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
+
 
 
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -156,11 +150,50 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
+//
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+
+
+//        sv.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //perform your click operation here
+//                searchViewTitle();
+//            }
+//        });
 
 
 
 
-//        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+    }
+
+
+public void searchViewTitle()
+{
+    // SEARCH
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, someReviews);
+        mainList.setAdapter(adapter);
+    sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            adapter.getFilter().filter(newText);
+            return false;
+        }
+    });
+
+    //        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //
@@ -168,9 +201,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 //            }
 //        });
 
+}
 
 
-    }
+
 
 
 
@@ -218,6 +252,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     }
 
 
+
+
     //    @Override
     public void onClick(View view) {
 
@@ -254,6 +290,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 myAdapter.notifyDataSetChanged();
                 break;
 
+
+
             case R.id.clear:
 //                someReviews.remove(position);
 //                myadapter.notifyDataSetChanged();
@@ -280,12 +318,52 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 //                    }
 //                });
 
+
                 break;
 
 
+            case R.id.save:
+
+
+                Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
+
+                saveData();
+                break;
+
+        }
+
+
+    }
+    private void saveData()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(someReviews);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadData()
+    {
+        someReviews=new ArrayList<Reviews>();
+        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
+                "so be very careful what way you drive it for god sake"));
+        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
+                "so be very careful what way you drive it for god sake"));
+        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
+                "so be very careful what way you drive it for god sake"));
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Reviews>>() {}.getType();
+        someReviews = gson.fromJson(json, type);
+
+        if(someReviews == null)
+        {
+            someReviews = new ArrayList<>();
         }
 
     }
-
 
 }
