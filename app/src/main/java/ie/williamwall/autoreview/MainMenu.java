@@ -18,6 +18,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
     int id = -1;
@@ -90,7 +94,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 Toast.makeText(MainMenu.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -98,10 +101,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.add:
-
                 Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();

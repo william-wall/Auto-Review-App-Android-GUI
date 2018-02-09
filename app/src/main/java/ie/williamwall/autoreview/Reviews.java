@@ -1,8 +1,8 @@
 package ie.williamwall.autoreview;
 
-/**
- * Created by william on 05/02/2018.
- */
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
 
 public class Reviews {
 

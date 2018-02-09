@@ -12,13 +12,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class Register extends AppCompatActivity {
 
     private EditText enterNameW, enterEmailW, enterPhoneW, enterPasswordW, enterConfirmPasswordW;
     public String name, email, phone, password, confirmPassword;
     private Button registerButton;
     ArrayList<User> userInstance = new ArrayList<User>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,45 +34,31 @@ public class Register extends AppCompatActivity {
         enterConfirmPasswordW = (EditText) findViewById(R.id.enterConfirmPassword);
         registerButton = (Button) findViewById(R.id.registerButton);
         Log.d("myTag", "This is my message");
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 register();
-
-
-
-
             }
         });
     }
-
-
 
     public void register() {
         initilize();
         if (!validate()) {
             Toast.makeText(this, "Signup has Failed", Toast.LENGTH_SHORT).show();
-
         } else {
-
             onSignupSuccess();
-
             User user = new User(name, email, Integer.parseInt(phone), password);
             userInstance.add(user);
             Log.d("list", user.toString());
             Intent move = new Intent(Register.this, Login.class);
             move.putExtra("message_key", name);
             move.putExtra("message_key2", password);
-
             startActivity(move);
-
-
         }
     }
 
     public void onSignupSuccess() {
-        // AFTER VALID INPUT!!!
         name = enterNameW.getText().toString();
         email = enterEmailW.getText().toString();
         phone = enterPhoneW.getText().toString();
@@ -77,20 +66,16 @@ public class Register extends AppCompatActivity {
         confirmPassword = enterConfirmPasswordW.getText().toString();
     }
 
-
     public void initilize() {
         name = enterNameW.getText().toString().trim();
         email = enterEmailW.getText().toString().trim();
         phone = enterPhoneW.getText().toString().trim();
         password = enterPasswordW.getText().toString().trim();
         confirmPassword = enterConfirmPasswordW.getText().toString().trim();
-
     }
 
     public boolean validate() {
-
         boolean valid = true;
-
         if (name.isEmpty() || name.length() > 32) {
             enterNameW.setError("Please Enter Valid Name");
             valid = false;
@@ -107,9 +92,7 @@ public class Register extends AppCompatActivity {
         if (confirmPassword.isEmpty()) {
             enterConfirmPasswordW.setError("Please Enter Valid Password");
         }
-
-        if(!password.equals(confirmPassword))
-//                (password != confirmPassword)
+        if (!password.equals(confirmPassword))
         {
             enterPasswordW.getText().clear();
             enterConfirmPasswordW.getText().clear();
@@ -117,10 +100,6 @@ public class Register extends AppCompatActivity {
             enterConfirmPasswordW.setError("Please Enter Valid Password");
             return valid = false;
         }
-
-            return valid;
+        return valid;
     }
-
-
-
 }

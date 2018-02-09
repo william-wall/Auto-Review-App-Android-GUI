@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.ProgressBar;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class Splash extends AppCompatActivity {
 
     ProgressBar splashProgress;
@@ -17,11 +21,6 @@ public class Splash extends AppCompatActivity {
         splashProgress = (ProgressBar) findViewById(R.id.progressBarSplash);
         splashProgress.setMax(100);
         splashProgress.setProgress(0);
-
-
-
-
-
         Thread myThread = new Thread() {
             @Override
             public void run() {
@@ -30,9 +29,7 @@ public class Splash extends AppCompatActivity {
                     {
                         splashProgress.setProgress(i);
                         sleep(50);
-
                     }
-
                     User me = new User("William", "william@williamwall.ie", 1, "password");
                     System.out.println("My name is:" + me.getName());
                     me.setName("OtherName");

@@ -12,6 +12,10 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.jar.Attributes;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class Login extends AppCompatActivity {
 
     private EditText name;
@@ -22,37 +26,25 @@ public class Login extends AppCompatActivity {
     private int counter = 5;
     private TextView currentTime;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         name = (EditText)findViewById(R.id.enterName);
         password = (EditText)findViewById(R.id.enterPassword);
         info = (TextView)findViewById(R.id.textView);
         login = (Button)findViewById(R.id.loginButton);
         register = (Button)findViewById(R.id.registerButton);
         currentTime = (TextView) findViewById(R.id.timeView);
-
         final String message = getIntent().getStringExtra("message_key");
         final String message2 = getIntent().getStringExtra("message_key2");
-
-
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         currentTime.setText(currentDateTimeString);
-
-
         info.setText("No of attempts remaining: 5");
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validate(name.getText().toString(), password.getText().toString(), message, message2);
-//                validate(message, message2);
-
-
             }
         });
 
@@ -65,7 +57,6 @@ public class Login extends AppCompatActivity {
             }
 
         });
-
     }
 
     private void validate(String userName, String userPassword, String message, String message2)
