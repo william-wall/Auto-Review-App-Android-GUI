@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity {
 
     private EditText name;
     private EditText password;
-    private TextView info;
+    private TextView info, usersName;
     private Button login;
     private Button register;
     private int counter = 5;
@@ -36,8 +36,10 @@ public class Login extends AppCompatActivity {
         login = (Button)findViewById(R.id.loginButton);
         register = (Button)findViewById(R.id.registerButton);
         currentTime = (TextView) findViewById(R.id.timeView);
+        usersName = (TextView) findViewById(R.id.logName);
         final String message = getIntent().getStringExtra("message_key");
         final String message2 = getIntent().getStringExtra("message_key2");
+        usersName.setText("Welcome "+message);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         currentTime.setText(currentDateTimeString);
         info.setText("No of attempts remaining: 5");
@@ -53,7 +55,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View v){
                 Intent move = new Intent(Login.this, Register.class);
                 startActivity(move);
-                System.out.println("MOVE TO REGISTER");
             }
 
         });

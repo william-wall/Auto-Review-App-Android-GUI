@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Auto Review</string>
+    <string name="app_name">Auto 1.0</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_settings">settings</string>
     <string name="title_activity_mainlogout">mainlogout</string>

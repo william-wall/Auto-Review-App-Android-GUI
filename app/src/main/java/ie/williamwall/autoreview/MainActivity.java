@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 // Designed and Developed @ William Wall
@@ -20,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lv;
     EditText nameTxt;
-    Button addBtn, updateBtn, deleteBtn, clearBtn;
+    Button addBtn, updateBtn, deleteBtn, clearBtn,saveBtn;
     ArrayList<String> names = new ArrayList<String>();
     ArrayAdapter<String> adapter;
 
@@ -28,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
         nameTxt = (EditText) findViewById(R.id.editText);
         addBtn = (Button) findViewById(R.id.add);
         updateBtn = (Button) findViewById(R.id.update);
         deleteBtn = (Button) findViewById(R.id.delete);
         clearBtn = (Button) findViewById(R.id.clear);
+        saveBtn = (Button) findViewById(R.id.save);
+        final String message = getIntent().getStringExtra("message_key");
+        names.add(message);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, names);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveData();
+            }
+        });
     }
 
     private void add() {
@@ -78,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.add(name);
             adapter.notifyDataSetChanged();
             nameTxt.setText("");
+            saveData();
             Toast.makeText(getApplicationContext(), "Added " + name, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Nothing to add", Toast.LENGTH_SHORT).show();
@@ -112,5 +128,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void clear() {
         adapter.clear();
+    }
+
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences2", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(names);
+        editor.putString("task list2", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        names = new ArrayList<String>();
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences2", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list2", null);
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        names = gson.fromJson(json, type);
+        if (names == null) {
+            names = new ArrayList<>();
+        }
     }
 }

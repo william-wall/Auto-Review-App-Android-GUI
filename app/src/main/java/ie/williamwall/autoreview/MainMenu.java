@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,7 +29,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     ListView mainList;
     EditText editTextTitle;
     EditText editTextDesc;
+    private TextView userLoginName;
     Button addButton, editButton, clearButton, saveButton;
+//            moveButton;
     ArrayList<Reviews> someReviews;
     CustomAdapter myAdapter;
     ArrayAdapter<Reviews> adapter;
@@ -42,7 +45,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         editButton = (Button) findViewById(R.id.edit);
         clearButton = (Button) findViewById(R.id.clear);
         saveButton = (Button) findViewById(R.id.save);
+//        moveButton = (Button) findViewById(R.id.fullWindow);
         sv = (SearchView) findViewById(R.id.searchCar);
+        userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
+        final String message3 = getIntent().getStringExtra("message_key");
+        userLoginName.setText(message3);
         addButton.setOnClickListener(this);
         editButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);

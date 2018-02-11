@@ -60,15 +60,14 @@
     <ListView
         android:id="@+id/list_cars"
         android:layout_width="match_parent"
-        android:layout_height="345dp">
+        android:layout_height="313dp">
 
     </ListView>
 
     <TextView
+        android:id="@+id/userLoginDisplay"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:gravity="center"
-
-        android:text="Logged in as Administrator" />
+        android:layout_height="26dp"
+        android:text="Logged in as: " />
 
 </LinearLayout>
