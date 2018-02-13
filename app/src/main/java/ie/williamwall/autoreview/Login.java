@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity {
     {
         if ( (userName.equals("admin"))&&(userPassword.equals("1234")) || (userName.equals(message))&&(userPassword.equals(message2)))
         {
-            Intent Intent = new Intent(Login.this, MainMenu.class);
+            Intent Intent = new Intent(Login.this, Main2Activity.class);
             startActivity(Intent);
         }
         else

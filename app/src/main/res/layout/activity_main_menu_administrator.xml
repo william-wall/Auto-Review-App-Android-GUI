@@ -8,6 +8,8 @@
     tools:context="ie.williamwall.autoreview.MainMenu"
     android:orientation="vertical">
 
+
+
     <SearchView
         android:id="@+id/searchCar"
         android:layout_width="match_parent"
@@ -52,7 +54,7 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/save"
-            android:text="save"
+            android:text="Save"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
