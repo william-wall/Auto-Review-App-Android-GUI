@@ -37,7 +37,8 @@
             android:name=".AdministrationReview"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".HomeScreen"></activity>
+        <activity android:name=".HomeScreen" />
+        <activity android:name=".UserDetail"></activity>
     </application>
 
 </manifest>

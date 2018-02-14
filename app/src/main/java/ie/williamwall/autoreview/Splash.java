@@ -30,10 +30,10 @@ public class Splash extends AppCompatActivity {
                         splashProgress.setProgress(i);
                         sleep(50);
                     }
-                    User me = new User("William", "william@williamwall.ie", 1, "password");
-                    System.out.println("My name is:" + me.getName());
-                    me.setName("OtherName");
-                    System.out.println("My name is:" + me.getName());
+//                    User me = new User("William", "william@williamwall.ie", 1, "password");
+//                    System.out.println("My name is:" + me.getName());
+//                    me.setName("OtherName");
+//                    System.out.println("My name is:" + me.getName());
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();

@@ -8,10 +8,10 @@ public class User {
 
     private String name;
     private String email;
-    private int phone;
+    private String phone;
     private String password;
 
-    User(String name, String email, int phone, String password) {
+    User(String name, String email, String phone, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -26,7 +26,7 @@ public class User {
         this.email = email;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -42,7 +42,7 @@ public class User {
         return this.email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return this.phone;
     }
 

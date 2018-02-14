@@ -29,6 +29,7 @@ public class AdministrationUser extends AppCompatActivity {
     Button addBtn, updateBtn, deleteBtn, clearBtn,saveBtn;
     ArrayList<String> names = new ArrayList<String>();
     ArrayAdapter<String> adapter;
+    ArrayList<User>users=new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,13 @@ public class AdministrationUser extends AppCompatActivity {
         deleteBtn = (Button) findViewById(R.id.delete);
         clearBtn = (Button) findViewById(R.id.clear);
         saveBtn = (Button) findViewById(R.id.save);
-        final String message = getIntent().getStringExtra("message_key");
-        names.add(message);
+        final String gotName = getIntent().getStringExtra("message_key");
+        final String gotEmail = getIntent().getStringExtra("message_key2");
+        final String gotPhone = getIntent().getStringExtra("message_key3");
+        final String gotPassword = getIntent().getStringExtra("message_key4");
+        User userInstance = new User(gotName, gotEmail, gotPhone, gotPassword);
+        users.add(userInstance);
+        names.add(gotName);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, names);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,15 +94,25 @@ public class AdministrationUser extends AppCompatActivity {
             }
         });
 
-//        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                Toast.makeText(AdministrationUser.this, "Long Click!", Toast.LENGTH_SHORT).show();
-//                Intent move = new Intent(AdministrationUser.this, Splash.class);
-//                startActivity(move);
-//                return false;
-//            }
-//        });
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View v, int pos, long id) {
+                Toast.makeText(AdministrationUser.this, "Long Click!", Toast.LENGTH_SHORT).show();
+
+
+//                String names = nameTxt.getText().toString();
+                Intent move = new Intent(AdministrationUser.this, UserDetail.class);
+                move.putExtra("sendName_key", gotName);
+                move.putExtra("sendEmail_key", gotEmail);
+                move.putExtra("sendPhone_key", gotPhone);
+                move.putExtra("sendPassword_key", gotPassword);
+
+
+//                move.putExtra("sendName_key", names);
+                startActivity(move);
+                return false;
+            }
+        });
     }
 
 
@@ -147,23 +163,39 @@ public class AdministrationUser extends AppCompatActivity {
 
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences2", MODE_PRIVATE);
+        SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editorUser = sharedPreferencesUser.edit();
         Gson gson = new Gson();
+        Gson gsonUser = new Gson();
         String json = gson.toJson(names);
+        String jsonUser = gsonUser.toJson(users);
         editor.putString("task list2", json);
+        editor.putString("task list3", jsonUser);
         editor.apply();
+        editorUser.apply();
     }
 
     private void loadData() {
         names = new ArrayList<String>();
+        users = new ArrayList<User>();
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences2", MODE_PRIVATE);
+        SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
         Gson gson = new Gson();
+        Gson gsonUser = new Gson();
         String json = sharedPreferences.getString("task list2", null);
+        String jsonUser = sharedPreferencesUser.getString("task list3", null);
         Type type = new TypeToken<ArrayList<String>>() {
         }.getType();
+        Type typeUser = new TypeToken<ArrayList<User>>() {
+        }.getType();
         names = gson.fromJson(json, type);
+        users = gsonUser.fromJson(jsonUser, typeUser);
         if (names == null) {
             names = new ArrayList<>();
+        }
+        if(users==null){
+            users = new ArrayList<>();
         }
     }
 }

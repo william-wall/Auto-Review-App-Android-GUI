@@ -48,12 +48,14 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Signup has Failed", Toast.LENGTH_SHORT).show();
         } else {
             onSignupSuccess();
-            User user = new User(name, email, Integer.parseInt(phone), password);
+            User user = new User(name, email, phone, password);
             userInstance.add(user);
             Log.d("list", user.toString());
             Intent move = new Intent(Register.this, AdministrationUser.class);
             move.putExtra("message_key", name);
-            move.putExtra("message_key2", password);
+            move.putExtra("message_key2", email);
+            move.putExtra("message_key3", phone);
+            move.putExtra("message_key4", password);
             startActivity(move);
         }
     }

@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
         currentTime = (TextView) findViewById(R.id.timeView);
         usersName = (TextView) findViewById(R.id.logName);
         final String message = getIntent().getStringExtra("message_key");
-        final String message2 = getIntent().getStringExtra("message_key2");
+        final String message2 = getIntent().getStringExtra("message_key4");
         usersName.setText("Welcome "+message);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         currentTime.setText(currentDateTimeString);
