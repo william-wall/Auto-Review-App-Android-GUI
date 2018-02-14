@@ -26,7 +26,7 @@
         <activity android:name=".Register" />
         <activity android:name=".Vehicle" />
         <activity android:name=".SuccessfulRegistration" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".AdministrationUser" />
         <activity android:name=".MainMenu" />
         <activity android:name=".MainMenuUser" />
 
@@ -34,7 +34,7 @@
         <!-- android:name=".Settings" -->
         <!-- android:label="@string/title_activity_settings" /> -->
         <activity
-            android:name=".Main2Activity"
+            android:name=".AdministrationReview"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".HomeScreen"></activity>

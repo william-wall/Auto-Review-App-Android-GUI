@@ -62,7 +62,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_main_menu_administrator);
         init();
         loadData();
-        myAdapter = new CustomAdapter(this, R.layout.item_layout, someReviews);
+        myAdapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myAdapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

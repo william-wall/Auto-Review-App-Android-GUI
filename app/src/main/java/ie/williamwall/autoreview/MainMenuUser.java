@@ -10,11 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 // Designed and Developed @ William Wall
@@ -57,7 +52,7 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
                 "so be very careful what way you drive it for god sake"));
         someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        myadapter = new CustomAdapter(this, R.layout.item_layout, someReviews);
+        myadapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myadapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

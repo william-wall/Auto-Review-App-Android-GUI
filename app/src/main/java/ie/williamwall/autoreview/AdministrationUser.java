@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall
 
-public class MainActivity extends AppCompatActivity {
+public class AdministrationUser extends AppCompatActivity {
 
     ListView lv;
     EditText nameTxt;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_administration_user);
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
         nameTxt = (EditText) findViewById(R.id.editText);
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 nameTxt.setText(names.get(pos));
             }
         });
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +87,19 @@ public class MainActivity extends AppCompatActivity {
                 saveData();
             }
         });
+
+//        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                Toast.makeText(AdministrationUser.this, "Long Click!", Toast.LENGTH_SHORT).show();
+//                Intent move = new Intent(AdministrationUser.this, Splash.class);
+//                startActivity(move);
+//                return false;
+//            }
+//        });
     }
+
+
 
     private void add() {
         String name = nameTxt.getText().toString();

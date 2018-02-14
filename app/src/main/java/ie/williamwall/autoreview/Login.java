@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.jar.Attributes;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
@@ -64,7 +63,7 @@ public class Login extends AppCompatActivity {
     {
         if ( (userName.equals("admin"))&&(userPassword.equals("1234")) || (userName.equals(message))&&(userPassword.equals(message2)))
         {
-            Intent Intent = new Intent(Login.this, Main2Activity.class);
+            Intent Intent = new Intent(Login.this, AdministrationReview.class);
             startActivity(Intent);
         }
         else

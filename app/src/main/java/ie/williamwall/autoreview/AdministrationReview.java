@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -25,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
+public class AdministrationReview extends AppCompatActivity implements View.OnClickListener {
 
     int id = -1;
     ListView mainList;
@@ -61,7 +60,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_administration_review);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,7 +74,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         });
         init();
         loadData();
-        myAdapter = new CustomAdapter(this, R.layout.item_layout, someReviews);
+        myAdapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myAdapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +89,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 someReviews.remove(position);
                 myAdapter.notifyDataSetChanged();
-                Toast.makeText(Main2Activity.this, "clear", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdministrationReview.this, "clear", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -100,7 +99,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add:
-                Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Car Review Added", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();
                 Reviews temp = new Reviews(R.mipmap.ic_launcher, stringTitle, stringDesc);
@@ -118,7 +117,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             case R.id.clear:
                 break;
             case R.id.save:
-                Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Review Saved!", Toast.LENGTH_SHORT).show();
                 saveData();
                 break;
         }
@@ -142,7 +141,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(Main2Activity.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdministrationReview.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -164,7 +163,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(Main2Activity.this, Login.class);
+            Intent Intent = new Intent(AdministrationReview.this, Login.class);
             startActivity(Intent);
 
 //            return true;

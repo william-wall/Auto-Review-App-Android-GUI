@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.williamwall.autoreview.Main2Activity"
-    tools:showIn="@layout/activity_main2"
+    tools:context="ie.williamwall.autoreview.AdministrationReview"
+    tools:showIn="@layout/activity_administration_review"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -95,8 +95,8 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
     <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:context="ie.williamwall.autoreview.Main2Activity"-->
-    <!--tools:showIn="@layout/activity_main2">-->
+    <!--tools:conteie.williamwall.autoreview.AdministrationReviewnReviewvity"-->
+    <!--tools:showIn="@layactivity_administration_reviewain2">-->
 
 
     <!--<SearchView-->
