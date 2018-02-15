@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ public class AdministrationUser extends AppCompatActivity {
 
     ListView lv;
     EditText nameTxt;
+    SearchView searchName;
     Button addBtn, updateBtn, deleteBtn, clearBtn,saveBtn;
     ArrayList<String> names = new ArrayList<String>();
     ArrayAdapter<String> adapter;
@@ -37,6 +39,7 @@ public class AdministrationUser extends AppCompatActivity {
         setContentView(R.layout.activity_administration_user);
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
+        searchName = (SearchView) findViewById(R.id.searchViewName);
         nameTxt = (EditText) findViewById(R.id.editText);
         addBtn = (Button) findViewById(R.id.add);
         updateBtn = (Button) findViewById(R.id.update);
@@ -58,6 +61,34 @@ public class AdministrationUser extends AppCompatActivity {
                 nameTxt.setText(names.get(pos));
             }
         });
+
+
+
+
+
+
+
+        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
+
+
+
+
+
+
+
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,5 +228,28 @@ public class AdministrationUser extends AppCompatActivity {
         if(users==null){
             users = new ArrayList<>();
         }
+    }
+
+    public void searchViewTitle() {
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
+//        lv.setAdapter(adapter);
+        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(AdministrationUser.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
