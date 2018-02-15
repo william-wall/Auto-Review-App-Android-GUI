@@ -230,26 +230,26 @@ public class AdministrationUser extends AppCompatActivity {
         }
     }
 
-    public void searchViewTitle() {
-//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
-//        lv.setAdapter(adapter);
-        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//    public void searchViewTitle() {
+////        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
+////        lv.setAdapter(adapter);
+//        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(AdministrationUser.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+//                return false;
 //            }
 //        });
-    }
+////        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////            @Override
+////            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+////                Toast.makeText(AdministrationUser.this, adapter.getItem(i).getReviewTitle(), Toast.LENGTH_SHORT).show();
+////            }
+////        });
+//    }
 }

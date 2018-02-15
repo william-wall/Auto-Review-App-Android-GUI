@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,7 +31,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
     ListView mainList;
     EditText editTextTitle;
     EditText editTextDesc;
-//    private TextView userLoginName;
+    private TextView userLoginName;
     Button addButton, editButton, clearButton, saveButton;
     //            moveButton;
     ArrayList<Reviews> someReviews;
@@ -48,9 +49,9 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
         saveButton = (Button) findViewById(R.id.save);
 //        moveButton = (Button) findViewById(R.id.fullWindow);
         sv = (SearchView) findViewById(R.id.searchCar);
-//        userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
+        userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
         final String message3 = getIntent().getStringExtra("message_key");
-//        userLoginName.setText(message3);
+        userLoginName.setText(message3);
         addButton.setOnClickListener(this);
         editButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
@@ -79,9 +80,18 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String titleInstance = "";
+                String descInstance = "";
                 id = position;
                 editTextTitle.setText(someReviews.get(position).getReviewTitle());
                 editTextDesc.setText(someReviews.get(position).getReviewDesc());
+                titleInstance = someReviews.get(position).getReviewTitle();
+                descInstance = someReviews.get(position).getReviewDesc();
+                Intent move = new Intent(AdministrationReview.this, ReviewDetail.class);
+                move.putExtra("sendTitle_key", titleInstance);
+                move.putExtra("sendDesc_key", descInstance);
+                startActivity(move);
+
             }
         });
         mainList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -93,6 +103,24 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
                 return false;
             }
         });
+
+
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
+
+
     }
 
     @Override

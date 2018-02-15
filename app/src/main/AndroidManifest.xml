@@ -22,23 +22,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".Welcome" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".Vehicle" />
         <activity android:name=".SuccessfulRegistration" />
         <activity android:name=".AdministrationUser" />
-        <activity android:name=".MainMenu" />
-        <activity android:name=".MainMenuUser" />
-
-        <!-- <activity -->
-        <!-- android:name=".Settings" -->
-        <!-- android:label="@string/title_activity_settings" /> -->
         <activity
             android:name=".AdministrationReview"
-            android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MainMenu" />
+        <activity android:name=".MainMenuUser" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".UserDetail"></activity>
+        <activity android:name=".ReviewDetail"></activity>
     </application>
 
 </manifest>

@@ -81,6 +81,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 return false;
             }
         });
+//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
     }
 
     public void searchViewTitle() {

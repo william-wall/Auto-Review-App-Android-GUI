@@ -28,7 +28,7 @@ public class Splash extends AppCompatActivity {
                     for(int i =0; i < 100; i++)
                     {
                         splashProgress.setProgress(i);
-                        sleep(50);
+                        sleep(10);
                     }
 //                    User me = new User("William", "william@williamwall.ie", 1, "password");
 //                    System.out.println("My name is:" + me.getName());
@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally {
-                    Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+                    Intent intent = new Intent(getApplicationContext(), AdministrationReview.class);
                     startActivity(intent);
                     finish();
                 }
