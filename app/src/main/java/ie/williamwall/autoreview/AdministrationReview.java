@@ -38,6 +38,14 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
     CustomAdapter myAdapter;
     ArrayAdapter<Reviews> adapter;
     SearchView sv;
+//
+//    public static AdministrationReview getInstance() {
+//        return instance;
+//    }
+//
+//    public ArrayList<Reviews> getSomeReviews(){
+//        return someReviews;
+//    }
 
     private void init() {
         mainList = (ListView) findViewById(R.id.list_cars);
@@ -73,6 +81,24 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
                         .setAction("Action", null).show();
             }
         });
+
+
+
+
+
+
+
+//        final String gotUpdatedTitle = getIntent().getStringExtra("sendBackTitle_key");
+//        final String gotUpdatedDesc = getIntent().getStringExtra("sendBackDesc_key");
+//        Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, gotUpdatedTitle, gotUpdatedDesc);
+//        someReviews.set(id, tempEdit);
+//        id = -1;
+//        myAdapter.notifyDataSetChanged();
+
+
+
+
+
         init();
         loadData();
         myAdapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
@@ -117,6 +143,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
                 return false;
             }
         });
+
 
 
 
