@@ -1,12 +1,17 @@
 package ie.williamwall.autoreview;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -111,12 +117,13 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
                 id = position;
                 editTextTitle.setText(someReviews.get(position).getReviewTitle());
                 editTextDesc.setText(someReviews.get(position).getReviewDesc());
-                titleInstance = someReviews.get(position).getReviewTitle();
-                descInstance = someReviews.get(position).getReviewDesc();
-                Intent move = new Intent(AdministrationReview.this, ReviewDetail.class);
-                move.putExtra("sendTitle_key", titleInstance);
-                move.putExtra("sendDesc_key", descInstance);
-                startActivity(move);
+                window(position);
+//                titleInstance = someReviews.get(position).getReviewTitle();
+//                descInstance = someReviews.get(position).getReviewDesc();
+//                Intent move = new Intent(AdministrationReview.this, ReviewDetail.class);
+//                move.putExtra("sendTitle_key", titleInstance);
+//                move.putExtra("sendDesc_key", descInstance);
+//                startActivity(move);
 
             }
         });
@@ -253,6 +260,93 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
         if (someReviews == null) {
             someReviews = new ArrayList<>();
         }
+    }
+
+    public int window(int position)
+    {
+
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
+        alert.setTitle("www.parthydroid.wordpress.com");
+
+        LinearLayout layout = new LinearLayout(AdministrationReview.this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText title = new EditText(AdministrationReview.this);
+        layout.addView(title);
+
+        final EditText desc = new EditText(AdministrationReview.this);
+        layout.addView(desc);
+
+        id = position;
+        title.setText(someReviews.get(position).getReviewTitle());
+        desc.setText(someReviews.get(position).getReviewDesc());
+
+        final EditText Floorname = new EditText(AdministrationReview.this);
+        layout.addView(Floorname);
+
+        final EditText WingName = new EditText(AdministrationReview.this);
+        layout.addView(WingName);
+
+        alert.setView(layout);
+
+        alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String stringEditTitle = title.getText().toString();
+                String stringEditDesc = desc.getText().toString();
+                Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+                someReviews.set(id, tempEdit);
+                id = -1;
+                myAdapter.notifyDataSetChanged();
+//                wname = Wifi_textbox.getText().toString();
+//                mname = Mac_textbox.getText().toString();
+//                fname = Floorname.getText().toString();
+//                wgname = WingName.getText().toString();
+
+                Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // what ever you want to do with No option.
+            }
+        });
+        alert.show();
+
+        return position;
+
+
+
+
+
+
+//        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//
+//        alert.setTitle("Title");
+//        alert.setMessage("Message");
+//// Set an EditText view to get user input
+//        final EditText inputTitle = new EditText(this);
+//        alert.setMessage("Message");
+//        final EditText inputDesc = new EditText(this);
+//        alert.setView(inputTitle);
+//        alert.setView(inputDesc);
+//
+//        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                // Do something with value!
+//            }
+//        });
+//
+//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                // Canceled.
+//            }
+//        });
+//
+//        alert.show();
     }
 
 }
