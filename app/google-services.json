@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1018832033853",
+    "firebase_url": "https://autoreviewapp.firebaseio.com",
+    "project_id": "autoreviewapp",
+    "storage_bucket": "autoreviewapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018832033853:android:e3b1486e09e97160",
+        "android_client_info": {
+          "package_name": "ie.williamwall.autoreview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018832033853-8p96jui7eclfbevfuf4el3nv7150f623.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVW8GE-cKvDPqvp57fWMrWylvoBCDIftQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

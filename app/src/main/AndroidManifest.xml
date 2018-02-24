@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -34,8 +35,13 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".MainMenuUser" />
         <activity android:name=".HomeScreen" />
-        <activity android:name=".UserDetail"></activity>
-        <activity android:name=".ReviewDetail"></activity>
+        <activity android:name=".UserDetail" />
+        <activity android:name=".ReviewDetail" />
+        <activity android:name=".MainActivityFirebase" />
+        <activity android:name=".LoginActivityFirebase" />
+        <activity android:name=".SignupActivityFirebase" />
+        <activity android:name=".ResetPasswordActivityFirebase" />
+        <activity android:name=".testlogin"></activity>
     </application>
 
 </manifest>

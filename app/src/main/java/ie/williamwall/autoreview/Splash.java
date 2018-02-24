@@ -3,7 +3,6 @@ package ie.williamwall.autoreview;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.ProgressBar;
 
 // Designed and Developed @ William Wall
@@ -39,7 +38,7 @@ public class Splash extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally {
-                    Intent intent = new Intent(getApplicationContext(), AdministrationReview.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
                     startActivity(intent);
                     finish();
                 }
