@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.firebaseLogin.accountActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,11 +17,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import ie.williamwall.autoreview.AdministrationReview;
+import ie.williamwall.autoreview.HomeScreen;
+import ie.williamwall.autoreview.Login;
 import ie.williamwall.autoreview.R;
+
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
 
 public class MainActivityFirebase extends AppCompatActivity {
 
-    private Button btnChangePassword, btnRemoveUser,
+    private Button btnChangePassword, btnRemoveUser, btnContinue,
             changePassword, remove, signOut;
     private TextView email;
 
@@ -62,6 +69,8 @@ public class MainActivityFirebase extends AppCompatActivity {
 
         changePassword = (Button) findViewById(R.id.changePass);
 
+        btnContinue = (Button) findViewById(R.id.continueMain);
+
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
 
@@ -99,6 +108,18 @@ public class MainActivityFirebase extends AppCompatActivity {
                 remove.setVisibility(View.GONE);
             }
         });
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String sendingUsername = user.getEmail();
+                Intent Intent = new Intent(MainActivityFirebase.this, HomeScreen.class);
+                Intent.putExtra("message_key_user", sendingUsername);
+                startActivity(Intent);
+            }
+        });
+
+
 
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,6 +252,12 @@ public class MainActivityFirebase extends AppCompatActivity {
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
+    }
+    public void sendUser(FirebaseUser user){
+        String sendingUsername = user.getEmail();
+        Intent Intent = new Intent(MainActivityFirebase.this, AdministrationReview.class);
+        Intent.putExtra("message_key", sendingUsername);
+        startActivity(Intent);
     }
 }
 

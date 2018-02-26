@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.firebaseLogin.accountActivity;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import ie.williamwall.autoreview.R;
+
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
 
 public class ResetPasswordActivityFirebase extends AppCompatActivity {
 

@@ -31,6 +31,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import ie.williamwall.autoreview.firebaseLogin.accountActivity.LoginActivityFirebase;
+
 public class AdministrationReview extends AppCompatActivity implements View.OnClickListener {
 
     int id = -1;
@@ -64,8 +66,8 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 //        moveButton = (Button) findViewById(R.id.fullWindow);
         sv = (SearchView) findViewById(R.id.searchCar);
         userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
-        final String message3 = getIntent().getStringExtra("message_key");
-        userLoginName.setText(message3);
+//        final String message3 = getIntent().getStringExtra("message_key_user");
+//        userLoginName.setText(message3);
         addButton.setOnClickListener(this);
         editButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
@@ -220,18 +222,21 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(AdministrationReview.this, Login.class);
+            Intent Intent = new Intent(AdministrationReview.this, LoginActivityFirebase.class);
             startActivity(Intent);
 
 //            return true;
         }
 
-        return super.onOptionsItemSelected(item);
+
+
+            return super.onOptionsItemSelected(item);
     }
 
     private void saveData() {

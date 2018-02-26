@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.firebaseLogin.accountActivity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,6 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import ie.williamwall.autoreview.R;
+
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
 
 public class SignupActivityFirebase extends AppCompatActivity {
 

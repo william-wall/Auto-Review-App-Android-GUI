@@ -46,13 +46,19 @@ public class AdministrationUser extends AppCompatActivity {
         deleteBtn = (Button) findViewById(R.id.delete);
         clearBtn = (Button) findViewById(R.id.clear);
         saveBtn = (Button) findViewById(R.id.save);
-        final String gotName = getIntent().getStringExtra("message_key");
-        final String gotEmail = getIntent().getStringExtra("message_key2");
-        final String gotPhone = getIntent().getStringExtra("message_key3");
-        final String gotPassword = getIntent().getStringExtra("message_key4");
-        User userInstance = new User(gotName, gotEmail, gotPhone, gotPassword);
-        users.add(userInstance);
-        names.add(gotName);
+
+
+
+//        final String gotName = getIntent().getStringExtra("message_key");
+//        final String gotEmail = getIntent().getStringExtra("message_key2");
+//        final String gotPhone = getIntent().getStringExtra("message_key3");
+//        final String gotPassword = getIntent().getStringExtra("message_key4");
+//        User userInstance = new User(gotName, gotEmail, gotPhone, gotPassword);
+//        users.add(userInstance);
+//        names.add(gotName);
+
+
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, names);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -132,15 +138,22 @@ public class AdministrationUser extends AppCompatActivity {
 
 
 //                String names = nameTxt.getText().toString();
-                Intent move = new Intent(AdministrationUser.this, UserDetail.class);
-                move.putExtra("sendName_key", gotName);
-                move.putExtra("sendEmail_key", gotEmail);
-                move.putExtra("sendPhone_key", gotPhone);
-                move.putExtra("sendPassword_key", gotPassword);
+
+
+
+                //HERE 1
+//                Intent move = new Intent(AdministrationUser.this, UserDetail.class);
+//                move.putExtra("sendName_key", gotName);
+//                move.putExtra("sendEmail_key", gotEmail);
+//                move.putExtra("sendPhone_key", gotPhone);
+//                move.putExtra("sendPassword_key", gotPassword);
 
 
 //                move.putExtra("sendName_key", names);
-                startActivity(move);
+
+
+                //HERE 2
+//                startActivity(move);
                 return false;
             }
         });
