@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.williamwall.autoreview.AdministrationReview"
-    tools:showIn="@layout/activity_administration_review"
+    tools:context="ie.williamwall.autoreview.AdministrationUser"
+    tools:showIn="@layout/activity_administration_user"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -14,33 +15,45 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+
+            />
+
 
     </android.support.design.widget.AppBarLayout>
 
     <SearchView
-        android:id="@+id/searchCar"
+        android:id="@+id/searchViewName"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:hint="Search ..." />
-
-    <EditText
-        android:id="@+id/edit_title"
-        android:layout_width="match_parent"
-        android:hint="Title"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/edit_desc"
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:text="Name" />
+
+    <EditText
+    android:id="@+id/editEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    />
+    <EditText
+        android:id="@+id/editPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description" />
-
+        />
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -53,39 +66,137 @@
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/edit"
+            android:id="@+id/update"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Update" />
+
         <Button
-            android:layout_weight="1"
             android:id="@+id/clear"
-            android:text="Delete"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Clear" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Delete" />
         <Button
             android:layout_weight="1"
             android:id="@+id/save"
-            android:text="Save"
+            android:text="save"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-
     <ListView
-        android:id="@+id/list_cars"
+        android:choiceMode="singleChoice"
+        android:id="@+id/listViewMain"
         android:layout_width="match_parent"
-        android:layout_height="313dp">
+        android:layout_height="match_parent">
 
     </ListView>
 
-    <TextView
-        android:id="@+id/userLoginDisplay"
-        android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:text="Logged in as: " />
-
 </LinearLayout>
+
+
+
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:conteie.williamwall.autoreview.AdministrationUserOldOldUser"-->
+    <!--tools:showIn="@layout/activity_administration_user"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--<SearchView-->
+        <!--android:id="@+id/searchCar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:hint="Search ..." />-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/edit_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:hint="Title"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/edit_desc"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Description" />-->
+
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<Button-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/add"-->
+            <!--android:text="Add"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/edit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="Update" />-->
+        <!--<Button-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/clear"-->
+            <!--android:text="Delete"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+        <!--<Button-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/save"-->
+            <!--android:text="Save"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+    <!--</LinearLayout>-->
+
+    <!--<ListView-->
+        <!--android:id="@+id/list_cars"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="313dp">-->
+
+    <!--</ListView>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/userLoginDisplay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="26dp"-->
+        <!--android:text="Logged in as: " />-->
+
+<!--</LinearLayout>-->
 
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->

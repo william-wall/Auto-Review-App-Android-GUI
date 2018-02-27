@@ -26,9 +26,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
+        <activity android:name=".AdministrationUser"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Vehicle" />
         <activity android:name=".SuccessfulRegistration" />
-        <activity android:name=".AdministrationUser" />
+        <activity android:name=".AdministrationUserOld"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdministrationReview"
             android:theme="@style/AppTheme.NoActionBar" />

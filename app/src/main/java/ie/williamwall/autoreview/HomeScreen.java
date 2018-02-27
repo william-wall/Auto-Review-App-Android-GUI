@@ -35,7 +35,7 @@ public class HomeScreen extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent move = new Intent(HomeScreen.this, AdministrationUser.class);
+                Intent move = new Intent(HomeScreen.this,AdministrationUser.class);
                 startActivity(move);
             }
 

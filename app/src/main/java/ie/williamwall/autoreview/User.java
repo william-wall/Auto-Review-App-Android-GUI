@@ -6,16 +6,31 @@ package ie.williamwall.autoreview;
 
 public class User {
 
+     int avatar;
     private String name;
     private String email;
     private String phone;
     private String password;
 
-    User(String name, String email, String phone, String password) {
+    public User() {
+    }
+
+
+    User(int avatar, String name, String email, String phone, String password) {
+        this.avatar = avatar;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 
     public void setName(String name) {

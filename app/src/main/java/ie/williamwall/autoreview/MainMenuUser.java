@@ -24,7 +24,7 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
     EditText editTextDesc;
     Button addButton, editButton;
     ArrayList<Reviews> someReviews;
-    CustomAdapter myadapter;
+    CustomAdapterReview myadapter;
     TextView userName;
 
     private void init() {
@@ -52,7 +52,7 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
                 "so be very careful what way you drive it for god sake"));
         someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        myadapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
+        myadapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myadapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

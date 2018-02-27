@@ -19,17 +19,17 @@ import java.util.ArrayList;
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall
 
-public class CustomAdapter extends ArrayAdapter {
+public class CustomAdapterUser extends ArrayAdapter {
 
     Activity activity;
     int layout;
-    ArrayList<Reviews>someReviews;
+    ArrayList<User>users;
 
-    public CustomAdapter(@NonNull Activity activity, int layout, @NonNull ArrayList<Reviews> someReviews) {
-        super(activity, layout, someReviews);
+    public CustomAdapterUser(@NonNull Activity activity, int layout, @NonNull ArrayList<User> users) {
+        super(activity, layout, users);
         this.activity=activity;
         this.layout=layout;
-        this.someReviews=someReviews;
+        this.users=users;
     }
 
     @NonNull
@@ -38,11 +38,15 @@ public class CustomAdapter extends ArrayAdapter {
         LayoutInflater layoutInflater = activity.getLayoutInflater();
         convertView = layoutInflater.inflate(layout,null);
         ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
-        TextView editTitle = (TextView) convertView.findViewById(R.id.edit_title);
-        TextView editDesc = (TextView) convertView.findViewById(R.id.edit_desc);
-        avatar.setImageResource(someReviews.get(position).getAvatar());
-        editTitle.setText(someReviews.get(position).getReviewTitle());
-        editDesc.setText(someReviews.get(position).getReviewDesc());
+        TextView name = (TextView) convertView.findViewById(R.id.instanceName);
+        TextView email = (TextView) convertView.findViewById(R.id.instanceEmail);
+        TextView phone = (TextView) convertView.findViewById(R.id.instancePhone);
+        TextView password = (TextView) convertView.findViewById(R.id.instancePassword);
+        avatar.setImageResource(users.get(position).getAvatar());
+        name.setText(users.get(position).getName());
+        email.setText(users.get(position).getEmail());
+        phone.setText(users.get(position).getPhone());
+        password.setText(users.get(position).getPassword());
         return convertView;
     }
 }

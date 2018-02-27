@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="ie.williamwall.autoreview.AdministrationReview"
-    tools:showIn="@layout/activity_administration_review"
-    android:orientation="vertical">
+    tools:showIn="@layout/activity_administration_review">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,63 +29,27 @@
     <SearchView
         android:id="@+id/searchCar"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:hint="Search ..." />
 
-    <EditText
-        android:id="@+id/edit_title"
-        android:layout_width="match_parent"
-        android:hint="Title"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/edit_desc"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description" />
+        android:orientation="horizontal">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/add"
-            android:text="Add"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Update" />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/clear"
-            android:text="Delete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/save"
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/list_cars"
         android:layout_width="match_parent"
-        android:layout_height="313dp">
+        android:layout_height="match_parent">
 
     </ListView>
 
     <TextView
         android:id="@+id/userLoginDisplay"
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="40dp"
         android:text="Logged in as: " />
 
 </LinearLayout>

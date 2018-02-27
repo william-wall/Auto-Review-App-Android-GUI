@@ -33,7 +33,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     Button addButton, editButton, clearButton, saveButton;
 //            moveButton;
     ArrayList<Reviews> someReviews;
-    CustomAdapter myAdapter;
+    CustomAdapterReview myAdapter;
     ArrayAdapter<Reviews> adapter;
     SearchView sv;
 
@@ -62,7 +62,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_main_menu_administrator);
         init();
         loadData();
-        myAdapter = new CustomAdapter(this, R.layout.item_layout_administration_review, someReviews);
+        myAdapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myAdapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
