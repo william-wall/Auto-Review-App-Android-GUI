@@ -1,19 +1,19 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.review;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall
 
-public class Reviews {
+public class Review {
 
     int avatar;
     String reviewTitle;
     String reviewDesc;
 
-    public Reviews() {
+    public Review() {
     }
 
-    public Reviews(int avatar, String reviewTitle, String reviewDesc) {
+    public Review(int avatar, String reviewTitle, String reviewDesc) {
         this.avatar = avatar;
         this.reviewTitle = reviewTitle;
         this.reviewDesc = reviewDesc;

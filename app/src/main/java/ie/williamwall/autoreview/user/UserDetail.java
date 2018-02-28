@@ -1,8 +1,10 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.user;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import ie.williamwall.autoreview.R;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.williamwall.autoreview.UserDetail">
+    tools:context="ie.williamwall.autoreview.user.UserDetail">
 
     <EditText
         android:id="@+id/nameDisplay"

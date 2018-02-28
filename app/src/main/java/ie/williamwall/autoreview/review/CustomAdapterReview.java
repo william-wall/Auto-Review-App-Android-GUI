@@ -1,19 +1,18 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.review;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ie.williamwall.autoreview.R;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
@@ -23,9 +22,9 @@ public class CustomAdapterReview extends ArrayAdapter {
 
     Activity activity;
     int layout;
-    ArrayList<Reviews>someReviews;
+    ArrayList<Review>someReviews;
 
-    public CustomAdapterReview(@NonNull Activity activity, int layout, @NonNull ArrayList<Reviews> someReviews) {
+    public CustomAdapterReview(@NonNull Activity activity, int layout, @NonNull ArrayList<Review> someReviews) {
         super(activity, layout, someReviews);
         this.activity=activity;
         this.layout=layout;

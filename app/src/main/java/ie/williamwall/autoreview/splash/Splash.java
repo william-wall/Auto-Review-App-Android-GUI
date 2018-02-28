@@ -1,11 +1,12 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.splash;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-import ie.williamwall.autoreview.firebaseLogin.accountActivity.LoginActivityFirebase;
+import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

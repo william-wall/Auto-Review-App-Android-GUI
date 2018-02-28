@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.user;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

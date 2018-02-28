@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.util.Date;
 
+import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.user.Register;
+
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall

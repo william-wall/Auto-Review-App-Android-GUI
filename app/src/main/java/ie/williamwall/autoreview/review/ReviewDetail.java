@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.review;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,15 +11,17 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import ie.williamwall.autoreview.R;
+
 public class ReviewDetail extends AppCompatActivity {
 
     private EditText title;
     private EditText desc;
     private Button update;
 
-//    public ArrayList<Reviews> someReviews = <<AdministrationReview>>.getSomeReviews();
+//    public ArrayList<Review> someReviews = <<AdministrationReview>>.getSomeReviews();
 
-//    public ArrayList<Reviews> someReviews = AdministrationReview.getInstance().getFrozen();
+//    public ArrayList<Review> someReviews = AdministrationReview.getInstance().getFrozen();
 
 
     @Override

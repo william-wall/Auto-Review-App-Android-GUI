@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.user.AdministrationUser;
+
 public class HomeScreen extends AppCompatActivity {
 
     private Button administrator;

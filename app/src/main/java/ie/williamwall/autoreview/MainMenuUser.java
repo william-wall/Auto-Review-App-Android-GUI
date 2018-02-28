@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ie.williamwall.autoreview.review.CustomAdapterReview;
+import ie.williamwall.autoreview.review.Review;
+
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall
@@ -23,7 +26,7 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
     EditText editTextTitle;
     EditText editTextDesc;
     Button addButton, editButton;
-    ArrayList<Reviews> someReviews;
+    ArrayList<Review> someReviews;
     CustomAdapterReview myadapter;
     TextView userName;
 
@@ -45,12 +48,12 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
         String message = getIntent().getStringExtra("message_key");
         userName.setText(message);
         init();
-        someReviews = new ArrayList<Reviews>();
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
+        someReviews = new ArrayList<Review>();
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
         myadapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myadapter);
@@ -83,14 +86,14 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();
-                Reviews temp = new Reviews(R.mipmap.ic_launcher, stringTitle, stringDesc);
+                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc);
                 someReviews.add(temp);
                 myadapter.notifyDataSetChanged();
                 break;
             case R.id.edit:
                 String stringEditTitle = editTextTitle.getText().toString();
                 String stringEditDesc = editTextDesc.getText().toString();
-                Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myadapter.notifyDataSetChanged();

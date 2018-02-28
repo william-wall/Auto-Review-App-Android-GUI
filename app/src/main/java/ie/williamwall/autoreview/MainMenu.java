@@ -19,6 +19,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import ie.williamwall.autoreview.review.CustomAdapterReview;
+import ie.williamwall.autoreview.review.Review;
+
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
 // GitHub @ github.com/william-wall
@@ -32,9 +35,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private TextView userLoginName;
     Button addButton, editButton, clearButton, saveButton;
 //            moveButton;
-    ArrayList<Reviews> someReviews;
+    ArrayList<Review> someReviews;
     CustomAdapterReview myAdapter;
-    ArrayAdapter<Reviews> adapter;
+    ArrayAdapter<Review> adapter;
     SearchView sv;
 
     private void init() {
@@ -125,14 +128,14 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();
-                Reviews temp = new Reviews(R.mipmap.ic_launcher, stringTitle, stringDesc);
+                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc);
                 someReviews.add(temp);
                 myAdapter.notifyDataSetChanged();
                 break;
             case R.id.edit:
                 String stringEditTitle = editTextTitle.getText().toString();
                 String stringEditDesc = editTextDesc.getText().toString();
-                Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
@@ -156,17 +159,17 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void loadData() {
-        someReviews = new ArrayList<Reviews>();
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
+        someReviews = new ArrayList<Review>();
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
-        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
+        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
                 "so be very careful what way you drive it for god sake"));
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Reviews>>() {
+        Type type = new TypeToken<ArrayList<Review>>() {
         }.getType();
         someReviews = gson.fromJson(json, type);
         if (someReviews == null) {

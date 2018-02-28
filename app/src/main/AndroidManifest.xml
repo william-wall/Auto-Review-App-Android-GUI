@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
+            android:name=".splash.Splash"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,28 +22,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Welcome" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".AdministrationUser"
+        <activity android:name=".user.Register" />
+        <activity android:name=".user.AdministrationUser"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Vehicle" />
         <activity android:name=".SuccessfulRegistration" />
-        <activity android:name=".AdministrationUserOld"
+        <activity android:name=".user.AdministrationUserOld"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdministrationReview"
+            android:name=".review.AdministrationReview"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainMenu" />
         <activity android:name=".MainMenuUser" />
         <activity android:name=".HomeScreen" />
-        <activity android:name=".UserDetail" />
-        <activity android:name=".ReviewDetail" />
-        <activity android:name=".firebaseLogin.accountActivity.MainActivityFirebase" />
-        <activity android:name=".firebaseLogin.accountActivity.LoginActivityFirebase" />
-        <activity android:name=".firebaseLogin.accountActivity.SignupActivityFirebase" />
-        <activity android:name=".firebaseLogin.accountActivity.ResetPasswordActivityFirebase" />
+        <activity android:name=".user.UserDetail" />
+        <activity android:name=".review.ReviewDetail" />
+        <activity android:name=".weather.Weather"
+
+            />
+        <activity android:name=".firebase.MainActivityFirebase" />
+        <activity android:name=".firebase.LoginActivityFirebase" />
+        <activity android:name=".firebase.SignupActivityFirebase" />
+        <activity android:name=".firebase.ResetPasswordActivityFirebase" />
     </application>
 
 </manifest>

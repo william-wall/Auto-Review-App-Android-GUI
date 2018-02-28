@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.williamwall.autoreview.AdministrationUser"
+    tools:context="ie.williamwall.autoreview.user.AdministrationUser"
     tools:showIn="@layout/activity_administration_user"
     android:orientation="vertical">
 
@@ -33,65 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="Name" />
-
-    <EditText
-    android:id="@+id/editEmail"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    />
-    <EditText
-        android:id="@+id/editPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/add"
-            android:text="Add"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/update"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Update" />
-
-        <Button
-            android:id="@+id/clear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Clear" />
-
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Delete" />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/save"
-            android:text="save"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
     <ListView
         android:choiceMode="singleChoice"
         android:id="@+id/listViewMain"

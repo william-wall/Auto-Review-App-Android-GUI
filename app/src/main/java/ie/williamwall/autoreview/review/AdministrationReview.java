@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.review;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +27,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import ie.williamwall.autoreview.firebaseLogin.accountActivity.LoginActivityFirebase;
+import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
 
 public class AdministrationReview extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,16 +39,16 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
     private TextView userLoginName;
 //    Button addButton, editButton, clearButton, saveButton;
     //            moveButton;
-    ArrayList<Reviews> someReviews;
+    ArrayList<Review> someReviews;
     CustomAdapterReview myAdapter;
-    ArrayAdapter<Reviews> adapter;
+    ArrayAdapter<Review> adapter;
     SearchView sv;
 //
 //    public static AdministrationReview getInstance() {
 //        return instance;
 //    }
 //
-//    public ArrayList<Reviews> getSomeReviews(){
+//    public ArrayList<Review> getSomeReviews(){
 //        return someReviews;
 //    }
 
@@ -94,7 +95,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
 //        final String gotUpdatedTitle = getIntent().getStringExtra("sendBackTitle_key");
 //        final String gotUpdatedDesc = getIntent().getStringExtra("sendBackDesc_key");
-//        Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, gotUpdatedTitle, gotUpdatedDesc);
+//        Review tempEdit = new Review(R.mipmap.ic_launcher, gotUpdatedTitle, gotUpdatedDesc);
 //        someReviews.set(id, tempEdit);
 //        id = -1;
 //        myAdapter.notifyDataSetChanged();
@@ -162,7 +163,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 //                Toast.makeText(this, "Car Review Added", Toast.LENGTH_SHORT).show();
 //                String stringTitle = editTextTitle.getText().toString();
 //                String stringDesc = editTextDesc.getText().toString();
-//                Reviews temp = new Reviews(R.mipmap.ic_launcher, stringTitle, stringDesc);
+//                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc);
 //                someReviews.add(temp);
 //                myAdapter.notifyDataSetChanged();
 //                saveData();
@@ -170,7 +171,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
             case R.id.edit:
 //                String stringEditTitle = editTextTitle.getText().toString();
 //                String stringEditDesc = editTextDesc.getText().toString();
-//                Reviews tempEdit = new Reviews(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+//                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
 //                someReviews.set(id, tempEdit);
 //                id = -1;
 //                myAdapter.notifyDataSetChanged();
@@ -247,17 +248,17 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
     }
 
     private void loadData() {
-        someReviews = new ArrayList<Reviews>();
-//        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
+        someReviews = new ArrayList<Review>();
+//        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
 //                "so be very careful what way you drive it for god sake"));
-//        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
+//        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
 //                "so be very careful what way you drive it for god sake"));
-//        someReviews.add(new Reviews(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
+//        someReviews.add(new Review(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
 //                "so be very careful what way you drive it for god sake"));
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Reviews>>() {
+        Type type = new TypeToken<ArrayList<Review>>() {
         }.getType();
         someReviews = gson.fromJson(json, type);
         if (someReviews == null) {
@@ -294,7 +295,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
             public void onClick(DialogInterface dialog, int whichButton) {
                 String stringEditTitle = title.getText().toString();
                 String stringEditDesc = desc.getText().toString();
-                Reviews tempEdit = new Reviews(R.mipmap.car, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
@@ -314,7 +315,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
                 String stringEditTitle = title.getText().toString();
                 String stringEditDesc = desc.getText().toString();
-                Reviews tempEdit = new Reviews(R.mipmap.car, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 someReviews.remove(tempEdit);
@@ -352,7 +353,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
                         String stringEditTitle = title.getText().toString();
                         String stringEditDesc = desc.getText().toString();
-                        Reviews temp = new Reviews(R.mipmap.car, stringEditTitle, stringEditDesc);
+                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
                         someReviews.add(temp);
                         myAdapter.notifyDataSetChanged();
                         saveData();
