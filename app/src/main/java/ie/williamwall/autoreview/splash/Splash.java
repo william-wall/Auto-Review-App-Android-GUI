@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.R;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

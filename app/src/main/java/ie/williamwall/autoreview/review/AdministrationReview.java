@@ -92,7 +92,6 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
 
 
-
 //        final String gotUpdatedTitle = getIntent().getStringExtra("sendBackTitle_key");
 //        final String gotUpdatedDesc = getIntent().getStringExtra("sendBackDesc_key");
 //        Review tempEdit = new Review(R.mipmap.ic_launcher, gotUpdatedTitle, gotUpdatedDesc);
@@ -106,6 +105,9 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
         init();
         loadData();
+        Review reviewInstance = new Review(R.mipmap.car, "OPEL", "VECTRA");
+        someReviews.add(reviewInstance);
+
         myAdapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myAdapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -49,7 +49,8 @@ public class AdministrationUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         loadData();
-
+        User userInstance = new User(R.mipmap.car, "JAMES", "HACK", "0879858985" ,"12");
+        users.add(userInstance);
         lv = (ListView) findViewById(R.id.listViewMain);
         searchName = (SearchView) findViewById(R.id.searchViewName);
 
