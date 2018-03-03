@@ -39,9 +39,11 @@ public class CustomAdapterReview extends ArrayAdapter {
         ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
         TextView editTitle = (TextView) convertView.findViewById(R.id.edit_title);
         TextView editDesc = (TextView) convertView.findViewById(R.id.edit_desc);
+        TextView time = (TextView) convertView.findViewById(R.id.timeStamp);
         avatar.setImageResource(someReviews.get(position).getAvatar());
         editTitle.setText(someReviews.get(position).getReviewTitle());
         editDesc.setText(someReviews.get(position).getReviewDesc());
+        time.setText(someReviews.get(position).getTimeStamp());
         return convertView;
     }
 }

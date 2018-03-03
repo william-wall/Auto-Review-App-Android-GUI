@@ -10,7 +10,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ie.williamwall.autoreview.review.CustomAdapterReview;
 import ie.williamwall.autoreview.review.Review;
@@ -49,12 +51,14 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
         userName.setText(message);
         init();
         someReviews = new ArrayList<Review>();
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         myadapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myadapter);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,17 +87,21 @@ public class MainMenuUser extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.add:
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
                 Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();
-                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc);
+                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc,currentDateTimeString);
                 someReviews.add(temp);
                 myadapter.notifyDataSetChanged();
                 break;
             case R.id.edit:
+                String currentDateTimeString2 = DateFormat.getDateTimeInstance().format(new Date());
+
                 String stringEditTitle = editTextTitle.getText().toString();
                 String stringEditDesc = editTextDesc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc,currentDateTimeString2);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myadapter.notifyDataSetChanged();

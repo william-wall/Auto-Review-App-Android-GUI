@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.user.AdministrationUser;
 
@@ -22,7 +23,7 @@ public class Weather extends AppCompatActivity {
 
     TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField, usernameField, usernameText,adminDesc;
 
-    Button userBtn, reviewBtn;
+    Button userBtn, reviewBtn, mapBtn;
 
     Typeface weatherFont;
 
@@ -34,6 +35,7 @@ public class Weather extends AppCompatActivity {
 
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        mapBtn = (Button) findViewById(R.id.mapButton);
         userBtn = (Button) findViewById(R.id.userButton);
         reviewBtn = (Button) findViewById(R.id.reviewButton);
         adminDesc = (TextView)findViewById(R.id.adminDesc_field);
@@ -64,6 +66,13 @@ public class Weather extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent move = new Intent(Weather.this, AdministrationReview.class);
+                startActivity(move);
+            }
+        });
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent move = new Intent(Weather.this, MapsActivity.class);
                 startActivity(move);
             }
         });

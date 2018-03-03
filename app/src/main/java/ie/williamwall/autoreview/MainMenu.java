@@ -17,7 +17,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ie.williamwall.autoreview.review.CustomAdapterReview;
 import ie.williamwall.autoreview.review.Review;
@@ -125,17 +127,22 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add:
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
                 Toast.makeText(this, "Click Add button", Toast.LENGTH_SHORT).show();
                 String stringTitle = editTextTitle.getText().toString();
                 String stringDesc = editTextDesc.getText().toString();
-                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc);
+
+                Review temp = new Review(R.mipmap.ic_launcher, stringTitle, stringDesc, currentDateTimeString);
                 someReviews.add(temp);
                 myAdapter.notifyDataSetChanged();
                 break;
             case R.id.edit:
+                String currentDateTimeString2 = DateFormat.getDateTimeInstance().format(new Date());
+
                 String stringEditTitle = editTextTitle.getText().toString();
                 String stringEditDesc = editTextDesc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.ic_launcher, stringEditTitle, stringEditDesc, currentDateTimeString2);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
@@ -159,13 +166,15 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void loadData() {
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
         someReviews = new ArrayList<Review>();
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Toyota", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Honda", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         someReviews.add(new Review(R.mipmap.ic_launcher_round, "Audi", "This is a really fast car and it can go really fast " +
-                "so be very careful what way you drive it for god sake"));
+                "so be very careful what way you drive it for god sake",currentDateTimeString));
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);

@@ -25,7 +25,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
@@ -100,13 +102,14 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 //        myAdapter.notifyDataSetChanged();
 
 
-
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+//        currentTime.setText(currentDateTimeString);
 
 
         init();
         loadData();
-        Review reviewInstance = new Review(R.mipmap.car, "OPEL", "VECTRA");
-        someReviews.add(reviewInstance);
+//        Review reviewInstance = new Review(R.mipmap.car, "OPEL", "VECTRA", currentDateTimeString);
+//        someReviews.add(reviewInstance);
 
         myAdapter = new CustomAdapterReview(this, R.layout.item_layout_administration_review, someReviews);
         mainList.setAdapter(myAdapter);
@@ -295,9 +298,10 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
         alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 String stringEditTitle = title.getText().toString();
                 String stringEditDesc = desc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
@@ -313,11 +317,12 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
         alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
 
                 String stringEditTitle = title.getText().toString();
                 String stringEditDesc = desc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
+                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
                 someReviews.set(id, tempEdit);
                 id = -1;
                 someReviews.remove(tempEdit);
@@ -352,10 +357,11 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 
                 alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
                         String stringEditTitle = title.getText().toString();
                         String stringEditDesc = desc.getText().toString();
-                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc);
+                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
                         someReviews.add(temp);
                         myAdapter.notifyDataSetChanged();
                         saveData();

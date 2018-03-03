@@ -49,6 +49,18 @@
             android:textColor="@android:color/white"
             />
 
+        <EditText
+            android:id="@+id/passwordReenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:hint="@string/hint_password_check"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            />
 
         <Button
             android:id="@+id/sign_up_button"

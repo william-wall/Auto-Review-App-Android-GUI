@@ -32,6 +32,10 @@
         android:id="@+id/searchViewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/searchSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
 
     <ListView
         android:choiceMode="singleChoice"

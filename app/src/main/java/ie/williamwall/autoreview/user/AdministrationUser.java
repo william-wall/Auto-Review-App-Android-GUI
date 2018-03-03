@@ -9,14 +9,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
@@ -38,8 +43,10 @@ public class AdministrationUser extends AppCompatActivity {
     SearchView searchName;
     CustomAdapterUser myAdapter;
     ArrayList<User> users = new ArrayList<User>();
+    Spinner listSpinner;
     int id = -1;
-
+    ArrayList<String> justNames = new ArrayList<String>();
+    ArrayAdapter<String>adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +56,22 @@ public class AdministrationUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         loadData();
+
+
+
+
+
         User userInstance = new User(R.mipmap.car, "JAMES", "HACK", "0879858985" ,"12");
         users.add(userInstance);
         lv = (ListView) findViewById(R.id.listViewMain);
         searchName = (SearchView) findViewById(R.id.searchViewName);
+        listSpinner = (Spinner) findViewById(R.id.searchSpinner);
+
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_item, justNames);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listSpinner.setAdapter(adapter);
+
 
 //        nameTxt = (EditText) findViewById(R.id.editName);
 //        emailTxt = (EditText) findViewById(R.id.editEmail);
@@ -84,11 +103,90 @@ public class AdministrationUser extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
+                alert.setTitle("Administer User");
+
+                LinearLayout layout = new LinearLayout(AdministrationUser.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                final EditText name = new EditText(AdministrationUser.this);
+                name.setHint("Name");
+                layout.addView(name);
+
+                final EditText email = new EditText(AdministrationUser.this);
+                email.setHint("Email");
+                layout.addView(email);
+
+                final EditText phone = new EditText(AdministrationUser.this);
+                phone.setHint("Phone");
+                layout.addView(phone);
+
+                final EditText password = new EditText(AdministrationUser.this);
+                password.setHint("Password");
+                layout.addView(password);
+
+
+
+
+                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        String stringEditName = name.getText().toString();
+                        String stringEditEmail = email.getText().toString();
+                        String stringEditPhone = phone.getText().toString();
+                        String stringEditPassword = password.getText().toString();
+                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword);
+                        users.add(temp);
+                        myAdapter.notifyDataSetChanged();
+                        justNames.add(stringEditName);
+//                        listSpinner.add
+
+                        saveData();
+                        Toast.makeText(AdministrationUser.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                alert.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
+
+                        builder.setTitle("Confirm");
+                        builder.setMessage("Are you sure?");
+
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing but close the dialog
+
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // Do nothing
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                alert.setView(layout);
+
+
+                alert.show();
 
             }
         });
+
+
+//        lv.setTextFilterEnabled(true);
 
         searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -98,10 +196,15 @@ public class AdministrationUser extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+//                lv.setFilterText(newText);
+
                 myAdapter.getFilter().filter(newText);
                 return false;
             }
         });
+
+//
+
 
     }
 
