@@ -11,17 +11,19 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    private String timeStamp;
 
     public User() {
     }
 
 
-    User(int avatar, String name, String email, String phone, String password) {
+    User(int avatar, String name, String email, String phone, String password, String timeStamp) {
         this.avatar = avatar;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.timeStamp = timeStamp;
     }
 
 
@@ -49,6 +51,11 @@ public class User {
         this.password = password;
     }
 
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+
     public String getName() {
         return this.name;
     }
@@ -65,7 +72,10 @@ public class User {
         return this.password;
     }
 
+    public String  getTimeStamp() {return this.timeStamp;}
+
+
     public String toString() {
-        return "Name: " + name + " \nEmail: " + email + "\nPhone: " + phone + "Password: " + password + "\n\n";
+        return "Name: " + name + " \nEmail: " + email + "\nPhone: " + phone + "\nPassword: " + password + "\nTime: " + timeStamp + "\n\n";
     }
 }

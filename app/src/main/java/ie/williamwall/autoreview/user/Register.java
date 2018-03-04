@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 
@@ -50,7 +52,9 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Signup has Failed", Toast.LENGTH_SHORT).show();
         } else {
             onSignupSuccess();
-            User user = new User(R.mipmap.ic_launcher_round, name, email, phone, password);
+            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+            User user = new User(R.mipmap.ic_launcher_round, name, email, phone, password,currentDateTimeString);
             userInstance.add(user);
             Log.d("list", user.toString());
             Intent move = new Intent(Register.this, AdministrationUserOld.class);

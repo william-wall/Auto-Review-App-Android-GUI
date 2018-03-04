@@ -41,11 +41,13 @@ public class CustomAdapterUser extends ArrayAdapter {
         TextView email = (TextView) convertView.findViewById(R.id.instanceEmail);
         TextView phone = (TextView) convertView.findViewById(R.id.instancePhone);
         TextView password = (TextView) convertView.findViewById(R.id.instancePassword);
+        TextView time = (TextView) convertView.findViewById(R.id.instanceTimeStamp);
         avatar.setImageResource(users.get(position).getAvatar());
         name.setText(users.get(position).getName());
         email.setText(users.get(position).getEmail());
         phone.setText(users.get(position).getPhone());
         password.setText(users.get(position).getPassword());
+        time.setText(users.get(position).getTimeStamp());
         return convertView;
     }
 }

@@ -27,7 +27,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import ie.williamwall.autoreview.R;
@@ -60,8 +62,9 @@ public class AdministrationUser extends AppCompatActivity {
 
 
 
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-        User userInstance = new User(R.mipmap.car, "JAMES", "HACK", "0879858985" ,"12");
+        User userInstance = new User(R.mipmap.car, "JAMES", "HACK", "0879858985" ,"12", currentDateTimeString);
         users.add(userInstance);
         lv = (ListView) findViewById(R.id.listViewMain);
         searchName = (SearchView) findViewById(R.id.searchViewName);
@@ -137,7 +140,9 @@ public class AdministrationUser extends AppCompatActivity {
                         String stringEditEmail = email.getText().toString();
                         String stringEditPhone = phone.getText().toString();
                         String stringEditPassword = password.getText().toString();
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword);
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
                         users.add(temp);
                         myAdapter.notifyDataSetChanged();
                         justNames.add(stringEditName);
@@ -328,7 +333,9 @@ public class AdministrationUser extends AppCompatActivity {
                 String stringEditEmail = email.getText().toString();
                 String stringEditPhone = phone.getText().toString();
                 String stringEditPassword = password.getText().toString();
-                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword);
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
                 users.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
@@ -343,7 +350,9 @@ public class AdministrationUser extends AppCompatActivity {
                 String stringEditEmail = email.getText().toString();
                 String stringEditPhone = phone.getText().toString();
                 String stringEditPassword = password.getText().toString();
-                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword);
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
                 users.set(id, tempEdit);
                 id = -1;
                 users.remove(tempEdit);
@@ -386,7 +395,9 @@ public class AdministrationUser extends AppCompatActivity {
                         String stringEditEmail = email.getText().toString();
                         String stringEditPhone = phone.getText().toString();
                         String stringEditPassword = password.getText().toString();
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword);
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
                         users.add(temp);
                         myAdapter.notifyDataSetChanged();
                         saveData();

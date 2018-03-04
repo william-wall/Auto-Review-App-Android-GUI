@@ -88,6 +88,50 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
+                alert.setTitle("Administer Review");
+
+                LinearLayout layout = new LinearLayout(AdministrationReview.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                final EditText title = new EditText(AdministrationReview.this);
+                layout.addView(title);
+
+                final EditText desc = new EditText(AdministrationReview.this);
+                layout.addView(desc);
+
+//                id = position;
+//                title.setText(someReviews.get(position).getReviewTitle());
+//                desc.setText(someReviews.get(position).getReviewDesc());
+
+                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                        String stringEditTitle = title.getText().toString();
+                        String stringEditDesc = desc.getText().toString();
+                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
+                        someReviews.add(temp);
+                        myAdapter.notifyDataSetChanged();
+                        saveData();
+                        Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                });
+
+                alert.setView(layout);
+
+
+                alert.show();
+
+
             }
         });
 
