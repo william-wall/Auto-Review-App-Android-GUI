@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -13,8 +12,6 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
 
     <application
         android:allowBackup="true"
@@ -46,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainMenu" />
         <activity android:name=".MainMenuUser" />
-        <activity android:name=".HomeScreen" />
+        <activity android:name=".home.HomeScreen" />
         <activity android:name=".user.UserDetail" />
         <activity android:name=".review.ReviewDetail" />
         <activity android:name=".weather.Weather" />
@@ -54,7 +51,6 @@
         <activity android:name=".firebase.LoginActivityFirebase" />
         <activity android:name=".firebase.SignupActivityFirebase" />
         <activity android:name=".firebase.ResetPasswordActivityFirebase" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,10 +62,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".maps.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
     </application>
-
 </manifest>

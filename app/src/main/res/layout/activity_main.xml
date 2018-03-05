@@ -5,39 +5,6 @@
     android:background="#00bfbf"
     android:padding="20dp">
 
-    <TextView
-        android:id="@+id/adminDesc_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
-        android:layout_centerHorizontal="true"
-        android:text="Welcome Administrator"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
-
-
-    <TextView
-        android:id="@+id/userNameDesc_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/adminDesc_field"
-        android:layout_centerHorizontal="true"
-        android:text="Logged in as:"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/userName_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userNameDesc_field"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/city_field"
@@ -109,30 +76,5 @@
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
-
-    <Button
-        android:id="@+id/userButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/weather_icon"
-        android:layout_toStartOf="@+id/userNameDesc_field"
-        android:text="Users" />
-
-    <Button
-        android:id="@+id/reviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/weather_icon"
-        android:layout_toEndOf="@+id/userNameDesc_field"
-        android:text="Reviews" />
-
-    <Button
-        android:id="@+id/mapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/userButton"
-        android:layout_alignRight="@+id/userButton"
-        android:layout_below="@+id/userButton"
-        android:text="Maps" />
 
 </RelativeLayout>

@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.weather.Weather;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.R;
@@ -112,7 +113,7 @@ public class MainActivityFirebase extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String sendingUsername = user.getEmail();
-                Intent Intent = new Intent(MainActivityFirebase.this, Weather.class);
+                Intent Intent = new Intent(MainActivityFirebase.this, HomeScreen.class);
                 Intent.putExtra("message_key_user", sendingUsername);
                 startActivity(Intent);
             }

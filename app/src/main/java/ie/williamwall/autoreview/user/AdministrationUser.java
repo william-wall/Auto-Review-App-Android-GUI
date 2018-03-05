@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +35,9 @@ import java.util.Locale;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.weather.Weather;
 
 /**
  * Created by william on 27/02/2018.
@@ -49,6 +53,8 @@ public class AdministrationUser extends AppCompatActivity {
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
     ArrayAdapter<String>adapter;
+//    Button instanceClass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,9 @@ public class AdministrationUser extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listViewMain);
         searchName = (SearchView) findViewById(R.id.searchViewName);
         listSpinner = (Spinner) findViewById(R.id.searchSpinner);
+
+//        instanceClass = (Button) findViewById(R.id.action_user);
+//        instanceClass.setEnabled(false);
 
         adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_item, justNames);
@@ -217,6 +226,9 @@ public class AdministrationUser extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_user);
+        item.setEnabled(false);
+
         return true;
     }
 
@@ -226,13 +238,44 @@ public class AdministrationUser extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+//        MenuItem item = menu.findItem(R.id.action_user);
+
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+             if (id == R.id.action_logout) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, LoginActivityFirebase.class);
             startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_weather) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationUser.this, Weather.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_location) {
+            Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationUser.this, MapsActivity.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_review) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationUser.this, AdministrationReview.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_user) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+
+
 
 //            return true;
         }

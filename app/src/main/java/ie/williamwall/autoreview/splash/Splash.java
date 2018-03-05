@@ -28,20 +28,14 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    for(int i =0; i < 100; i++)
-                    {
+                    for (int i = 0; i < 100; i++) {
                         splashProgress.setProgress(i);
-                        sleep(50);
+                        sleep(60);
                     }
-//                    User me = new User("William", "william@williamwall.ie", 1, "password");
-//                    System.out.println("My name is:" + me.getName());
-//                    me.setName("OtherName");
-//                    System.out.println("My name is:" + me.getName());
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
                     startActivity(intent);
                     finish();
@@ -49,5 +43,5 @@ public class Splash extends AppCompatActivity {
             }
         };
         myThread.start();
-   }
+    }
 }

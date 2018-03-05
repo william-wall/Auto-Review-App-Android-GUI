@@ -31,6 +31,9 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.user.AdministrationUser;
+import ie.williamwall.autoreview.weather.Weather;
 
 public class AdministrationReview extends AppCompatActivity implements View.OnClickListener {
 
@@ -262,6 +265,8 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_review);
+        item.setEnabled(false);
         return true;
     }
 
@@ -274,17 +279,45 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, LoginActivityFirebase.class);
             startActivity(Intent);
 
 //            return true;
         }
+        if (id == R.id.action_weather) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationReview.this, Weather.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_location) {
+            Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationReview.this, MapsActivity.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_review) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationReview.this, AdministrationReview.class);
+            startActivity(Intent);
+
+//            return true;
+        }
+        if (id == R.id.action_user) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+
+
+//            return true;
+        }
 
 
 
-            return super.onOptionsItemSelected(item);
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void saveData() {
