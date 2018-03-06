@@ -93,7 +93,7 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
                         .setAction("Action", null).show();
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
-                alert.setTitle("Administer Review");
+                alert.setTitle("Add New Review");
 
                 LinearLayout layout = new LinearLayout(AdministrationReview.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
@@ -294,23 +294,23 @@ public class AdministrationReview extends AppCompatActivity implements View.OnCl
 //            return true;
         }
         if (id == R.id.action_location) {
-            Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, MapsActivity.class);
             startActivity(Intent);
 
 //            return true;
         }
         if (id == R.id.action_review) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(AdministrationReview.this, AdministrationReview.class);
-            startActivity(Intent);
+            Toast.makeText(this, "Administration Review", Toast.LENGTH_SHORT).show();
+
 
 //            return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
 
-
+            Intent Intent = new Intent(AdministrationReview.this, AdministrationUser.class);
+            startActivity(Intent);
 //            return true;
         }
 

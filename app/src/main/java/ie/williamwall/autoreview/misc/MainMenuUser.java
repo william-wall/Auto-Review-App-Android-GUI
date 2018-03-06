@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.misc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.review.CustomAdapterReview;
 import ie.williamwall.autoreview.review.Review;
 

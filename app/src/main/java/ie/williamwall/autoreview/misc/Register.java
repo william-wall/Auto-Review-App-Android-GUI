@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.user;
+package ie.williamwall.autoreview.misc;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.user.User;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

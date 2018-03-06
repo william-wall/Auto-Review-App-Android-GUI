@@ -29,20 +29,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".user.Register" />
+        <activity android:name=".misc.Login" />
+        <activity android:name=".misc.Register" />
         <activity
             android:name=".user.AdministrationUser"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SuccessfulRegistration" />
+        <activity android:name=".misc.SuccessfulRegistration" />
         <activity
-            android:name=".user.AdministrationUserOld"
+            android:name=".misc.AdministrationUserOld"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".review.AdministrationReview"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainMenu" />
-        <activity android:name=".MainMenuUser" />
+        <activity android:name=".misc.MainMenu" />
+        <activity android:name=".misc.MainMenuUser" />
         <activity android:name=".home.HomeScreen" />
         <activity android:name=".user.UserDetail" />
         <activity android:name=".review.ReviewDetail" />

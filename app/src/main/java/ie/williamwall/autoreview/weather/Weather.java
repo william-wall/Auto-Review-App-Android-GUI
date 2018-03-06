@@ -1,7 +1,5 @@
 package ie.williamwall.autoreview.weather;
-/**
- * Created by SHAJIB on 7/4/2017.
- */
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,7 +19,7 @@ public class Weather extends AppCompatActivity {
 
 
 
-    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField, usernameField, usernameText,adminDesc;
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
 
 
 
@@ -37,7 +35,7 @@ public class Weather extends AppCompatActivity {
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
         cityField = (TextView)findViewById(R.id.city_field);
         updatedField = (TextView)findViewById(R.id.updated_field);
-        usernameField = (TextView)findViewById(R.id.userName_field);
+//        usernameField = (TextView)findViewById(R.id.userName_field);
         detailsField = (TextView)findViewById(R.id.details_field);
         currentTemperatureField = (TextView)findViewById(R.id.current_temperature_field);
         humidity_field = (TextView)findViewById(R.id.humidity_field);

@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.misc;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.util.Date;
 
+import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.user.Register;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

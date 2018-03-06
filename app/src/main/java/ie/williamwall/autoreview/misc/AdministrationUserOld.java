@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.user;
+package ie.williamwall.autoreview.misc;
 
 import android.support.v7.app.AppCompatActivity;
 

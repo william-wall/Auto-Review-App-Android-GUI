@@ -259,21 +259,21 @@ public class AdministrationUser extends AppCompatActivity {
 //            return true;
         }
         if (id == R.id.action_location) {
-            Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, MapsActivity.class);
             startActivity(Intent);
 
 //            return true;
         }
         if (id == R.id.action_review) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration Review", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, AdministrationReview.class);
             startActivity(Intent);
 
 //            return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
 
 
 
