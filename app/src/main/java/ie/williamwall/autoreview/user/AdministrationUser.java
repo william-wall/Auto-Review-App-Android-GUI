@@ -45,16 +45,13 @@ import ie.williamwall.autoreview.weather.Weather;
 
 public class AdministrationUser extends AppCompatActivity {
     ListView lv;
-//    EditText nameTxt, emailTxt, phoneTxt, passwordTxt;
     SearchView searchName;
     CustomAdapterUser myAdapter;
     ArrayList<User> users = new ArrayList<User>();
     Spinner listSpinner;
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
-    ArrayAdapter<String>adapter;
-//    Button instanceClass;
-
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,39 +59,16 @@ public class AdministrationUser extends AppCompatActivity {
         setContentView(R.layout.activity_administration_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         loadData();
-
-
-
-
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-        User userInstance = new User(R.mipmap.car, "JAMES", "HACK", "0879858985" ,"12", currentDateTimeString);
-        users.add(userInstance);
         lv = (ListView) findViewById(R.id.listViewMain);
         searchName = (SearchView) findViewById(R.id.searchViewName);
         listSpinner = (Spinner) findViewById(R.id.searchSpinner);
-
-//        instanceClass = (Button) findViewById(R.id.action_user);
-//        instanceClass.setEnabled(false);
-
         adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_item, justNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listSpinner.setAdapter(adapter);
-
-
-//        nameTxt = (EditText) findViewById(R.id.editName);
-//        emailTxt = (EditText) findViewById(R.id.editEmail);
-//        phoneTxt = (EditText) findViewById(R.id.editPhone);
-//        passwordTxt = (EditText) findViewById(R.id.editPassword);
-
-
-
         myAdapter = new CustomAdapterUser(this, R.layout.item_layout_administration_user, users);
         lv.setAdapter(myAdapter);
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -110,98 +84,73 @@ public class AdministrationUser extends AppCompatActivity {
                 window(position);
             }
         });
-
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                users.remove(position);
+                myAdapter.notifyDataSetChanged();
+                Toast.makeText(AdministrationUser.this, "Deleted User", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
-                alert.setTitle("Administer User");
-
+                alert.setTitle("Administration User");
                 LinearLayout layout = new LinearLayout(AdministrationUser.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
-
                 final EditText name = new EditText(AdministrationUser.this);
-                name.setHint("Name");
+                name.setHint("Name, E.G. John Doe");
                 layout.addView(name);
-
                 final EditText email = new EditText(AdministrationUser.this);
-                email.setHint("Email");
+                email.setHint("Email, E.G. johndoe@gmail.com");
                 layout.addView(email);
-
                 final EditText phone = new EditText(AdministrationUser.this);
-                phone.setHint("Phone");
+                phone.setHint("Phone, E.G. 0871234567");
                 layout.addView(phone);
-
                 final EditText password = new EditText(AdministrationUser.this);
-                password.setHint("Password");
+                password.setHint("Password, E.G. somepassword");
                 layout.addView(password);
-
-
-
-
                 alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                         String stringEditName = name.getText().toString();
                         String stringEditEmail = email.getText().toString();
                         String stringEditPhone = phone.getText().toString();
                         String stringEditPassword = password.getText().toString();
                         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
+                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                         users.add(temp);
                         myAdapter.notifyDataSetChanged();
                         justNames.add(stringEditName);
-//                        listSpinner.add
-
                         saveData();
-                        Toast.makeText(AdministrationUser.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
                     }
                 });
-
                 alert.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        Toast.makeText(AdministrationUser.this, "Cancel", Toast.LENGTH_LONG).show();
                         AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
-
                         builder.setTitle("Confirm");
                         builder.setMessage("Are you sure?");
-
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
                             public void onClick(DialogInterface dialog, int which) {
-                                // Do nothing but close the dialog
-
                                 dialog.dismiss();
                             }
                         });
-
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
-                                // Do nothing
-                                dialog.dismiss();
                             }
                         });
+                        builder.show();
                     }
                 });
-
                 alert.setView(layout);
-
-
                 alert.show();
-
             }
         });
-
-
-//        lv.setTextFilterEnabled(true);
-
         searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -210,108 +159,52 @@ public class AdministrationUser extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//                lv.setFilterText(newText);
-
                 myAdapter.getFilter().filter(newText);
                 return false;
             }
         });
-
-//
-
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem item = menu.findItem(R.id.action_user);
         item.setEnabled(false);
-
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-//        MenuItem item = menu.findItem(R.id.action_user);
-
-
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-             if (id == R.id.action_logout) {
+        if (id == R.id.action_logout) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, LoginActivityFirebase.class);
             startActivity(Intent);
-
-//            return true;
+            return true;
         }
         if (id == R.id.action_weather) {
             Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, Weather.class);
             startActivity(Intent);
-
-//            return true;
+            return true;
         }
         if (id == R.id.action_location) {
             Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, MapsActivity.class);
             startActivity(Intent);
-
-//            return true;
+            return true;
         }
         if (id == R.id.action_review) {
             Toast.makeText(this, "Administration Review", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, AdministrationReview.class);
             startActivity(Intent);
-
-//            return true;
+            return true;
         }
         if (id == R.id.action_user) {
             Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
-
-
-
-//            return true;
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-    private void add() {
-
-//        String stringName = nameTxt.getText().toString();
-//        String stringEmail = emailTxt.getText().toString();
-//        String stringPhone = phoneTxt.getText().toString();
-//        String stringPassword = passwordTxt.getText().toString();
-//        User temp = new User(R.mipmap.car, stringName, stringEmail, stringPhone, stringPassword);
-//        users.add(temp);
-//        myAdapter.notifyDataSetChanged();
-//        saveData();
-//        Toast.makeText(AdministrationUser.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-
-    }
-
-    private void update() {
-
-    }
-
-    private void delete() {
-
-    }
-
-    private void clear() {
-
-    }
-
-
     private void saveData() {
-
         SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
         SharedPreferences.Editor editorUser = sharedPreferencesUser.edit();
         Gson gsonUser = new Gson();
@@ -319,7 +212,6 @@ public class AdministrationUser extends AppCompatActivity {
         editorUser.putString("task list3", jsonUser);
         editorUser.apply();
     }
-
     private void loadData() {
         users = new ArrayList<User>();
         SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
@@ -332,44 +224,29 @@ public class AdministrationUser extends AppCompatActivity {
             users = new ArrayList<>();
         }
     }
-
-    public int window(int position)
-    {
-
-
-
+    public int window(int position) {
         AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
-        alert.setTitle("Administer Review");
-
+        alert.setTitle("Administer User");
         LinearLayout layout = new LinearLayout(AdministrationUser.this);
         layout.setOrientation(LinearLayout.VERTICAL);
-
         final EditText name = new EditText(AdministrationUser.this);
-        name.setHint("Name");
+        name.setHint("Name, E.G. John Doe");
         layout.addView(name);
-
         final EditText email = new EditText(AdministrationUser.this);
-        email.setHint("Email");
+        email.setHint("Email, E.G. johndoe@gmail.com");
         layout.addView(email);
-
         final EditText phone = new EditText(AdministrationUser.this);
-        phone.setHint("Phone");
+        phone.setHint("Phone, E.G. 0871234567");
         layout.addView(phone);
-
         final EditText password = new EditText(AdministrationUser.this);
-        password.setHint("Password");
+        password.setHint("Password, E.G. somepassword");
         layout.addView(password);
-
         id = position;
         name.setText(users.get(position).getName());
         email.setText(users.get(position).getEmail());
         phone.setText(users.get(position).getPhone());
         password.setText(users.get(position).getPassword());
-
-
-
         alert.setView(layout);
-
         alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String stringEditName = name.getText().toString();
@@ -377,16 +254,14 @@ public class AdministrationUser extends AppCompatActivity {
                 String stringEditPhone = phone.getText().toString();
                 String stringEditPassword = password.getText().toString();
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
+                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                 users.set(id, tempEdit);
                 id = -1;
                 myAdapter.notifyDataSetChanged();
                 saveData();
-                Toast.makeText(AdministrationUser.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(AdministrationUser.this, "Updated Sucessfully", Toast.LENGTH_LONG).show();
             }
         });
-
         alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String stringEditName = name.getText().toString();
@@ -394,79 +269,57 @@ public class AdministrationUser extends AppCompatActivity {
                 String stringEditPhone = phone.getText().toString();
                 String stringEditPassword = password.getText().toString();
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
+                User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                 users.set(id, tempEdit);
                 id = -1;
                 users.remove(tempEdit);
                 myAdapter.notifyDataSetChanged();
                 saveData();
+                Toast.makeText(AdministrationUser.this, "Deleted User", Toast.LENGTH_LONG).show();
             }
         });
         alert.setNeutralButton("New", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
-                alert.setTitle("Administer User");
-
+                alert.setTitle("Administration User");
                 LinearLayout layout = new LinearLayout(AdministrationUser.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
-
                 final EditText name = new EditText(AdministrationUser.this);
-                name.setHint("Name");
+                name.setHint("Name, E.G. John Doe");
                 layout.addView(name);
-
                 final EditText email = new EditText(AdministrationUser.this);
-                email.setHint("Email");
+                email.setHint("Email, E.G. johndoe@gmail.com");
                 layout.addView(email);
-
                 final EditText phone = new EditText(AdministrationUser.this);
-                phone.setHint("Phone");
+                phone.setHint("Phone, E.G. 0871234567");
                 layout.addView(phone);
-
                 final EditText password = new EditText(AdministrationUser.this);
-                password.setHint("Password");
+                password.setHint("Password, E.G. somepassword");
                 layout.addView(password);
-
-
-
-
                 alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                         String stringEditName = name.getText().toString();
                         String stringEditEmail = email.getText().toString();
                         String stringEditPhone = phone.getText().toString();
                         String stringEditPassword = password.getText().toString();
                         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword,currentDateTimeString);
+                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                         users.add(temp);
                         myAdapter.notifyDataSetChanged();
                         saveData();
-                        Toast.makeText(AdministrationUser.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
                     }
                 });
-
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                     }
                 });
-
                 alert.setView(layout);
-
-
                 alert.show();
-
             }
         });
-
         alert.show();
-
         return position;
-
     }
-
 }
