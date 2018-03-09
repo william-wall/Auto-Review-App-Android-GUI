@@ -52,6 +52,4 @@ public class Review {
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
-
-
 }

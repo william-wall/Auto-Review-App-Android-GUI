@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -39,9 +41,10 @@ import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.weather.Weather;
 
-/**
- * Created by william on 27/02/2018.
- */
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 
 public class AdministrationUser extends AppCompatActivity {
     ListView lv;
@@ -52,6 +55,7 @@ public class AdministrationUser extends AppCompatActivity {
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
     ArrayAdapter<String> adapter;
+//    Boolean valid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,7 @@ public class AdministrationUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
+
         searchName = (SearchView) findViewById(R.id.searchViewName);
         listSpinner = (Spinner) findViewById(R.id.searchSpinner);
         adapter = new ArrayAdapter<String>(getApplicationContext(),
@@ -95,60 +100,159 @@ public class AdministrationUser extends AppCompatActivity {
         });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
-                alert.setTitle("Administration User");
-                LinearLayout layout = new LinearLayout(AdministrationUser.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                final EditText name = new EditText(AdministrationUser.this);
-                name.setHint("Name, E.G. John Doe");
-                layout.addView(name);
-                final EditText email = new EditText(AdministrationUser.this);
-                email.setHint("Email, E.G. johndoe@gmail.com");
-                layout.addView(email);
-                final EditText phone = new EditText(AdministrationUser.this);
-                phone.setHint("Phone, E.G. 0871234567");
-                layout.addView(phone);
-                final EditText password = new EditText(AdministrationUser.this);
-                password.setHint("Password, E.G. somepassword");
-                layout.addView(password);
-                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String stringEditName = name.getText().toString();
-                        String stringEditEmail = email.getText().toString();
-                        String stringEditPhone = phone.getText().toString();
-                        String stringEditPassword = password.getText().toString();
-                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
-                        users.add(temp);
-                        myAdapter.notifyDataSetChanged();
-                        justNames.add(stringEditName);
-                        saveData();
-                        Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(AdministrationUser.this);
+                View mView = getLayoutInflater().inflate(R.layout.activity_add_screen, null);
+//                 final TextView mTitle = (TextView) mView.findViewById(R.id.titleView);
+//                final TextView mSub = (TextView) mView.findViewById(R.id.subView);
+                final EditText mName = (EditText) mView.findViewById(R.id.newN);
+                final EditText mEmail = (EditText) mView.findViewById(R.id.newE);
+                final EditText mPhone = (EditText) mView.findViewById(R.id.newPh);
+                final EditText mPassword = (EditText) mView.findViewById(R.id.newP);
+
+                mBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
                     }
                 });
-                alert.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(AdministrationUser.this, "Cancel", Toast.LENGTH_LONG).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
-                        builder.setTitle("Confirm");
-                        builder.setMessage("Are you sure?");
-                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        builder.show();
+                mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 });
-                alert.setView(layout);
-                alert.show();
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String stringEditName = mName.getText().toString();
+                        String stringEditEmail = mEmail.getText().toString();
+                        String stringEditPhone = mPhone.getText().toString();
+                        String stringEditPassword = mPassword.getText().toString();
+                        if (stringEditName.isEmpty() || stringEditEmail.length() > 32) {
+                            mName.setError("Please Enter Valid Name");
+                        }
+                        if (stringEditEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(stringEditEmail).matches()) {
+                            mEmail.setError("Email must be valid pattern");
+
+                        }
+                        if (stringEditPhone.isEmpty() || stringEditPhone.length() < 6) {
+                            mPhone.setError("Phone must be at least 6 char");
+
+                        }
+                        if (stringEditPassword.isEmpty() || stringEditPassword.length() < 8) {
+                            mPassword.setError("Password must be at least 8 char");
+
+                        }
+                        if(stringEditName.isEmpty() || stringEditEmail.length() > 32||stringEditEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(stringEditEmail).matches()||stringEditPhone.isEmpty() || stringEditPhone.length() < 6||stringEditPassword.isEmpty() || stringEditPassword.length() < 8)
+                        {
+                            Toast.makeText(AdministrationUser.this, "You have incorrect field data!", Toast.LENGTH_LONG).show();
+
+                        }
+                        else {
+                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                            User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+                            users.add(temp);
+                            myAdapter.notifyDataSetChanged();
+                            saveData();
+                            Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+
+                        }
+//                        if (stringEditEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(stringEditEmail).matches()) {
+//                            email.setError("Please Enter Valid Email");
+//                        }
+//                        if (stringEditPhone.isEmpty()) {
+//                            phone.setError("Please Enter Valid Phone");
+//                        }
+//                        if (stringEditPassword.isEmpty()) {
+//                            password.setError("Please Enter Valid Password");
+//                        }
+//                            else{
+//
+//                            }
+                    }
+                });
+
+
+//                View mView = getLayoutInflater().inflate(R.layout.activity_add_screen,null);
+//                final EditText newName = (EditText)mView.findViewById(R.id.newN);
+//                final EditText newEmail = (EditText)mView.findViewById(R.id.newE);
+//                final EditText newPhone = (EditText)mView.findViewById(R.id.newPh);
+//                final EditText newPassword = (EditText)mView.findViewById(R.id.newP);
+//                 AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
+////                alert.setTitle("Administration User");
+////                final LinearLayout layout = new LinearLayout(AdministrationUser.this);
+////                layout.setOrientation(LinearLayout.VERTICAL);
+////                final EditText name = new EditText(AdministrationUser.this);
+////                name.setHint("Name, E.G. John Doe");
+////                layout.addView(name);
+////                final EditText email = new EditText(AdministrationUser.this);
+////                email.setHint("Email, E.G. johndoe@gmail.com");
+////                layout.addView(email);
+////                final EditText phone = new EditText(AdministrationUser.this);
+////                phone.setHint("Phone, E.G. 0871234567");
+////                layout.addView(phone);
+////                final EditText password = new EditText(AdministrationUser.this);
+////                password.setHint("Password, E.G. somepassword");
+////                layout.addView(password);
+//                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+////                        String stringEditName = newName.getText().toString();
+////                        String stringEditEmail = newEmail.getText().toString();
+////                        String stringEditPhone = newPhone.getText().toString();
+////                        String stringEditPassword = newPassword.getText().toString();
+////                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+////
+////
+////                            User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+////                            users.add(temp);
+////                            myAdapter.notifyDataSetChanged();
+////                            saveData();
+////                            Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
+//                alert.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+////                        Toast.makeText(AdministrationUser.this, "Cancel", Toast.LENGTH_LONG).show();
+////                        AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
+////                        builder.setTitle("Confirm");
+////                        builder.setMessage("Are you sure?");
+////                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        });
+////                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                            }
+////                        });
+////                        builder.show();
+//                    }
+//                });
+//                alert.setView(mView);
+//                AlertDialog dialog = alert.create();
+//                alert.show();
+//                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+////                        if (!name.getText().toString().isEmpty()) {
+////                            name.setError("Please Enter Valid Name");
+////                            dialog.dismiss();
+////                        }
+////                    else {
+////                            Toast.makeText(AdministrationUser.this, "Fucked up", Toast.LENGTH_SHORT).show();
+////                        }
+//                    }
+//                });
             }
         });
         searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -164,6 +268,7 @@ public class AdministrationUser extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -171,6 +276,7 @@ public class AdministrationUser extends AppCompatActivity {
         item.setEnabled(false);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -204,6 +310,7 @@ public class AdministrationUser extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void saveData() {
         SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
         SharedPreferences.Editor editorUser = sharedPreferencesUser.edit();
@@ -212,6 +319,7 @@ public class AdministrationUser extends AppCompatActivity {
         editorUser.putString("task list3", jsonUser);
         editorUser.apply();
     }
+
     private void loadData() {
         users = new ArrayList<User>();
         SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
@@ -224,6 +332,7 @@ public class AdministrationUser extends AppCompatActivity {
             users = new ArrayList<>();
         }
     }
+
     public int window(int position) {
         AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
         alert.setTitle("Administer User");
@@ -281,45 +390,72 @@ public class AdministrationUser extends AppCompatActivity {
         alert.setNeutralButton("New", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
-                alert.setTitle("Administration User");
-                LinearLayout layout = new LinearLayout(AdministrationUser.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                final EditText name = new EditText(AdministrationUser.this);
-                name.setHint("Name, E.G. John Doe");
-                layout.addView(name);
-                final EditText email = new EditText(AdministrationUser.this);
-                email.setHint("Email, E.G. johndoe@gmail.com");
-                layout.addView(email);
-                final EditText phone = new EditText(AdministrationUser.this);
-                phone.setHint("Phone, E.G. 0871234567");
-                layout.addView(phone);
-                final EditText password = new EditText(AdministrationUser.this);
-                password.setHint("Password, E.G. somepassword");
-                layout.addView(password);
-                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String stringEditName = name.getText().toString();
-                        String stringEditEmail = email.getText().toString();
-                        String stringEditPhone = phone.getText().toString();
-                        String stringEditPassword = password.getText().toString();
-                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
-                        users.add(temp);
-                        myAdapter.notifyDataSetChanged();
-                        saveData();
-                        Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
-                    }
-                });
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                alert.setView(layout);
-                alert.show();
+                addWindow();
             }
         });
         alert.show();
         return position;
+    }
+
+    public boolean validate(String stringEditName, EditText name, String stringEditEmail, EditText email, String stringEditPhone, EditText phone, String stringEditPassword, EditText password) {
+        boolean valid = true;
+        if (stringEditName.isEmpty() || stringEditName.length() > 32) {
+            name.setError("Please Enter Valid Name");
+            valid = false;
+        }
+        if (stringEditEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(stringEditEmail).matches()) {
+            email.setError("Please Enter Valid Email");
+        }
+        if (stringEditPhone.isEmpty()) {
+            phone.setError("Please Enter Valid Phone");
+        }
+        if (stringEditPassword.isEmpty()) {
+            password.setError("Please Enter Valid Password");
+        }
+        return valid;
+    }
+
+    public void addWindow() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationUser.this);
+        alert.setTitle("Administration User");
+        final LinearLayout layout = new LinearLayout(AdministrationUser.this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final EditText name = new EditText(AdministrationUser.this);
+        name.setHint("Name, E.G. John Doe");
+        layout.addView(name);
+        final EditText email = new EditText(AdministrationUser.this);
+        email.setHint("Email, E.G. johndoe@gmail.com");
+        layout.addView(email);
+        final EditText phone = new EditText(AdministrationUser.this);
+        phone.setHint("Phone, E.G. 0871234567");
+        layout.addView(phone);
+        final EditText password = new EditText(AdministrationUser.this);
+        password.setHint("Password, E.G. somepassword");
+        layout.addView(password);
+        alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String stringEditName = name.getText().toString();
+                String stringEditEmail = email.getText().toString();
+                String stringEditPhone = phone.getText().toString();
+                String stringEditPassword = password.getText().toString();
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                if (!validate(stringEditName, name, stringEditEmail, email, stringEditPhone, phone, stringEditPassword, password)) {
+                    Toast.makeText(AdministrationUser.this, "Signup has Failed", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+                    users.add(temp);
+                    myAdapter.notifyDataSetChanged();
+                    saveData();
+                    Toast.makeText(AdministrationUser.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
+        });
+        alert.setView(layout);
+        alert.show();
     }
 }

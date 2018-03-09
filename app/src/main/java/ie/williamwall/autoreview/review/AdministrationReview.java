@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +34,15 @@ import java.util.Date;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.misc.AdministrationUserOld;
+import ie.williamwall.autoreview.misc.Register;
 import ie.williamwall.autoreview.user.AdministrationUser;
+import ie.williamwall.autoreview.user.User;
 import ie.williamwall.autoreview.weather.Weather;
+
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
 
 public class AdministrationReview extends AppCompatActivity {
 
@@ -212,6 +221,7 @@ public class AdministrationReview extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -220,6 +230,7 @@ public class AdministrationReview extends AppCompatActivity {
         editor.putString("task list", json);
         editor.apply();
     }
+
     private void loadData() {
         someReviews = new ArrayList<Review>();
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -232,6 +243,7 @@ public class AdministrationReview extends AppCompatActivity {
             someReviews = new ArrayList<>();
         }
     }
+
     public int window(int position) {
         AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
         alert.setTitle("Administer Review");

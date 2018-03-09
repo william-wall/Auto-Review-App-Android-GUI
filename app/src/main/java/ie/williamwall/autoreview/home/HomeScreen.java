@@ -16,6 +16,10 @@ import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.user.AdministrationUser;
 import ie.williamwall.autoreview.weather.Weather;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class HomeScreen extends AppCompatActivity {
 
     private Button review;
@@ -35,13 +39,10 @@ public class HomeScreen extends AppCompatActivity {
         weather = (Button)findViewById(R.id.weather);
         userName = (TextView)findViewById(R.id.userName);
         userTime = (TextView)findViewById(R.id.userTime);
-
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         userTime.setText(currentDateTimeString);
-
         final String message3 = getIntent().getStringExtra("message_key_user");
         userName.setText(message3);
-
         review.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -74,7 +75,5 @@ public class HomeScreen extends AppCompatActivity {
             }
 
         });
-
     }
-
 }

@@ -13,16 +13,15 @@ import java.util.ArrayList;
 
 import ie.williamwall.autoreview.R;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ github.com/william-wall
+
 public class ReviewDetail extends AppCompatActivity {
 
     private EditText title;
     private EditText desc;
     private Button update;
-
-//    public ArrayList<Review> someReviews = <<AdministrationReview>>.getSomeReviews();
-
-//    public ArrayList<Review> someReviews = AdministrationReview.getInstance().getFrozen();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,55 +34,31 @@ public class ReviewDetail extends AppCompatActivity {
         String instanceDesc = getIntent().getStringExtra("sendDesc_key");
         title.setText(instanceTitle);
         desc.setText(instanceDesc);
-
-
-
-
-
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 window();
-
-//                String changedTitle = title.getText().toString();
-//                String changedDesc = desc.getText().toString();
-//                Intent move = new Intent(ReviewDetail.this, AdministrationReview.class);
-//                move.putExtra("sendBackTitle_key", changedTitle);
-//                move.putExtra("sendBackDesc_key", changedDesc);
-//                startActivity(move);
-
-
             }
         });
-
-
-
     }
-    public void window()
-    {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+    public void window() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Title");
         alert.setMessage("Message");
 
-// Set an EditText view to get user input
         final EditText input = new EditText(this);
         alert.setView(input);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-
-                // Do something with value!
             }
         });
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
             }
         });
-
         alert.show();
     }
 }
