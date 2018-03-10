@@ -201,7 +201,7 @@ public class AdministrationUser extends AppCompatActivity {
                     Toast.makeText(AdministrationUser.this, "You have incorrect field data, look at errors!", Toast.LENGTH_LONG).show();
                 } else {
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                    User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+                    User tempEdit = new User(R.mipmap.user, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                     users.set(id, tempEdit);
                     id = -1;
                     myAdapter.notifyDataSetChanged();
@@ -223,7 +223,7 @@ public class AdministrationUser extends AppCompatActivity {
                         String stringEditPhone = mPhone.getText().toString();
                         String stringEditPassword = mPassword.getText().toString();
                         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        User tempEdit = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+                        User tempEdit = new User(R.mipmap.user, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                         users.set(id, tempEdit);
                         id = -1;
                         users.remove(tempEdit);
@@ -239,7 +239,6 @@ public class AdministrationUser extends AppCompatActivity {
                     }
                 });
                 builder.show();
-
             }
         });
         mBuilder.setNeutralButton("New", new DialogInterface.OnClickListener() {
@@ -285,7 +284,7 @@ public class AdministrationUser extends AppCompatActivity {
                     Toast.makeText(AdministrationUser.this, "You have incorrect field data, look at errors!", Toast.LENGTH_LONG).show();
                 } else {
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                    User temp = new User(R.mipmap.car, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
+                    User temp = new User(R.mipmap.user, stringEditName, stringEditEmail, stringEditPhone, stringEditPassword, currentDateTimeString);
                     users.add(temp);
                     myAdapter.notifyDataSetChanged();
                     saveData();

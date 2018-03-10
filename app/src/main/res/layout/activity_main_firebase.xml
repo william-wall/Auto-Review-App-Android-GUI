@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context="ie.williamwall.autoreview.firebase.MainActivityFirebase">
 
     <EditText
@@ -13,6 +14,8 @@
         android:layout_centerHorizontal="true"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
+        android:textColor="@android:color/white"
+
         android:maxLines="1"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="82dp" />
@@ -29,9 +32,12 @@
         android:imeActionId="@+id/login"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
+        android:textColor="@android:color/white"
+
         android:maxLines="1"
         tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="125dp" />
+        tools:layout_editor_absoluteY="125dp"
+        tools:ignore="InvalidImeActionId" />
 
     <EditText
         android:id="@+id/newPassword"
@@ -41,13 +47,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:focusableInTouchMode="true"
+        android:textColor="@android:color/white"
+
         android:hint="@string/new_pass"
         android:imeActionId="@+id/login"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
         android:maxLines="1"
         tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="168dp" />
+        tools:layout_editor_absoluteY="168dp"
+        tools:ignore="InvalidImeActionId" />
 
     <Button
         android:id="@+id/changePass"
@@ -56,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/remove"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:text="@string/btn_change"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -79,8 +88,9 @@
         android:layout_above="@+id/continueMain"
         android:layout_alignLeft="@+id/changePass"
         android:layout_alignStart="@+id/changePass"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:text="@string/btn_remove"
+
         android:textColor="@android:color/white"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="199dp"
@@ -96,7 +106,8 @@
         tools:layout_editor_absoluteX="42dp"
         tools:layout_editor_absoluteY="312dp"
         android:layout_above="@+id/remove_user_button"
-        android:layout_alignStart="@+id/remove_user_button" />
+        android:layout_alignStart="@+id/remove_user_button"
+        android:layout_alignLeft="@+id/remove_user_button" />
 
     <Button
         android:id="@+id/remove_user_button"
@@ -108,7 +119,8 @@
         tools:layout_editor_absoluteX="42dp"
         tools:layout_editor_absoluteY="408dp"
         android:layout_above="@+id/sign_out"
-        android:layout_alignStart="@+id/sign_out" />
+        android:layout_alignStart="@+id/sign_out"
+        android:layout_alignLeft="@+id/sign_out" />
 
     <Button
         android:id="@+id/sign_out"
@@ -132,6 +144,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/fireText"
         android:gravity="center"
+        android:textColor="@android:color/white"
+
         android:hint="@string/email_id"
         android:textSize="20sp"
         android:textStyle="bold|italic" />
@@ -153,42 +167,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:textColor="@android:color/white"
+
         android:text="Firebase Account Administration"
         android:textSize="25sp"
         android:gravity="center"
         android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/no1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/no3"
-        android:layout_alignLeft="@+id/no2"
-        android:layout_alignStart="@+id/no2"
-        android:layout_marginBottom="18dp"
-        android:text="1. Continue - Main System"
-        android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/no2"
-        android:textSize="15sp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/no3"
-        android:layout_centerHorizontal="true"
-        android:text="2. Change your login password" />
-
-    <TextView
-        android:id="@+id/no3"
-        android:textSize="15sp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/old_email"
-        android:layout_alignLeft="@+id/no2"
-        android:layout_alignStart="@+id/no2"
-        android:layout_marginBottom="11dp"
-        android:text="3. Remove your account" />
 
 </RelativeLayout>

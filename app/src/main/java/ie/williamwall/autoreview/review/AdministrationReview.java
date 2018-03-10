@@ -70,52 +70,53 @@ public class AdministrationReview extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
-                alert.setTitle("Add New Review");
-                LinearLayout layout = new LinearLayout(AdministrationReview.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                final EditText title = new EditText(AdministrationReview.this);
-                title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
-                layout.addView(title);
-                final EditText desc = new EditText(AdministrationReview.this);
-                desc.setHint("Review Description, E.G. Terrible fuel consumption...");
-                layout.addView(desc);
-                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        String stringEditTitle = title.getText().toString();
-                        String stringEditDesc = desc.getText().toString();
-                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
-                        someReviews.add(temp);
-                        myAdapter.notifyDataSetChanged();
-                        saveData();
-                        Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-                    }
-                });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(AdministrationReview.this, "Cancel", Toast.LENGTH_LONG).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationReview.this);
-                        builder.setTitle("Confirm");
-                        builder.setMessage("Are you sure?");
-                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        builder.show();
-                    }
-                });
-                alert.setView(layout);
-                alert.show();
+                addWindow();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
+//                alert.setTitle("Add New Review");
+//                LinearLayout layout = new LinearLayout(AdministrationReview.this);
+//                layout.setOrientation(LinearLayout.VERTICAL);
+//                final EditText title = new EditText(AdministrationReview.this);
+//                title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
+//                layout.addView(title);
+//                final EditText desc = new EditText(AdministrationReview.this);
+//                desc.setHint("Review Description, E.G. Terrible fuel consumption...");
+//                layout.addView(desc);
+//                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+//                        String stringEditTitle = title.getText().toString();
+//                        String stringEditDesc = desc.getText().toString();
+//                        Review temp = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+//                        someReviews.add(temp);
+//                        myAdapter.notifyDataSetChanged();
+//                        saveData();
+//                        Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//
+//                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        Toast.makeText(AdministrationReview.this, "Cancel", Toast.LENGTH_LONG).show();
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationReview.this);
+//                        builder.setTitle("Confirm");
+//                        builder.setMessage("Are you sure?");
+//                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        });
+//                        builder.show();
+//                    }
+//                });
+//                alert.setView(layout);
+//                alert.show();
             }
         });
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
@@ -131,7 +132,7 @@ public class AdministrationReview extends AppCompatActivity {
                 id = position;
                 titleInstance = someReviews.get(position).getReviewTitle();
                 descInstance = someReviews.get(position).getReviewDesc();
-                window(position);
+                crudWindow(position);
             }
         });
         mainList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -243,83 +244,203 @@ public class AdministrationReview extends AppCompatActivity {
             someReviews = new ArrayList<>();
         }
     }
+    public boolean validate(String stringEditTitle, EditText mTitle, String stringEditDesc, EditText mDesc) {
+        boolean valid = true;
+        if (stringEditTitle.isEmpty() || stringEditTitle.length() < 5) {
+            mTitle.setError("Title must be at least 5 characters!");
+            valid = false;
+        }
+        if (stringEditDesc.isEmpty() || stringEditDesc.length() < 20) {
+            mDesc.setError("Review must be at least 20 characters!");
+            valid = false;
+        }
+        if (stringEditTitle.isEmpty() || stringEditTitle.length() < 5 || stringEditDesc.isEmpty() || stringEditDesc.length() < 20) {
+            valid = false;
+        }
+        return valid;
+    }
 
-    public int window(int position) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
-        alert.setTitle("Administer Review");
-        LinearLayout layout = new LinearLayout(AdministrationReview.this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        final EditText title = new EditText(AdministrationReview.this);
-        title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
-        layout.addView(title);
-        final EditText desc = new EditText(AdministrationReview.this);
-        desc.setHint("Review Description, E.G. Terrible fuel consumption...");
-        layout.addView(desc);
-        id = position;
-        title.setText(someReviews.get(position).getReviewTitle());
-        desc.setText(someReviews.get(position).getReviewDesc());
-        alert.setView(layout);
-        alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                String stringEditTitle = title.getText().toString();
-                String stringEditDesc = desc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
-                someReviews.set(id, tempEdit);
-                id = -1;
-                myAdapter.notifyDataSetChanged();
-                Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-                saveData();
-            }
-        });
-        alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                String stringEditTitle = title.getText().toString();
-                String stringEditDesc = desc.getText().toString();
-                Review tempEdit = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
-                someReviews.set(id, tempEdit);
-                id = -1;
-                someReviews.remove(tempEdit);
-                myAdapter.notifyDataSetChanged();
-                saveData();
-                Toast.makeText(AdministrationReview.this, "Deleted Review", Toast.LENGTH_SHORT).show();
-            }
-        });
-        alert.setNeutralButton("New", new DialogInterface.OnClickListener() {
+    public void addWindow() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(AdministrationReview.this);
+        View mView = getLayoutInflater().inflate(R.layout.activity_crud_screen_review, null);
+        final EditText mTitle = (EditText) mView.findViewById(R.id.newTitle);
+        final EditText mDesc = (EditText) mView.findViewById(R.id.newDesc);
+        mBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
-                alert.setTitle("Administer Review");
-                LinearLayout layout = new LinearLayout(AdministrationReview.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                final EditText title = new EditText(AdministrationReview.this);
-                title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
-                layout.addView(title);
-                final EditText desc = new EditText(AdministrationReview.this);
-                desc.setHint("Review Description, E.G. Terrible fuel consumption...");
-                layout.addView(desc);
-                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        String stringEditTitle = title.getText().toString();
-                        String stringEditDesc = desc.getText().toString();
-                        Review temp = new Review(R.mipmap.car, stringEditTitle, stringEditDesc, currentDateTimeString);
-                        someReviews.add(temp);
-                        myAdapter.notifyDataSetChanged();
-                        saveData();
-                        Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
-                    }
-                });
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                alert.setView(layout);
-                alert.show();
             }
         });
-        alert.show();
+        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String stringEditTitle = mTitle.getText().toString();
+                String stringEditDesc = mDesc.getText().toString();
+                if (!validate(stringEditTitle, mTitle, stringEditDesc, mDesc)) {
+                    Toast.makeText(AdministrationReview.this, "You have incorrect field data, look at errors!", Toast.LENGTH_LONG).show();
+                } else {
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    Review temp = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+                    someReviews.add(temp);
+                    myAdapter.notifyDataSetChanged();
+                    saveData();
+                    Toast.makeText(AdministrationReview.this, "Added Sucessfully", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public int crudWindow(int position) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(AdministrationReview.this);
+        View mView = getLayoutInflater().inflate(R.layout.activity_crud_screen_review, null);
+        final EditText mTitle = (EditText) mView.findViewById(R.id.newTitle);
+        final EditText mDesc = (EditText) mView.findViewById(R.id.newDesc);
+        id = position;
+        mTitle.setText(someReviews.get(position).getReviewTitle());
+        mDesc.setText(someReviews.get(position).getReviewDesc());
+        mBuilder.setView(mView);
+        mBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String stringEditTitle = mTitle.getText().toString();
+                String stringEditDesc = mDesc.getText().toString();
+                if (!validate(stringEditTitle, mTitle, stringEditDesc, mDesc)) {
+                    Toast.makeText(AdministrationReview.this, "You have incorrect field data, look at errors!", Toast.LENGTH_LONG).show();
+                } else {
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    Review tempEdit = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+                    someReviews.set(id, tempEdit);
+                    id = -1;
+                    myAdapter.notifyDataSetChanged();
+                    saveData();
+                    Toast.makeText(AdministrationReview.this, "Updated Sucessfully", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationReview.this);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String stringEditTitle = mTitle.getText().toString();
+                        String stringEditDesc = mDesc.getText().toString();
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                        Review tempEdit = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+                        someReviews.set(id, tempEdit);
+                        id = -1;
+                        someReviews.remove(tempEdit);
+                        myAdapter.notifyDataSetChanged();
+                        saveData();
+                        Toast.makeText(AdministrationReview.this, "Deleted User", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
+        mBuilder.setNeutralButton("New", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                addWindow();
+            }
+        });
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
         return position;
     }
+
+//    public int window(int position) {
+//        AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
+//        alert.setTitle("Administer Review");
+//        LinearLayout layout = new LinearLayout(AdministrationReview.this);
+//        layout.setOrientation(LinearLayout.VERTICAL);
+//        final EditText title = new EditText(AdministrationReview.this);
+//        title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
+//        layout.addView(title);
+//        final EditText desc = new EditText(AdministrationReview.this);
+//        desc.setHint("Review Description, E.G. Terrible fuel consumption...");
+//        layout.addView(desc);
+//        id = position;
+//        title.setText(someReviews.get(position).getReviewTitle());
+//        desc.setText(someReviews.get(position).getReviewDesc());
+//        alert.setView(layout);
+//        alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+//                String stringEditTitle = title.getText().toString();
+//                String stringEditDesc = desc.getText().toString();
+//                Review tempEdit = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+//                someReviews.set(id, tempEdit);
+//                id = -1;
+//                myAdapter.notifyDataSetChanged();
+//                Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+//                saveData();
+//            }
+//        });
+//        alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+//                String stringEditTitle = title.getText().toString();
+//                String stringEditDesc = desc.getText().toString();
+//                Review tempEdit = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+//                someReviews.set(id, tempEdit);
+//                id = -1;
+//                someReviews.remove(tempEdit);
+//                myAdapter.notifyDataSetChanged();
+//                saveData();
+//                Toast.makeText(AdministrationReview.this, "Deleted Review", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        alert.setNeutralButton("New", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                AlertDialog.Builder alert = new AlertDialog.Builder(AdministrationReview.this);
+//                alert.setTitle("Administer Review");
+//                LinearLayout layout = new LinearLayout(AdministrationReview.this);
+//                layout.setOrientation(LinearLayout.VERTICAL);
+//                final EditText title = new EditText(AdministrationReview.this);
+//                title.setHint("Review Title, E.G. Opel Vectra 1.6 16v");
+//                layout.addView(title);
+//                final EditText desc = new EditText(AdministrationReview.this);
+//                desc.setHint("Review Description, E.G. Terrible fuel consumption...");
+//                layout.addView(desc);
+//                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+//                        String stringEditTitle = title.getText().toString();
+//                        String stringEditDesc = desc.getText().toString();
+//                        Review temp = new Review(R.mipmap.caricon, stringEditTitle, stringEditDesc, currentDateTimeString);
+//                        someReviews.add(temp);
+//                        myAdapter.notifyDataSetChanged();
+//                        saveData();
+//                        Toast.makeText(AdministrationReview.this, "Saved Sucessfully", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                    }
+//                });
+//                alert.setView(layout);
+//                alert.show();
+//            }
+//        });
+//        alert.show();
+//        return position;
+//    }
 }

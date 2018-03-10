@@ -30,7 +30,7 @@ public class Splash extends AppCompatActivity {
                 try {
                     for (int i = 0; i < 100; i++) {
                         splashProgress.setProgress(i);
-                        sleep(10);
+                        sleep(60);
                     }
                 } catch (InterruptedException e) {
 
