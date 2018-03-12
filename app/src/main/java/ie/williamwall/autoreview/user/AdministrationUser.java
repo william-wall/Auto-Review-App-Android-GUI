@@ -31,6 +31,7 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.weather.Weather;
@@ -151,6 +152,12 @@ public class AdministrationUser extends AppCompatActivity {
         }
         if (id == R.id.action_user) {
             Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.home_icon) {
+            Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(AdministrationUser.this, HomeScreen.class);
+            startActivity(Intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
