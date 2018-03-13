@@ -43,7 +43,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".misc.MainMenu" />
         <activity android:name=".misc.MainMenuUser" />
-        <activity android:name=".home.HomeScreen" />
+        <activity android:name=".home.HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".user.UserDetail" />
         <activity android:name=".review.ReviewDetail" />
         <activity android:name=".weather.Weather" />

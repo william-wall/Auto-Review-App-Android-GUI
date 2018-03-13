@@ -31,6 +31,7 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.firebase.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
@@ -43,10 +44,10 @@ import ie.williamwall.autoreview.weather.Weather;
 
 public class AdministrationUser extends AppCompatActivity {
     ListView lv;
-    SearchView searchName;
+//    SearchView searchName;
     CustomAdapterUser myAdapter;
     ArrayList<User> users = new ArrayList<User>();
-    Spinner listSpinner;
+//    Spinner listSpinner;
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
     ArrayAdapter<String> adapter;
@@ -60,12 +61,11 @@ public class AdministrationUser extends AppCompatActivity {
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
 
-        searchName = (SearchView) findViewById(R.id.searchViewName);
-        listSpinner = (Spinner) findViewById(R.id.searchSpinner);
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item, justNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        listSpinner.setAdapter(adapter);
+
+//        adapter = new ArrayAdapter<String>(getApplicationContext(),
+//                android.R.layout.simple_spinner_item, justNames);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        listSpinner.setAdapter(adapter);
         myAdapter = new CustomAdapterUser(this, R.layout.item_layout_administration_user, users);
         lv.setAdapter(myAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,18 +101,18 @@ public class AdministrationUser extends AppCompatActivity {
                 addWindow();
             }
         });
-        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                myAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+//        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                myAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -128,7 +128,7 @@ public class AdministrationUser extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(AdministrationUser.this, LoginActivityFirebase.class);
+            Intent Intent = new Intent(AdministrationUser.this, MainActivityFirebase.class);
             startActivity(Intent);
             return true;
         }

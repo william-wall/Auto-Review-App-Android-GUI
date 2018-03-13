@@ -33,6 +33,7 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
+import ie.williamwall.autoreview.firebase.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.misc.AdministrationUserOld;
@@ -53,11 +54,11 @@ public class AdministrationReview extends AppCompatActivity {
     ArrayList<Review> someReviews;
     CustomAdapterReview myAdapter;
     ArrayAdapter<Review> adapter;
-    SearchView sv;
+//    SearchView sv;
 
     private void init() {
         mainList = (ListView) findViewById(R.id.list_cars);
-        sv = (SearchView) findViewById(R.id.searchCar);
+//        sv = (SearchView) findViewById(R.id.searchCar);
         userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
     }
 
@@ -145,35 +146,35 @@ public class AdministrationReview extends AppCompatActivity {
                 return false;
             }
         });
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                myAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                myAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
     }
 
     public void searchViewTitle() {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, someReviews);
         mainList.setAdapter(adapter);
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -195,7 +196,7 @@ public class AdministrationReview extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(AdministrationReview.this, LoginActivityFirebase.class);
+            Intent Intent = new Intent(AdministrationReview.this, MainActivityFirebase.class);
             startActivity(Intent);
             return true;
         }
