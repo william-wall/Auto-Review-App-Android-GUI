@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.misc;
+package ie.williamwall.autoreview.notInUse;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

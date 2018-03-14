@@ -42,64 +42,48 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        review = (Button)findViewById(R.id.review);
-        user = (Button)findViewById(R.id.user);
-        location = (Button)findViewById(R.id.location);
-        weather = (Button)findViewById(R.id.weather);
-        userName = (TextView)findViewById(R.id.userName);
-        userTime = (TextView)findViewById(R.id.userTime);
+        review = (Button) findViewById(R.id.review);
+        user = (Button) findViewById(R.id.user);
+        location = (Button) findViewById(R.id.location);
+        weather = (Button) findViewById(R.id.weather);
+        userName = (TextView) findViewById(R.id.userName);
+        userTime = (TextView) findViewById(R.id.userTime);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         userTime.setText(currentDateTimeString);
         final String message3 = getIntent().getStringExtra("message_key_user");
         userName.setText(message3);
-        review.setOnClickListener(new View.OnClickListener(){
+        review.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
-//                String sendingUsername = userName.getText().toString();
+            public void onClick(View v) {
                 Intent move = new Intent(HomeScreen.this, AdministrationReview.class);
-//                Intent.putExtra("message_key_user_send", sendingUsername);
                 startActivity(move);
             }
 
         });
-        user.setOnClickListener(new View.OnClickListener(){
+        user.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent move = new Intent(HomeScreen.this,AdministrationUser.class);
+            public void onClick(View v) {
+                Intent move = new Intent(HomeScreen.this, AdministrationUser.class);
                 startActivity(move);
             }
 
         });
-        location.setOnClickListener(new View.OnClickListener(){
+        location.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent move = new Intent(HomeScreen.this,MapsActivity.class);
+            public void onClick(View v) {
+                Intent move = new Intent(HomeScreen.this, MapsActivity.class);
                 startActivity(move);
             }
 
         });
-        weather.setOnClickListener(new View.OnClickListener(){
+        weather.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent move = new Intent(HomeScreen.this,Weather.class);
+            public void onClick(View v) {
+                Intent move = new Intent(HomeScreen.this, Weather.class);
                 startActivity(move);
             }
 
         });
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//
-//
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(HomeScreen.this, "Working", Toast.LENGTH_SHORT).show();
-//
-////                addWindow();
-//            }
-//        });
-
     }
 
     @Override
@@ -109,6 +93,7 @@ public class HomeScreen extends AppCompatActivity {
         item.setEnabled(false);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -151,5 +136,4 @@ public class HomeScreen extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -44,10 +44,8 @@ import ie.williamwall.autoreview.weather.Weather;
 
 public class AdministrationUser extends AppCompatActivity {
     ListView lv;
-//    SearchView searchName;
     CustomAdapterUser myAdapter;
     ArrayList<User> users = new ArrayList<User>();
-//    Spinner listSpinner;
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
     ArrayAdapter<String> adapter;
@@ -60,12 +58,6 @@ public class AdministrationUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
-
-
-//        adapter = new ArrayAdapter<String>(getApplicationContext(),
-//                android.R.layout.simple_spinner_item, justNames);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        listSpinner.setAdapter(adapter);
         myAdapter = new CustomAdapterUser(this, R.layout.item_layout_administration_user, users);
         lv.setAdapter(myAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,18 +93,6 @@ public class AdministrationUser extends AppCompatActivity {
                 addWindow();
             }
         });
-//        searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                myAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
     }
 
     @Override

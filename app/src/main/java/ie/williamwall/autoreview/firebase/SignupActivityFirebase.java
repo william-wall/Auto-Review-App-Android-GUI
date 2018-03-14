@@ -24,7 +24,7 @@ import ie.williamwall.autoreview.R;
 
 public class SignupActivityFirebase extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword, checkPassword;     //hit option + enter if you on mac , for windows hit ctrl + enter
+    private EditText inputEmail, inputPassword, checkPassword;
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
@@ -82,7 +82,7 @@ public class SignupActivityFirebase extends AppCompatActivity {
                         .addOnCompleteListener(SignupActivityFirebase.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignupActivityFirebase.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivityFirebase.this, "Sign Up Successful" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
