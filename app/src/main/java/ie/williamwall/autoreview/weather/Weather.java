@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebase.MainActivityFirebase;
+import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.user.AdministrationUser;
@@ -27,8 +33,10 @@ public class Weather extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
         cityField = (TextView) findViewById(R.id.city_field);
         updatedField = (TextView) findViewById(R.id.updated_field);
@@ -50,5 +58,53 @@ public class Weather extends AppCompatActivity {
             }
         });
         asyncTask.execute("52.246632", "-7.138822");
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            Toast.makeText(this, "Logged Off", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, MainActivityFirebase.class);
+            startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.action_weather) {
+            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, Weather.class);
+            startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.action_location) {
+            Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, MapsActivity.class);
+            startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.action_review) {
+            Toast.makeText(this, "Administration Review", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, AdministrationReview.class);
+            startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.action_user) {
+            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, AdministrationUser.class);
+            startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.home_icon) {
+            Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
+            Intent Intent = new Intent(Weather.this, HomeScreen.class);
+            startActivity(Intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

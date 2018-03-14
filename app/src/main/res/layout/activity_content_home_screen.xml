@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     tools:context="ie.williamwall.autoreview.home.HomeScreen"
         tools:showIn="@layout/activity_home_screen">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -18,7 +20,9 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             />
+
     </android.support.design.widget.AppBarLayout>
+
     <Button
         android:id="@+id/user"
         android:layout_width="346dp"
@@ -28,7 +32,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:text="User Administration"
+        android:text="@string/home_title"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +49,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Review Administration"
+        android:text="@string/btn_review_administration"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +67,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-        android:text="TextView"
+        android:text="@string/home_user_email"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold|italic"
@@ -83,8 +86,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="Application Administration"
-
+        android:text="@string/home_title"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold|italic"
@@ -103,9 +105,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="Select option:"
+        android:text="@string/btn_choice"
         android:textColor="@color/white"
-
         android:textSize="25sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +125,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:text="Weather Report"
+        android:text="@string/btn_weather"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +143,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:text="Current Location"
+        android:text="@string/btn_map"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +153,6 @@
         app:layout_constraintVertical_bias="0.985" />
 
     <TextView
-
         android:id="@+id/text_email"
         android:layout_width="215dp"
         android:layout_height="35dp"
@@ -161,8 +161,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-
-        android:text="User Email:"
+        android:text="@string/display_email"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold|italic"
@@ -182,9 +181,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-        android:text="Time:"
+        android:text="@string/display_time"
         android:textColor="@color/white"
-
         android:textSize="15sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -203,8 +201,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-
-        android:text="TextView"
+        android:text="@string/home_user_time"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold|italic"
@@ -216,7 +213,7 @@
         app:layout_constraintVertical_bias="0.418" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewHome"
         android:layout_width="115dp"
         android:layout_height="105dp"
         android:layout_marginBottom="8dp"
@@ -230,11 +227,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.259"
         app:srcCompat="@mipmap/caricon" />
-
-
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

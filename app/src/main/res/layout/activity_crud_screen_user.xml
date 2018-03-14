@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,9 +15,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Administration User"
+        android:text="@string/user_crud_title"
         android:textColor="@color/white"
-
         android:textSize="30sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,9 +34,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Create, Read, Update and Delete"
-        android:textSize="15sp"
+        android:text="@string/review_crud_sub_title"
         android:textColor="@color/white"
+        android:textSize="15sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,9 +130,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-        android:text="Name"
-        android:textSize="21sp"
+        android:text="@string/crud_name"
         android:textColor="@color/white"
+        android:textSize="21sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,8 +150,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
+        android:text="@string/crud_email"
         android:textColor="@color/white"
-        android:text="E-mail"
         android:textSize="21sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,9 +170,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
-        android:text="Phone"
-        android:textSize="21sp"
+        android:text="@string/crud_phone"
         android:textColor="@color/white"
+        android:textSize="21sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,8 +190,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
+        android:text="@string/crud_password"
         android:textColor="@color/white"
-        android:text="Password"
         android:textSize="21sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +202,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageViewUser"
         android:layout_width="116dp"
         android:layout_height="51dp"
         android:layout_marginBottom="8dp"
@@ -217,6 +215,5 @@
         app:layout_constraintTop_toBottomOf="@+id/subView"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/user" />
-
 
 </android.support.constraint.ConstraintLayout>

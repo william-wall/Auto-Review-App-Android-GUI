@@ -2,7 +2,6 @@
     <string name="app_name">Auto Review</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_settings">settings</string>
-    <string name="title_activity_mainlogout">mainlogout</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -81,11 +80,7 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_settings_window">settingsWindow</string>
-    <string name="title_activity_mainsettings">mainsettings</string>
-    <string name="title_activity_elipse">elipse</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
-    <!--<string name="app_name">FirebaseLoginApp</string>-->
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -118,4 +113,34 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="email_id">Email ID</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="user_title">User Administration</string>
+    <string name="home_title">Application Administration</string>
+    <string name="btn_review_administration">Review Administration</string>
+    <string name="btn_user_administration">User Administration</string>
+    <string name="btn_weather">Weather Report</string>
+    <string name="btn_map">Current Location</string>
+    <string name="btn_choice">Choose:</string>
+    <string name="display_email">User Email:</string>
+    <string name="display_time">Time:</string>
+    <string name="home_user_time">Current Time</string>
+    <string name="home_user_email">Current User</string>
+
+    <string name="review_crud_title">Administration Review</string>
+    <string name="review_crud_sub_title">Create, Read, Update and Delete</string>
+    <string name="review_crud_title_field">Review Title</string>
+    <string name="review_crud_review_field">Review Comment</string>
+
+    <string name="user_crud_title">Administration User</string>
+    <string name="crud_name">Name</string>
+    <string name="crud_email">E-Mail</string>
+    <string name="crud_phone">Phone</string>
+    <string name="crud_password">Password</string>
+
+    <string name="btn_continue">Continue</string>
+
+    <string name="app_version_splash">Version 1.0 Administration</string>
+    <string name="app_title">Auto Review</string>
+    <string name="app_loading">Loading ...</string>
+
 </resources>

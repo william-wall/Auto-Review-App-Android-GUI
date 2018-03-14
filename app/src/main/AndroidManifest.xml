@@ -47,7 +47,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".user.UserDetail" />
         <activity android:name=".review.ReviewDetail" />
-        <activity android:name=".weather.Weather" />
+        <activity android:name=".weather.Weather"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".firebase.MainActivityFirebase" />
         <activity android:name=".firebase.LoginActivityFirebase" />
         <activity android:name=".firebase.SignupActivityFirebase" />
