@@ -28,7 +28,13 @@
         android:orientation="horizontal">
 
     </LinearLayout>
-
+<TextView
+    android:id="@+id/userName"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_gravity="center"
+    android:textStyle="bold"
+    android:text="home_user_email"/>
     <ListView
         android:id="@+id/list_cars"
         android:layout_width="match_parent"
@@ -36,146 +42,7 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/userLoginDisplay"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Logged in as: " />
+
 
 </LinearLayout>
 
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:conteie.williamwall.autoreview.AdministrationReviewnReviewvity"-->
-    <!--tools:showIn="@layactivity_administration_reviewain2">-->
-
-
-    <!--<SearchView-->
-        <!--android:id="@+id/searchCar"-->
-        <!--android:layout_width="368dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.0" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/edit_title"-->
-        <!--android:layout_width="368dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:text="Name"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.666"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/searchCar"-->
-        <!--app:layout_constraintVertical_bias="0.072" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/edit_desc"-->
-        <!--android:layout_width="368dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:text="Name"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.666"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.191" />-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="368dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.296">-->
-
-        <!--<Button-->
-            <!--android:id="@+id/add"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Add" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/edit"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Update" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/clear"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Clear" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/save"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Save" />-->
-    <!--</LinearLayout>-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/list_cars"-->
-        <!--android:layout_width="368dp"-->
-        <!--android:layout_height="309dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.968" />-->
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/userLoginDisplay"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="26dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="Logged in as: " />&ndash;&gt;-->
-<!--</android.support.constraint.ConstraintLayout>-->
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Hello World!"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->

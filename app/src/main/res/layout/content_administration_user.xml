@@ -28,7 +28,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="home_user_email"/>
 
     <ListView
         android:choiceMode="singleChoice"
@@ -37,6 +43,8 @@
         android:layout_height="match_parent">
 
     </ListView>
+
+
 
 </LinearLayout>
 

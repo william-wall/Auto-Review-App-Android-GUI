@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.user;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,8 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,15 +53,20 @@ public class AdministrationUser extends AppCompatActivity {
     int id = -1;
     ArrayList<String> justNames = new ArrayList<String>();
     ArrayAdapter<String> adapter;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administration_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        userName = (TextView) findViewById(R.id.userName);
         setSupportActionBar(toolbar);
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
         loadData();
         lv = (ListView) findViewById(R.id.listViewMain);
+        String sendUserId = getIntent().getStringExtra("message_key_user");
         myAdapter = new CustomAdapterUser(this, R.layout.item_layout_administration_user, users);
         lv.setAdapter(myAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -131,7 +140,6 @@ public class AdministrationUser extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.home_icon) {
@@ -292,7 +300,7 @@ public class AdministrationUser extends AppCompatActivity {
             mEmail.setError("Email must be valid pattern");
             valid = false;
         }
-        if (stringEditPhone.isEmpty() || stringEditPhone.length() < 6) {
+        if (stringEditPhone.isEmpty() || stringEditPhone.length() < 6 || stringEditPhone.length() > 15) {
             mPhone.setError("Phone must be at least 6 char");
             valid = false;
         }
@@ -304,5 +312,10 @@ public class AdministrationUser extends AppCompatActivity {
             valid = false;
         }
         return valid;
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+        userName.setText("Administrator ID: " + user.getEmail());
+
     }
 }

@@ -33,7 +33,6 @@ public class Weather extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +61,8 @@ public class Weather extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_weather);
+        item.setEnabled(false);
         return true;
     }
 
@@ -76,9 +77,6 @@ public class Weather extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_weather) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(Weather.this, Weather.class);
-            startActivity(Intent);
             return true;
         }
         if (id == R.id.action_location) {
@@ -107,4 +105,6 @@ public class Weather extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

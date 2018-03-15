@@ -90,9 +90,9 @@ public class MainActivityFirebase extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String sendingUsername = user.getEmail();
+//                String sendingUsername = user.getEmail();
                 Intent Intent = new Intent(MainActivityFirebase.this, HomeScreen.class);
-                Intent.putExtra("message_key_user", sendingUsername);
+//                Intent.putExtra("message_key_user", sendingUsername);
                 startActivity(Intent);
             }
         });

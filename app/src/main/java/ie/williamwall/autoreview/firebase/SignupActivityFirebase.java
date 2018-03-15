@@ -82,13 +82,13 @@ public class SignupActivityFirebase extends AppCompatActivity {
                         .addOnCompleteListener(SignupActivityFirebase.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignupActivityFirebase.this, "Sign Up Successful" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivityFirebase.this, "Sign Up Successful: " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivityFirebase.this, "Authentication failed." + task.getException(),
+                                    Toast.makeText(SignupActivityFirebase.this, "Authentication failed: " + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     startActivity(new Intent(SignupActivityFirebase.this, MainActivityFirebase.class));

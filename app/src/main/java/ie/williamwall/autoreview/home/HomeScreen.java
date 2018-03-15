@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -50,15 +54,15 @@ public class HomeScreen extends AppCompatActivity {
         userTime = (TextView) findViewById(R.id.userTime);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         userTime.setText(currentDateTimeString);
-        final String message3 = getIntent().getStringExtra("message_key_user");
-        userName.setText(message3);
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
+
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent move = new Intent(HomeScreen.this, AdministrationReview.class);
                 startActivity(move);
             }
-
         });
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +86,6 @@ public class HomeScreen extends AppCompatActivity {
                 Intent move = new Intent(HomeScreen.this, Weather.class);
                 startActivity(move);
             }
-
         });
     }
 
@@ -135,5 +138,10 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+        userName.setText(user.getEmail());
+
     }
 }

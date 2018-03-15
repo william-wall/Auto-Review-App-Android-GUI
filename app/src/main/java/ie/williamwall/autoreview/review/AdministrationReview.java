@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.review;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -45,17 +48,19 @@ public class AdministrationReview extends AppCompatActivity {
     ArrayList<Review> someReviews;
     CustomAdapterReview myAdapter;
     ArrayAdapter<Review> adapter;
+    TextView userName;
 
     private void init() {
         mainList = (ListView) findViewById(R.id.list_cars);
-        userLoginName = (TextView) findViewById(R.id.userLoginDisplay);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administration_review);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        userName = (TextView)findViewById(R.id.userName);
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +126,6 @@ public class AdministrationReview extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_review) {
-            Toast.makeText(this, "Administration Review", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.action_user) {
@@ -280,5 +284,10 @@ public class AdministrationReview extends AppCompatActivity {
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
         return position;
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+        userName.setText("Administrator ID: " + user.getEmail());
+
     }
 }
