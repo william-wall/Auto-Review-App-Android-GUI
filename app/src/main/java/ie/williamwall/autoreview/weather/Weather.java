@@ -58,6 +58,7 @@ public class Weather extends AppCompatActivity {
         });
         asyncTask.execute("52.246632", "-7.138822");
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -101,6 +102,10 @@ public class Weather extends AppCompatActivity {
             Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(Weather.this, HomeScreen.class);
             startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.info_icon) {
+            Toast.makeText(this, "Only used in User and Review Administration!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

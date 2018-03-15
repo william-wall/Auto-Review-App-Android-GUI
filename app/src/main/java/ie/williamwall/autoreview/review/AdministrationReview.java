@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
@@ -31,6 +34,7 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebase.MainActivityFirebase;
+import ie.williamwall.autoreview.firebase.SignupActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.user.AdministrationUser;
@@ -58,9 +62,10 @@ public class AdministrationReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administration_review);
-        userName = (TextView)findViewById(R.id.userName);
+        userName = (TextView) findViewById(R.id.userName);
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
-        setDataToView(userId);        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setDataToView(userId);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +95,7 @@ public class AdministrationReview extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 someReviews.remove(position);
                 myAdapter.notifyDataSetChanged();
+                saveData();
                 Toast.makeText(AdministrationReview.this, "Deleted Review", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -138,6 +144,36 @@ public class AdministrationReview extends AppCompatActivity {
             Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, HomeScreen.class);
             startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.info_icon) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationReview.this);
+            builder.setTitle("Confirm");
+            builder.setMessage("Do you want to populate list with random records?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    Review temp = new Review(R.mipmap.caricon, "AUDI A6 S-Line 3.0", "Massive amount of power, comfort is hard to beat. Real stylish motor. Worth the money, I have never heard a bad review about one of these cars!", currentDateTimeString);
+                    Review temp2 = new Review(R.mipmap.caricon, "Toyota Avensis 2.0 D", "Reliable car, never gives trouble and new buy is cheap!\n" +
+                            "not that costly and vrt is moderate! The tax for such a car is quite cheap", currentDateTimeString);
+                    Review temp3 = new Review(R.mipmap.caricon, "OPEL Vectra 1.6 V6 Club", "Slow and very bad fuel consumption, would not recommend! Petrol cars like these are a thing of the past!", currentDateTimeString);
+                    Review temp4 = new Review(R.mipmap.caricon, "VW Golf 1.9 TDI 2003", "Very good on fuel, not too bad on power either. Reliable car although getting quite old now. It seems that this car needs a lot of services more regular than other cars!", currentDateTimeString);
+                    someReviews.add(temp);
+                    someReviews.add(temp2);
+                    someReviews.add(temp3);
+                    someReviews.add(temp4);
+                    myAdapter.notifyDataSetChanged();
+                    saveData();
+                    dialog.dismiss();
+                    Toast.makeText(AdministrationReview.this, "Random Data Added!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -251,7 +287,7 @@ public class AdministrationReview extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationReview.this);
                 builder.setTitle("Confirm");
-                builder.setMessage("Are you sure?");
+                builder.setMessage("Are you sure you want to delete?");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String stringEditTitle = mTitle.getText().toString();
@@ -285,9 +321,13 @@ public class AdministrationReview extends AppCompatActivity {
         dialog.show();
         return position;
     }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         userName.setText("Administrator ID: " + user.getEmail());
 
     }
+
+
 }
+

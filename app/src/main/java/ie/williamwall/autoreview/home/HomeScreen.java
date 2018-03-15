@@ -92,8 +92,6 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem(R.id.home_icon);
-        item.setEnabled(false);
         return true;
     }
 
@@ -132,9 +130,11 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.home_icon) {
-            Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
-            Intent Intent = new Intent(HomeScreen.this, HomeScreen.class);
-            startActivity(Intent);
+            Toast.makeText(this, "You are already home!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.info_icon) {
+            Toast.makeText(this, "Only used in User and Review Administration!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

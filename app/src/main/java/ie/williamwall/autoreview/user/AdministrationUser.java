@@ -39,6 +39,7 @@ import ie.williamwall.autoreview.firebase.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.review.Review;
 import ie.williamwall.autoreview.weather.Weather;
 
 // Designed and Developed @ William Wall
@@ -89,6 +90,7 @@ public class AdministrationUser extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 users.remove(position);
                 myAdapter.notifyDataSetChanged();
+                saveData();
                 Toast.makeText(AdministrationUser.this, "Deleted User", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -146,6 +148,38 @@ public class AdministrationUser extends AppCompatActivity {
             Toast.makeText(this, "Home Administration", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationUser.this, HomeScreen.class);
             startActivity(Intent);
+            return true;
+        }
+        if (id == R.id.info_icon) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
+            builder.setTitle("Confirm");
+            builder.setMessage("Do you want to populate list with random records?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    User temp = new User(R.mipmap.user, "William Wall", "william@williamwall.ie", "0852754358", "firebase_12", currentDateTimeString);
+                    User temp2 = new User(R.mipmap.user, "John Jones", "johnjones@gmail.com", "0874589657", "some_password", currentDateTimeString);
+                    User temp3 = new User(R.mipmap.user, "Emma Lofty", "elofty@hotmail.com", "0882541256", "auto.review", currentDateTimeString);
+                    User temp4 = new User(R.mipmap.user, "Frank Simms", "fsimms@gmail.com", "0863521458", "strongPass", currentDateTimeString);
+                    User temp5 = new User(R.mipmap.user, "Gemma Hynes", "hynes12542@gmail.com", "0852545129", "hynes1234", currentDateTimeString);
+                    users.add(temp);
+                    users.add(temp2);
+                    users.add(temp3);
+                    users.add(temp4);
+                    users.add(temp5);
+                    myAdapter.notifyDataSetChanged();
+                    saveData();
+                    dialog.dismiss();
+                    Toast.makeText(AdministrationUser.this, "Random Data Added!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -210,7 +244,7 @@ public class AdministrationUser extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdministrationUser.this);
                 builder.setTitle("Confirm");
-                builder.setMessage("Are you sure?");
+                builder.setMessage("Are you sure you want to delete?");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String stringEditName = mName.getText().toString();
@@ -313,6 +347,7 @@ public class AdministrationUser extends AppCompatActivity {
         }
         return valid;
     }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         userName.setText("Administrator ID: " + user.getEmail());
