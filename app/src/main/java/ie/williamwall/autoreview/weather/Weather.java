@@ -56,7 +56,7 @@ public class Weather extends AppCompatActivity {
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
             }
         });
-        asyncTask.execute("52.246632", "-7.138822");
+        asyncTask.execute("52.245036", "-7.136621");
     }
 
     @Override
