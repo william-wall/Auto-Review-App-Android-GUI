@@ -42,7 +42,7 @@ import ie.williamwall.autoreview.weather.Weather;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
-// GitHub @ github.com/william-wall
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 
 public class AdministrationReview extends AppCompatActivity {
 

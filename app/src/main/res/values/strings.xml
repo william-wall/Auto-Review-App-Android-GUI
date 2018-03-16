@@ -99,7 +99,7 @@
     <string name="btn_login">LOGIN</string>
     <string name="prompt_password">Please enter your password</string>
     <string name="btn_link_to_register">Not a member? Get registered now!</string>
-    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="btn_link_to_login">Already registered. Log me in!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
     <string name="btn_forgot_password">Forgot your password?</string>
     <string name="btn_reset_password">Reset Password</string>

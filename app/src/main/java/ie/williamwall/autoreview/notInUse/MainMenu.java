@@ -27,7 +27,7 @@ import ie.williamwall.autoreview.review.Review;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
-// GitHub @ github.com/william-wall
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
