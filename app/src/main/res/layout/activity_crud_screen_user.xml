@@ -75,7 +75,7 @@
         android:textColor="@color/white"
         android:gravity="left"
         android:hint="Email, E.G. johndoe@gmail.com"
-        android:inputType="textPersonName"
+        android:inputType="textNoSuggestions|textVisiblePassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
