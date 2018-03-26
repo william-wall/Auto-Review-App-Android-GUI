@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebase.MainActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.reviewImageInserts.CustomImage;
 import ie.williamwall.autoreview.user.AdministrationUser;
 import ie.williamwall.autoreview.weather.Weather;
 
@@ -39,6 +41,7 @@ public class HomeScreen extends AppCompatActivity {
     private Button location;
     private TextView userTime;
     private TextView userName;
+    private ImageView appLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class HomeScreen extends AppCompatActivity {
         weather = (Button) findViewById(R.id.weather);
         userName = (TextView) findViewById(R.id.userName);
         userTime = (TextView) findViewById(R.id.userTime);
+        appLogo = (ImageView) findViewById(R.id.imageViewHome);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         userTime.setText(currentDateTimeString);
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
@@ -86,6 +90,15 @@ public class HomeScreen extends AppCompatActivity {
                 Intent move = new Intent(HomeScreen.this, Weather.class);
                 startActivity(move);
             }
+        });
+        appLogo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent move = new Intent(HomeScreen.this, CustomImage.class);
+                startActivity(move);
+            }
+
         });
     }
 

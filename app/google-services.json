@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1018832033853-4e2gq3phcdhimu3n6coq590dnr2c8p6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.williamwall.autoreview",
+            "certificate_hash": "b535ffcb2023cb7c5466efe58a72d3a90d999a59"
+          }
+        },
+        {
           "client_id": "1018832033853-8p96jui7eclfbevfuf4el3nv7150f623.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018832033853-8p96jui7eclfbevfuf4el3nv7150f623.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
