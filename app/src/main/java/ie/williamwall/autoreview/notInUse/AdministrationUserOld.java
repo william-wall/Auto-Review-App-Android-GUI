@@ -15,7 +15,7 @@ public class AdministrationUserOld extends AppCompatActivity {
 //    ArrayList<String> names = new ArrayList<String>();
 //    ArrayAdapter<String> adapter;
 //
-//    ArrayList<User>users=new ArrayList<User>();
+//    ArrayList<ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase>users=new ArrayList<ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase>();
 //
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class AdministrationUserOld extends AppCompatActivity {
 ////        final String gotEmail = getIntent().getStringExtra("message_key2");
 ////        final String gotPhone = getIntent().getStringExtra("message_key3");
 ////        final String gotPassword = getIntent().getStringExtra("message_key4");
-////        User userInstance = new User(gotName, gotEmail, gotPhone, gotPassword);
+////        ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase userInstance = new ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase(gotName, gotEmail, gotPhone, gotPassword);
 ////        users.add(userInstance);
 ////        names.add(gotName);
 //
@@ -250,7 +250,7 @@ public class AdministrationUserOld extends AppCompatActivity {
 //
 //    private void loadData() {
 //        names = new ArrayList<String>();
-//        users = new ArrayList<User>();
+//        users = new ArrayList<ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase>();
 //        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences2", MODE_PRIVATE);
 //        SharedPreferences sharedPreferencesUser = getSharedPreferences("shared preferences3", MODE_PRIVATE);
 //        Gson gson = new Gson();
@@ -259,7 +259,7 @@ public class AdministrationUserOld extends AppCompatActivity {
 //        String jsonUser = sharedPreferencesUser.getString("task list3", null);
 //        Type type = new TypeToken<ArrayList<String>>() {
 //        }.getType();
-//        Type typeUser = new TypeToken<ArrayList<User>>() {
+//        Type typeUser = new TypeToken<ArrayList<ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase>>() {
 //        }.getType();
 //        names = gson.fromJson(json, type);
 //        users = gsonUser.fromJson(jsonUser, typeUser);

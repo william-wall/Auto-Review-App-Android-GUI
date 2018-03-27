@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.reviewImageInserts;
+package ie.williamwall.autoreview.firebaseReview;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;

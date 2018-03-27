@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.firebase;
+package ie.williamwall.autoreview.firebaseAdministrator;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

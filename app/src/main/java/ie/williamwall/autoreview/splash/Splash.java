@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
-import ie.williamwall.autoreview.reviewImageInserts.CustomImage;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.firebaseUser.FirebaseUser;
 import ie.williamwall.autoreview.R;
 
 // Designed and Developed @ William Wall

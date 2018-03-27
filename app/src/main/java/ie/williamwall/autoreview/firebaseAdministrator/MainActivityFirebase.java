@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.firebase;
+package ie.williamwall.autoreview.firebaseAdministrator;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.home.HomeScreen;
-import ie.williamwall.autoreview.weather.Weather;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.R;
 
@@ -174,7 +173,7 @@ public class MainActivityFirebase extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-        email.setText("User Email: " + user.getEmail());
+        email.setText("Email: " + user.getEmail());
 
     }
 

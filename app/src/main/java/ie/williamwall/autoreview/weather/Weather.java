@@ -8,13 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.firebase.MainActivityFirebase;
+import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
@@ -93,7 +91,7 @@ public class Weather extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(Weather.this, AdministrationUser.class);
             startActivity(Intent);
             return true;
@@ -105,7 +103,7 @@ public class Weather extends AppCompatActivity {
             return true;
         }
         if (id == R.id.info_icon) {
-            Toast.makeText(this, "Only used in User and Review Administration!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Only used in ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase and Review Administration!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

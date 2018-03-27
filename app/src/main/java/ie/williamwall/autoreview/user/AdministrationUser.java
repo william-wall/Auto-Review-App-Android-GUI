@@ -16,10 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,12 +31,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
-import ie.williamwall.autoreview.firebase.MainActivityFirebase;
+import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.review.Review;
 import ie.williamwall.autoreview.weather.Weather;
 
 // Designed and Developed @ William Wall
@@ -91,7 +86,7 @@ public class AdministrationUser extends AppCompatActivity {
                 users.remove(position);
                 myAdapter.notifyDataSetChanged();
                 saveData();
-                Toast.makeText(AdministrationUser.this, "Deleted User", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdministrationUser.this, "Deleted ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -258,7 +253,7 @@ public class AdministrationUser extends AppCompatActivity {
                         users.remove(tempEdit);
                         myAdapter.notifyDataSetChanged();
                         saveData();
-                        Toast.makeText(AdministrationUser.this, "Deleted User", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdministrationUser.this, "Deleted ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });

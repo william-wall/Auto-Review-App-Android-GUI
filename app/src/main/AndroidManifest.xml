@@ -51,10 +51,10 @@
         <activity
             android:name=".weather.Weather"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".firebase.MainActivityFirebase" />
-        <activity android:name=".firebase.LoginActivityFirebase" />
-        <activity android:name=".firebase.SignupActivityFirebase" />
-        <activity android:name=".firebase.ResetPasswordActivityFirebase" />
+        <activity android:name=".firebaseAdministrator.MainActivityFirebase" />
+        <activity android:name=".firebaseAdministrator.LoginActivityFirebase" />
+        <activity android:name=".firebaseAdministrator.SignupActivityFirebase" />
+        <activity android:name=".firebaseAdministrator.ResetPasswordActivityFirebase" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -70,8 +70,12 @@
         <activity
             android:name=".maps.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".reviewImageInserts.CustomImage" />
-        <activity android:name=".reviewImageInserts.ViewData"></activity>
+        <activity android:name=".firebaseReview.CustomImage" />
+        <activity android:name=".firebaseReview.ViewData" />
+        <activity android:name=".firebaseUser.FirebaseUser"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        />
     </application>
 
 </manifest>

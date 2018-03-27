@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,8 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
@@ -33,8 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.firebase.MainActivityFirebase;
-import ie.williamwall.autoreview.firebase.SignupActivityFirebase;
+import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.user.AdministrationUser;
@@ -135,7 +131,7 @@ public class AdministrationReview extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, AdministrationUser.class);
             startActivity(Intent);
             return true;
@@ -299,7 +295,7 @@ public class AdministrationReview extends AppCompatActivity {
                         someReviews.remove(tempEdit);
                         myAdapter.notifyDataSetChanged();
                         saveData();
-                        Toast.makeText(AdministrationReview.this, "Deleted User", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdministrationReview.this, "Deleted ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });

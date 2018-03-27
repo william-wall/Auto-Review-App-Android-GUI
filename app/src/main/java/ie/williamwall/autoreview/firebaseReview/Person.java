@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.reviewImageInserts;
+package ie.williamwall.autoreview.firebaseReview;
 
 /**
  * Created by william on 26/03/2018.

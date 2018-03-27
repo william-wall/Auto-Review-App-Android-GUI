@@ -2,7 +2,6 @@ package ie.williamwall.autoreview.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +20,10 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.firebase.LoginActivityFirebase;
-import ie.williamwall.autoreview.firebase.MainActivityFirebase;
+import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.reviewImageInserts.CustomImage;
+import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.user.AdministrationUser;
 import ie.williamwall.autoreview.weather.Weather;
 
@@ -41,6 +39,7 @@ public class HomeScreen extends AppCompatActivity {
     private Button location;
     private TextView userTime;
     private TextView userName;
+    private TextView choose;
     private ImageView appLogo;
 
     @Override
@@ -55,6 +54,7 @@ public class HomeScreen extends AppCompatActivity {
         weather = (Button) findViewById(R.id.weather);
         userName = (TextView) findViewById(R.id.userName);
         userTime = (TextView) findViewById(R.id.userTime);
+        choose = (TextView) findViewById(R.id.choose);
         appLogo = (ImageView) findViewById(R.id.imageViewHome);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         userTime.setText(currentDateTimeString);
@@ -100,6 +100,15 @@ public class HomeScreen extends AppCompatActivity {
             }
 
         });
+        choose.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent move = new Intent(HomeScreen.this, ie.williamwall.autoreview.firebaseUser.FirebaseUser.class);
+                startActivity(move);
+            }
+
+        });
     }
 
     @Override
@@ -137,7 +146,7 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Administration User", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(HomeScreen.this, AdministrationUser.class);
             startActivity(Intent);
             return true;
@@ -147,7 +156,7 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.info_icon) {
-            Toast.makeText(this, "Only used in User and Review Administration!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Only used in ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase and Review Administration!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
