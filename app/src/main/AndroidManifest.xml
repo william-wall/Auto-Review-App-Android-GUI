@@ -72,10 +72,11 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".firebaseReview.CustomImage" />
         <activity android:name=".firebaseReview.ViewData" />
-        <activity android:name=".firebaseUser.FirebaseUser"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".firebaseUser.FirebaseUser"
+            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
         />
+        ]]>
     </application>
 
 </manifest>

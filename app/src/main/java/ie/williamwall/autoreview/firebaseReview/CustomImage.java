@@ -26,6 +26,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
 
@@ -99,11 +100,13 @@ public class CustomImage extends AppCompatActivity {
 
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-                    Person person = new Person(NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
+                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
 
-                    String id = databaseReference.push().getKey();
+                    databaseReference.child(person.getUid()).setValue(person);
 
-                    databaseReference.child(id).setValue(person);
+//                    String id = databaseReference.push().getKey();
+//
+//                    databaseReference.child(id).setValue(person);
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();

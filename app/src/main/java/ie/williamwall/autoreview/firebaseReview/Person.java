@@ -6,13 +6,15 @@ package ie.williamwall.autoreview.firebaseReview;
 
 public class Person {
 
+    String uid;
     String name;
     String email;
     String imageUri;
 
 
 
-    public Person(String name, String email, String imageUri) {
+    public Person(String uid, String name, String email, String imageUri) {
+        this.uid = uid;
         this.name = name;
         this.email = email;
         this.imageUri = imageUri;
@@ -20,6 +22,14 @@ public class Person {
 
     public Person(){
 
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {
