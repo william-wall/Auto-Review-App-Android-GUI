@@ -1,10 +1,12 @@
 package ie.williamwall.autoreview.firebaseReview;
 
+import java.io.Serializable;
+
 /**
  * Created by william on 26/03/2018.
  */
 
-public class Person {
+public class Person implements Serializable{
 
     String uid;
     String name;

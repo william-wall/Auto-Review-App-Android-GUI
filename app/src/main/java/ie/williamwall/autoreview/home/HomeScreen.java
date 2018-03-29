@@ -21,6 +21,7 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
+import ie.williamwall.autoreview.firebaseReview.ViewData;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;
@@ -95,7 +96,7 @@ public class HomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent move = new Intent(HomeScreen.this, CustomImage.class);
+                Intent move = new Intent(HomeScreen.this, ViewData.class);
                 startActivity(move);
             }
 
@@ -104,7 +105,7 @@ public class HomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent move = new Intent(HomeScreen.this, ie.williamwall.autoreview.firebaseUser.FirebaseUser.class);
+                Intent move = new Intent(HomeScreen.this, FirebaseUser.class);
                 startActivity(move);
             }
 

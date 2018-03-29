@@ -74,9 +74,11 @@
         <activity android:name=".firebaseReview.ViewData" />
         <activity
             android:name=".firebaseUser.FirebaseUser"
-            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
+            android:theme="@style/AppTheme.NoActionBar" />
+        <![CDATA[
         />
         ]]>
+        <activity android:name=".firebaseReview.UpdatingReviewImage"></activity>
     </application>
 
 </manifest>

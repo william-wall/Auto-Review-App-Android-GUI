@@ -5,20 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ie.williamwall.autoreview.firebaseReview.CustomImage">
+    tools:context="ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Browse Image"
-        android:id="@+id/chooseImage"
-        android:onClick="browseImages"/>
+
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/updateImages"
-        android:src="@mipmap/ic_launcher"/>
+        android:id="@+id/insertImages"
+        android:src="@mipmap/updateimage"
+        android:onClick="browseImages"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,14 +30,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Data"
-        android:id="@+id/updateReview"
-        />
+        android:text="Upload Data"
+        android:onClick="uploadData"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Data"
-        android:id="@+id/deleteReview"
-        />
+        android:onClick="viewAllData"
+        android:text="View all Data"/>
 
 </LinearLayout>
