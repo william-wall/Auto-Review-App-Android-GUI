@@ -44,9 +44,12 @@ public class MyAdapter extends ArrayAdapter<Person> {
         ImageView imageView = (ImageView) view.findViewById(R.id.getImages);
         TextView name = (TextView) view.findViewById(R.id.getName);
         TextView email = (TextView) view.findViewById(R.id.getEmail);
+        TextView userName = (TextView) view.findViewById(R.id.getUserName);
+
 
         name.setText(list.get(position).getName());
         email.setText(list.get(position).getEmail());
+        userName.setText(list.get(position).getUserName());
 
         Glide.with(activity).load(list.get(position).getImageUri()).into(imageView);
 

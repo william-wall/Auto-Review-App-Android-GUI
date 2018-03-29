@@ -96,7 +96,7 @@ public class HomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent move = new Intent(HomeScreen.this, ViewData.class);
+                Intent move = new Intent(HomeScreen.this, CustomImage.class);
                 startActivity(move);
             }
 
@@ -157,7 +157,7 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.info_icon) {
-            Toast.makeText(this, "Only used in ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase and Review Administration!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Only used in User and Review Administration!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

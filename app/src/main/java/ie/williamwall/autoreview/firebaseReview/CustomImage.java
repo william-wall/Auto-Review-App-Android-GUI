@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.firebaseReview;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -98,9 +101,17 @@ public class CustomImage extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+
+//                    String gotTheUser="";
+//                    gotTheUser = setDataToView(FirebaseUser user);
+
+                    final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+                   String gotIT=   setDataToView(userId);
+
+//                    String USERNAME =
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
+                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString(), gotIT);
 
                     databaseReference.child(person.getUid()).setValue(person);
 
@@ -135,5 +146,10 @@ public class CustomImage extends AppCompatActivity {
         Intent intent = new Intent(CustomImage.this, ViewData.class);
         startActivity(intent);
 
+    }
+    @SuppressLint("SetTextI18n")
+    private String setDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+return jjjj;
     }
 }

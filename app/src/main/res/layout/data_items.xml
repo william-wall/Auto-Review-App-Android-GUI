@@ -28,5 +28,12 @@
         android:padding="10dp"
         android:text="Email here"
         android:textSize="22sp"/>
-
+    <TextView
+        android:id="@+id/getUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="UserName"
+        android:textSize="15sp"/>
 </LinearLayout>

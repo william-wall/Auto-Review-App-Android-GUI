@@ -12,14 +12,15 @@ public class Person implements Serializable{
     String name;
     String email;
     String imageUri;
+String userName;
 
 
-
-    public Person(String uid, String name, String email, String imageUri) {
+    public Person(String uid, String name, String email, String imageUri, String userName) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.imageUri = imageUri;
+        this.userName = userName;
     }
 
     public Person(){
@@ -46,6 +47,7 @@ public class Person implements Serializable{
         return email;
     }
 
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -57,4 +59,15 @@ public class Person implements Serializable{
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
+
 }
