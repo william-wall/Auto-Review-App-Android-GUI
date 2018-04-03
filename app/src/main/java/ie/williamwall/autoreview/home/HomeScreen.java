@@ -105,7 +105,7 @@ public class HomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent move = new Intent(HomeScreen.this, FirebaseUser.class);
+                Intent move = new Intent(HomeScreen.this, ie.williamwall.autoreview.firebaseUser.FirebaseUser.class);
                 startActivity(move);
             }
 

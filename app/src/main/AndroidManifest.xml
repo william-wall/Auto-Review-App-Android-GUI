@@ -20,6 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
         <activity
             android:name=".splash.Splash"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -29,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider418412708582802"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
         <activity android:name=".notInUse.Login" />
         <activity android:name=".notInUse.Register" />
         <activity
@@ -78,7 +84,8 @@
         <![CDATA[
         />
         ]]>
-        <activity android:name=".firebaseReview.UpdatingReviewImage"></activity>
+        <activity android:name=".firebaseReview.UpdatingReviewImage" />
+        <activity android:name=".facebook.Facebook"></activity>
     </application>
 
 </manifest>

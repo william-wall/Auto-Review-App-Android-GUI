@@ -70,8 +70,8 @@ public class UpdatingReviewImage extends AppCompatActivity {
 //       String title = user.getName();
 //        String review=  user.getEmail();
 
-//        String title = getIntent().getStringExtra("message_key");
-//        String review = getIntent().getStringExtra("message_key2");
+        String title = getIntent().getStringExtra("message_key");
+        String review = getIntent().getStringExtra("message_key2");
 
 
 
@@ -79,8 +79,8 @@ public class UpdatingReviewImage extends AppCompatActivity {
 //
 //String review =user.getEmail();
 //
-//                name.setText(title);
-//                email.setText(review);
+                name.setText(title);
+                email.setText(review);
 
 
 
