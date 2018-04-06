@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.firebaseReview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -13,7 +14,11 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +36,7 @@ import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH
 
 public class ViewData extends AppCompatActivity {
     Activity activity;
-
+TextView userNameDisplay;
     ListView listView;
     List<Person> list;
     ProgressDialog progressDialog;
@@ -46,9 +51,10 @@ public class ViewData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_data);
-
+        userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
-
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
 
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -82,12 +88,19 @@ public class ViewData extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+                String gotIT=   getDataToView(userId);
+
+
+
+
                 final Person user = (Person) adapterView.getItemAtPosition(i);
                 selectedUser = user;
 
 //                Person userSend = new Person();
 //                selectedUser = userSend;
-
+                String userInstanceReview = user.getUserName();
 
                 String UID = user.getName();
                  String title = user.getName();
@@ -95,13 +108,19 @@ public class ViewData extends AppCompatActivity {
 
 
 
+                if(!userInstanceReview.matches(gotIT))
+{
+    Toast.makeText(getApplicationContext(), "You cannot edit a review you didnt create!!!", Toast.LENGTH_LONG).show();
 
-                Intent move = new Intent(ViewData.this, UpdatingReviewImage.class);
-                move.putExtra("message_key", title);
-                move.putExtra("message_key2", review);
+}
+else {
+
+                    Intent move = new Intent(ViewData.this, UpdatingReviewImage.class);
+                    move.putExtra("message_key", title);
+                    move.putExtra("message_key2", review);
 //                move.putExtra("message_key3", UID);
-                move.putExtra("MyClass",  user);
-                startActivity(move);
+                    move.putExtra("MyClass", user);
+                    startActivity(move);
 //                UpdatingReviewImage reviewInstanceSend = new UpdatingReviewImage();
 //                reviewInstanceSend.setPerson(user);
 //                final Person user = (Person) adapterView.getItemAtPosition(i);
@@ -190,6 +209,7 @@ public class ViewData extends AppCompatActivity {
 ////                return position;
 //
 //                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
             }
         });
 
@@ -223,5 +243,15 @@ public class ViewData extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+        userNameDisplay.setText(user.getEmail());
+
+    }
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
     }
 }
