@@ -205,4 +205,16 @@ public class UpdatingReviewImage extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void deleteInstance(View view){
+
+//        databaseReference.child(user.getUid()).child("name").setValue(NAME);
+        Intent intent = getIntent();
+        Person user = (Person) intent.getSerializableExtra("MyClass");
+        databaseReference.child(user.getUid()).removeValue();
+        Intent intentMove = new Intent(UpdatingReviewImage.this, ViewData.class);
+        startActivity(intentMove);
+        Toast.makeText(getApplicationContext(), "Successfully deleted review", Toast.LENGTH_LONG).show();
+
+
+    }
 }

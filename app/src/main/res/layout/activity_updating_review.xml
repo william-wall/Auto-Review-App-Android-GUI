@@ -37,5 +37,10 @@
         android:layout_height="wrap_content"
         android:onClick="viewAllData"
         android:text="View all Data"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="deleteInstance"
+        android:text="Delete Review"/>
 
 </LinearLayout>

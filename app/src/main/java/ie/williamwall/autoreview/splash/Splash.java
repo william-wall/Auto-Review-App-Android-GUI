@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 
 import ie.williamwall.autoreview.facebook.Facebook;
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
@@ -35,7 +36,7 @@ public class Splash extends AppCompatActivity {
 
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), Facebook.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
                     startActivity(intent);
                     finish();
                 }
