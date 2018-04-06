@@ -7,7 +7,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="action_settings">Logout</string>
     <string name="userLoginName">Username</string>
-<string name="facebook_app_id">418412708582802</string>
+    <string name="facebook_app_id">418412708582802</string>
     <string name="facebook_login_protocol_scheme">fb418412708582802</string>
     <!-- Strings related to Settings -->
 
@@ -143,5 +143,8 @@
     <string name="app_version_splash">Version 1.0 Administration</string>
     <string name="app_title">Auto Review</string>
     <string name="app_loading">Loading ...</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 </resources>

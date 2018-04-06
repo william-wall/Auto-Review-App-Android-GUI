@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import ie.williamwall.autoreview.Navigation;
 import ie.williamwall.autoreview.facebook.Facebook;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
@@ -36,7 +37,7 @@ public class Splash extends AppCompatActivity {
 
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
+                    Intent intent = new Intent(getApplicationContext(), Navigation.class);
                     startActivity(intent);
                     finish();
                 }
