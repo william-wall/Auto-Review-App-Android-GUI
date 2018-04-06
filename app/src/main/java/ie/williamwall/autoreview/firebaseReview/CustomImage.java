@@ -29,6 +29,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
@@ -107,11 +109,14 @@ public class CustomImage extends AppCompatActivity {
 
                     final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
                    String gotIT=   setDataToView(userId);
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
 
 //                    String USERNAME =
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString(), gotIT);
+                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString(), gotIT, currentDateTimeString);
 
                     databaseReference.child(person.getUid()).setValue(person);
 

@@ -1,6 +1,8 @@
 package ie.williamwall.autoreview.firebaseReview;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Created by william on 26/03/2018.
@@ -13,14 +15,15 @@ public class Person implements Serializable{
     String email;
     String imageUri;
 String userName;
+String userTime;
 
-
-    public Person(String uid, String name, String email, String imageUri, String userName) {
+    public Person(String uid, String name, String email, String imageUri, String userName, String userTime) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.imageUri = imageUri;
         this.userName = userName;
+        this.userTime = userTime;
     }
 
     public Person(){
@@ -68,6 +71,13 @@ String userName;
         this.userName = userName;
     }
 
+    public String getUserTime() {
+        return userTime;
+    }
+
+    public void setUserTime(String userTime) {
+        this.userTime = userTime;
+    }
 
 
 }
