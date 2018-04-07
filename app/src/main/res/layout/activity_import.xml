@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/weather"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -12,6 +13,7 @@
         layout="@layout/app_bar_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <include layout="@layout/content_import" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -21,6 +23,84 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_navigation_drawer" />
+
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+    <!--<TextView-->
+        <!--android:id="@+id/city_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="70dp"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/updated_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/city_field"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:textSize="15sp" />-->
+
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/weather_icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:textSize="90sp"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/current_temperature_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:textSize="50sp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/details_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/weather_icon"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/humidity_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/details_field"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/pressure_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/humidity_field"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--/>-->
+    <!--</RelativeLayout>-->
 
 </android.support.v4.widget.DrawerLayout>
     <!-- copy from activity_home and paste it here.-->

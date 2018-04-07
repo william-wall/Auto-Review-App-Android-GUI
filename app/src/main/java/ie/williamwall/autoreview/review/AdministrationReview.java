@@ -116,7 +116,7 @@ public class AdministrationReview extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_weather) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "WeatherFrag Report", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, Weather.class);
             startActivity(Intent);
             return true;

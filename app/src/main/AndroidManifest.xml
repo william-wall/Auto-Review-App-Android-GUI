@@ -90,24 +90,24 @@
         <activity android:name=".navigation.Navigation" />
         <activity
             android:name=".HomeNavigation"
-            android:label="@string/title_activity_home_navigation"
+            android:label="Home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".Import"
-            android:label="Activity Import"
+            android:name=".WeatherNew"
+            android:label="Weather"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Gallery"
-            android:label="Activity Gallery"
+            android:name=".MapsNavigation"
+            android:label="Gallery"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Slideshow"
-            android:label="Activity Slideshow"
+            android:label="Slideshow"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Tools"
-            android:label="Activity Tools"
+            android:label="Tools"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

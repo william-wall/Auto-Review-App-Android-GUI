@@ -1,9 +1,11 @@
 package ie.williamwall.autoreview;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,20 +15,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class Gallery extends AppCompatActivity
+import ie.williamwall.autoreview.weather.Function;
+
+public class WeatherNew extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
 
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
+    Typeface weatherFont;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
+        setContentView(R.layout.activity_import);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        cityField = (TextView) findViewById(R.id.city_field);
+        updatedField = (TextView) findViewById(R.id.updated_field);
+        detailsField = (TextView) findViewById(R.id.details_field);
+        currentTemperatureField = (TextView) findViewById(R.id.current_temperature_field);
+        humidity_field = (TextView) findViewById(R.id.humidity_field);
+        pressure_field = (TextView) findViewById(R.id.pressure_field);
+        weatherIcon = (TextView) findViewById(R.id.weather_icon);
+        weatherIcon.setTypeface(weatherFont);
+        Function.placeIdTask asyncTask = new Function.placeIdTask(new Function.AsyncResponse() {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
+                cityField.setText(weather_city);
+                updatedField.setText(weather_updatedOn);
+                detailsField.setText(weather_description);
+                currentTemperatureField.setText(weather_temperature);
+                humidity_field.setText("Humidity: " + weather_humidity);
+                pressure_field.setText("Pressure: " + weather_pressure);
+                weatherIcon.setText(Html.fromHtml(weather_iconText));
+            }
+        });
+        asyncTask.execute("52.245036", "-7.136621");
+
 
         //We dont need this.
 
@@ -48,7 +81,13 @@ public class Gallery extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -91,22 +130,24 @@ public class Gallery extends AppCompatActivity
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(Gallery.this,HomeNavigation.class);
+                Toast.makeText(this, "FFFFFFFFFFFFFFFF", Toast.LENGTH_SHORT).show();
+
+                Intent h= new Intent(WeatherNew.this,HomeNavigation.class);
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(Gallery.this,Import.class);
+                Intent i= new Intent(WeatherNew.this,WeatherNew.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(Gallery.this,Gallery.class);
+                Intent g= new Intent(WeatherNew.this,MapsNavigation.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(Gallery.this,Slideshow.class);
+                Intent s= new Intent(WeatherNew.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(Gallery.this,Tools.class);
+                Intent t= new Intent(WeatherNew.this,Tools.class);
                 startActivity(t);
                 break;
 

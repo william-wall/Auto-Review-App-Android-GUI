@@ -20,12 +20,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Weather.OnFragmentInteractionListener} interface
+ * {@link WeatherFrag.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Weather#newInstance} factory method to
+ * Use the {@link WeatherFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Weather extends Fragment {
+public class WeatherFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +40,7 @@ public class Weather extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Weather() {
+    public WeatherFrag() {
         // Required empty public constructor
     }
 
@@ -50,11 +50,11 @@ public class Weather extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Weather.
+     * @return A new instance of fragment WeatherFrag.
      */
     // TODO: Rename and change types and number of parameters
-    public static Weather newInstance(String param1, String param2) {
-        Weather fragment = new Weather();
+    public static WeatherFrag newInstance(String param1, String param2) {
+        WeatherFrag fragment = new WeatherFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

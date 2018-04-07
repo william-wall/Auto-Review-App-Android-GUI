@@ -37,7 +37,7 @@ public class Splash extends AppCompatActivity {
 
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), HomeNavigation.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
                     startActivity(intent);
                     finish();
                 }

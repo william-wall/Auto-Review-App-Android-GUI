@@ -96,11 +96,11 @@ public class Tools extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(Tools.this,Import.class);
+                Intent i= new Intent(Tools.this,WeatherNew.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(Tools.this,Gallery.class);
+                Intent g= new Intent(Tools.this,MapsNavigation.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:

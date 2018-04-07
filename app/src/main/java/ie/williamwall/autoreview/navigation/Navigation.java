@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import ie.williamwall.autoreview.notInUse.Location;
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.notInUse.Weather;
+import ie.williamwall.autoreview.notInUse.WeatherFrag;
 
 public class Navigation extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class Navigation extends AppCompatActivity {
                 fragmentClass = Location.class;
                 break;
             case R.id.wea:
-                fragmentClass = Weather.class;
+                fragmentClass = WeatherFrag.class;
                 break;
             default:
                 fragmentClass = Location.class;

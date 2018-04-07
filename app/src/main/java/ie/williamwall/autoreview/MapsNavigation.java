@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Import extends AppCompatActivity
+import ie.williamwall.autoreview.maps.MapsActivity;
+
+public class MapsNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -24,7 +26,7 @@ public class Import extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import);
+        setContentView(R.layout.activity_gallery);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,22 +93,22 @@ public class Import extends AppCompatActivity
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(Import.this,HomeNavigation.class);
+                Intent h= new Intent(MapsNavigation.this,HomeNavigation.class);
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(Import.this,Import.class);
+                Intent i= new Intent(MapsNavigation.this,WeatherNew.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(Import.this,Gallery.class);
+                Intent g= new Intent(MapsNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(Import.this,Slideshow.class);
+                Intent s= new Intent(MapsNavigation.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(Import.this,Tools.class);
+                Intent t= new Intent(MapsNavigation.this,Tools.class);
                 startActivity(t);
                 break;
 

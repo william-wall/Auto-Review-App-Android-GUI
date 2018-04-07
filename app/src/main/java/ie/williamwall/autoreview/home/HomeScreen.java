@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.text.DateFormat;
 import java.util.Date;
 
+import ie.williamwall.autoreview.HomeNavigation;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
@@ -104,7 +105,7 @@ public class HomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent move = new Intent(HomeScreen.this, ie.williamwall.autoreview.firebaseUser.FirebaseUser.class);
+                Intent move = new Intent(HomeScreen.this, HomeNavigation.class);
                 startActivity(move);
             }
 
@@ -128,7 +129,7 @@ public class HomeScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_weather) {
-            Toast.makeText(this, "Weather Report", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "WeatherFrag Report", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(HomeScreen.this, Weather.class);
             startActivity(Intent);
             return true;
