@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Location">
+    tools:context=".notInUse.Location">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="60sp"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Location" />
+
+
 
 </FrameLayout>

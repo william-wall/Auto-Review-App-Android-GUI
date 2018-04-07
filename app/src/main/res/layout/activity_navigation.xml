@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="ie.williamwall.autoreview.Navigation">
+    tools:context="ie.williamwall.autoreview.navigation.Navigation">
     
     <LinearLayout
         android:orientation="vertical"

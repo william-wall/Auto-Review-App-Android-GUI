@@ -1,12 +1,20 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.notInUse;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.weather.Function;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -26,6 +34,9 @@ public class Weather extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
+    Typeface weatherFont;
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,6 +65,10 @@ public class Weather extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        TextView show = (TextView) getView().findViewById(R.id.SHOWME);
+//
+//show.setText("WILLIE");
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -64,6 +79,8 @@ public class Weather extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_weather, container, false);
     }
 
@@ -99,5 +116,34 @@ public class Weather extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Your code here
+
+        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        cityField = (TextView) getView().findViewById(R.id.city_field);
+        updatedField = (TextView) getView().findViewById(R.id.updated_field);
+        detailsField = (TextView) getView().findViewById(R.id.details_field);
+        currentTemperatureField = (TextView) getView().findViewById(R.id.current_temperature_field);
+        humidity_field = (TextView) getView().findViewById(R.id.humidity_field);
+        pressure_field = (TextView) getView().findViewById(R.id.pressure_field);
+        weatherIcon = (TextView) getView().findViewById(R.id.weather_icon);
+        weatherIcon.setTypeface(weatherFont);
+        Function.placeIdTask asyncTask = new Function.placeIdTask(new Function.AsyncResponse() {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
+                cityField.setText(weather_city);
+                updatedField.setText(weather_updatedOn);
+                detailsField.setText(weather_description);
+                currentTemperatureField.setText(weather_temperature);
+                humidity_field.setText("Humidity: " + weather_humidity);
+                pressure_field.setText("Pressure: " + weather_pressure);
+                weatherIcon.setText(Html.fromHtml(weather_iconText));
+            }
+        });
+        asyncTask.execute("52.245036", "-7.136621");
+
     }
 }

@@ -85,10 +85,30 @@
         <activity
             android:name=".firebaseUser.FirebaseUser"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".firebaseReview.UpdatingReviewImage" />
         <activity android:name=".facebook.Facebook" />
-        <activity android:name=".Navigation" />
+        <activity android:name=".navigation.Navigation" />
+        <activity
+            android:name=".HomeNavigation"
+            android:label="@string/title_activity_home_navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".Import"
+            android:label="Activity Import"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Gallery"
+            android:label="Activity Gallery"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Slideshow"
+            android:label="Activity Slideshow"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tools"
+            android:label="Activity Tools"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

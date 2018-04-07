@@ -21,7 +21,6 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
-import ie.williamwall.autoreview.firebaseReview.ViewData;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;

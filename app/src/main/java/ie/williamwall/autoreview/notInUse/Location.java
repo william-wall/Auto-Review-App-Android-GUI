@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.notInUse;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.gms.maps.GoogleMap;
+
+import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.maps.GpsTracker;
 
 
 /**
@@ -26,6 +31,11 @@ public class Location extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private GoogleMap mMap;
+    private GpsTracker gpsTracker;
+    private android.location.Location mLocation;
+    double latitude, longitude;
 
     private OnFragmentInteractionListener mListener;
 
@@ -100,4 +110,14 @@ public class Location extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Your code here
+
+
+
+    }
+
 }

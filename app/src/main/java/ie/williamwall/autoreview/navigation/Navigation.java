@@ -1,7 +1,5 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.navigation;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +7,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import ie.williamwall.autoreview.notInUse.Location;
+import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.notInUse.Weather;
 
 public class Navigation extends AppCompatActivity {
 

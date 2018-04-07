@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-import ie.williamwall.autoreview.Navigation;
-import ie.williamwall.autoreview.facebook.Facebook;
-import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.HomeNavigation;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.navigation.Navigation;
+import ie.williamwall.autoreview.R;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
@@ -31,13 +31,13 @@ public class Splash extends AppCompatActivity {
                 try {
                     for (int i = 0; i < 100; i++) {
                         splashProgress.setProgress(i);
-                        sleep(60);
+                        sleep(20);
                     }
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), Navigation.class);
+                    Intent intent = new Intent(getApplicationContext(), HomeNavigation.class);
                     startActivity(intent);
                     finish();
                 }
