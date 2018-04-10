@@ -95,7 +95,7 @@ public class Slideshow extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(Slideshow.this,WeatherNew.class);
+                Intent i= new Intent(Slideshow.this,WeatherNavigation.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
@@ -106,7 +106,7 @@ public class Slideshow extends AppCompatActivity
                 Intent s= new Intent(Slideshow.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(Slideshow.this,Tools.class);
+                Intent t= new Intent(Slideshow.this,AccountNavigation.class);
                 startActivity(t);
                 break;
 

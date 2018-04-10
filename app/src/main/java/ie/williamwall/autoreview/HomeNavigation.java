@@ -22,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,9 +42,6 @@ import java.util.List;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage;
-import ie.williamwall.autoreview.firebaseReview.ViewData;
-import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.weather.Weather;
 
 import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH;
 
@@ -58,6 +54,7 @@ public class HomeNavigation extends AppCompatActivity
 
     Activity activity;
     TextView userNameDisplay;
+    TextView userNameDisplayNav;
     ListView listView;
     List<Person> list;
     ProgressDialog progressDialog;
@@ -74,10 +71,25 @@ public class HomeNavigation extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+//        userNameDisplayNav = (TextView) findViewById(R.id.usersNameNav);
         userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
+
+
+
+
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(userId);
+
+
+
+
+
+
+
+
+//        String gettingUserName = getDataToView(userId);
+//        userNameDisplayNav.setText(gettingUserName);
 
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -254,6 +266,16 @@ public class HomeNavigation extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        View headerView = navigationView.getHeaderView(0);
+        userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
+        String gotNameNav = getDataToView(userNav);
+        userNameDisplayNav.setText(gotNameNav);
+
+
     }
 
 
@@ -301,6 +323,7 @@ public class HomeNavigation extends AppCompatActivity
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         userNameDisplay.setText(user.getEmail());
+//        userNameDisplayNav.setText(user.getEmail());
 
     }
     @SuppressLint("SetTextI18n")
@@ -345,6 +368,11 @@ public class HomeNavigation extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_navigation, menu);
+
+//        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
+//        setDataToView(userId2);
+
+
         return true;
     }
 
@@ -376,7 +404,7 @@ public class HomeNavigation extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(HomeNavigation.this,WeatherNew.class);
+                Intent i= new Intent(HomeNavigation.this,WeatherNavigation.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
@@ -387,7 +415,7 @@ public class HomeNavigation extends AppCompatActivity
                 Intent s= new Intent(HomeNavigation.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(HomeNavigation.this,Tools.class);
+                Intent t= new Intent(HomeNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
             // this is done, now let us go and intialise the home page.

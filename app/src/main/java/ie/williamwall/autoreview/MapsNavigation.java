@@ -14,8 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ie.williamwall.autoreview.maps.MapsActivity;
-
 public class MapsNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -97,7 +95,7 @@ public class MapsNavigation extends AppCompatActivity
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(MapsNavigation.this,WeatherNew.class);
+                Intent i= new Intent(MapsNavigation.this,WeatherNavigation.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
@@ -108,7 +106,7 @@ public class MapsNavigation extends AppCompatActivity
                 Intent s= new Intent(MapsNavigation.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(MapsNavigation.this,Tools.class);
+                Intent t= new Intent(MapsNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
 

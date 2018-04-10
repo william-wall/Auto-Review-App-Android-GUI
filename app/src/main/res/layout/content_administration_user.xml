@@ -34,7 +34,8 @@
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="home_user_email"/>
+        android:text="home_user_email"
+        />
 
     <ListView
         android:choiceMode="singleChoice"

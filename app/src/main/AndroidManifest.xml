@@ -94,7 +94,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".WeatherNew"
+            android:name=".WeatherNavigation"
             android:label="Weather"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -106,7 +106,7 @@
             android:label="Slideshow"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tools"
+            android:name=".AccountNavigation"
             android:label="Tools"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Tools extends AppCompatActivity
+public class AccountNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -92,22 +92,22 @@ public class Tools extends AppCompatActivity
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(Tools.this,HomeNavigation.class);
+                Intent h= new Intent(AccountNavigation.this,HomeNavigation.class);
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(Tools.this,WeatherNew.class);
+                Intent i= new Intent(AccountNavigation.this,WeatherNavigation.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(Tools.this,MapsNavigation.class);
+                Intent g= new Intent(AccountNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(Tools.this,Slideshow.class);
+                Intent s= new Intent(AccountNavigation.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(Tools.this,Tools.class);
+                Intent t= new Intent(AccountNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
 

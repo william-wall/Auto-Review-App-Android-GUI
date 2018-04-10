@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import ie.williamwall.autoreview.weather.Function;
 
-public class WeatherNew extends AppCompatActivity
+public class WeatherNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -132,22 +132,22 @@ public class WeatherNew extends AppCompatActivity
             case R.id.nav_home:
                 Toast.makeText(this, "FFFFFFFFFFFFFFFF", Toast.LENGTH_SHORT).show();
 
-                Intent h= new Intent(WeatherNew.this,HomeNavigation.class);
+                Intent h= new Intent(WeatherNavigation.this,HomeNavigation.class);
                 startActivity(h);
                 break;
             case R.id.nav_import:
-                Intent i= new Intent(WeatherNew.this,WeatherNew.class);
+                Intent i= new Intent(WeatherNavigation.this,WeatherNavigation.class);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(WeatherNew.this,MapsNavigation.class);
+                Intent g= new Intent(WeatherNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(WeatherNew.this,Slideshow.class);
+                Intent s= new Intent(WeatherNavigation.this,Slideshow.class);
                 startActivity(s);
             case R.id.nav_tools:
-                Intent t= new Intent(WeatherNew.this,Tools.class);
+                Intent t= new Intent(WeatherNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
 
