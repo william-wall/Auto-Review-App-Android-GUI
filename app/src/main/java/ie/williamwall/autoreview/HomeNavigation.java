@@ -42,6 +42,7 @@ import java.util.List;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage;
+import ie.williamwall.autoreview.maps.MapsActivity;
 
 import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH;
 
@@ -408,11 +409,11 @@ public class HomeNavigation extends AppCompatActivity
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(HomeNavigation.this,MapsNavigation.class);
+                Intent g= new Intent(HomeNavigation.this,MapsActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(HomeNavigation.this,Slideshow.class);
+                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
                 startActivity(s);
             case R.id.nav_tools:
                 Intent t= new Intent(HomeNavigation.this,AccountNavigation.class);

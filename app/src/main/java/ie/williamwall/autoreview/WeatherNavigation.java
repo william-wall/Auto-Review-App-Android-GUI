@@ -144,7 +144,7 @@ public class WeatherNavigation extends AppCompatActivity
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(WeatherNavigation.this,Slideshow.class);
+                Intent s= new Intent(WeatherNavigation.this,ShareNavigation.class);
                 startActivity(s);
             case R.id.nav_tools:
                 Intent t= new Intent(WeatherNavigation.this,AccountNavigation.class);

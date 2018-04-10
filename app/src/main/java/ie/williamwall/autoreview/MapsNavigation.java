@@ -21,6 +21,11 @@ public class MapsNavigation extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar=null;
 
+//    private GoogleMap mMap;
+//    private GpsTracker gpsTracker;
+//    private Location mLocation;
+//    double latitude, longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +33,16 @@ public class MapsNavigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //We dont need this.
+//
+//        gpsTracker = new GpsTracker(getApplicationContext());
+//        mLocation = gpsTracker.getLocation();
+//        latitude = mLocation.getLatitude();
+//        longitude = mLocation.getLongitude();
+//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+//        //We dont need this.
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -49,6 +63,8 @@ public class MapsNavigation extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -103,7 +119,7 @@ public class MapsNavigation extends AppCompatActivity
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(MapsNavigation.this,Slideshow.class);
+                Intent s= new Intent(MapsNavigation.this,ShareNavigation.class);
                 startActivity(s);
             case R.id.nav_tools:
                 Intent t= new Intent(MapsNavigation.this,AccountNavigation.class);

@@ -15,6 +15,7 @@
         android:layout_height="match_parent" />
 
     <include layout="@layout/content_tools"
+
         />
 
     <android.support.design.widget.NavigationView

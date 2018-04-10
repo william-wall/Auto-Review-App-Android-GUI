@@ -29,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
-import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.review.AdministrationReview;
@@ -335,7 +334,7 @@ public class AccountNavigation extends AppCompatActivity
                 startActivity(g);
                 break;
             case R.id.nav_slideshow:
-                Intent s= new Intent(AccountNavigation.this,Slideshow.class);
+                Intent s= new Intent(AccountNavigation.this,ShareNavigation.class);
                 startActivity(s);
             case R.id.nav_tools:
                 Intent t= new Intent(AccountNavigation.this,AccountNavigation.class);

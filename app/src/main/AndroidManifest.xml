@@ -102,7 +102,7 @@
             android:label="Gallery"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Slideshow"
+            android:name=".ShareNavigation"
             android:label="Slideshow"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
