@@ -58,7 +58,7 @@ public class HomeNavigation extends AppCompatActivity
     Toolbar toolbar=null;
 
     Activity activity;
-    TextView userNameDisplay;
+//    TextView userNameDisplay;
     TextView userNameDisplayNav;
     ListView listView;
     List<Person> list;
@@ -74,18 +74,18 @@ public class HomeNavigation extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent move= new Intent(HomeNavigation.this,CustomImage.class);
+                startActivity(move);
+            }
+        });
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 //        userNameDisplayNav = (TextView) findViewById(R.id.usersNameNav);
-        userNameDisplay = (TextView) findViewById(R.id.userSignInName);
+//        userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
 
 
@@ -327,7 +327,7 @@ public class HomeNavigation extends AppCompatActivity
     }
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-        userNameDisplay.setText(user.getEmail());
+//        userNameDisplay.setText(user.getEmail());
 //        userNameDisplayNav.setText(user.getEmail());
 
     }

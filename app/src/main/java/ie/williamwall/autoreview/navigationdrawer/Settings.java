@@ -51,7 +51,8 @@ public class Settings extends AppCompatActivity
     Toolbar toolbar=null;
 
     private static final int REQUEST_VIDEO_CODE =1000 ;
-    Button btnShareLink, btnSharePhoto, btnShareVideo;
+    Button btnShareLink;
+//    btnSharePhoto, btnShareVideo;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -91,8 +92,8 @@ public class Settings extends AppCompatActivity
 
 
         btnShareLink = (Button)findViewById(R.id.btnShareLink);
-        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
-        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
+//        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
+//        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
 
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
@@ -130,47 +131,47 @@ public class Settings extends AppCompatActivity
             }
         });
 
-        btnSharePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(Settings.this, "Share Successful", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(Settings.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(Settings.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-                Picasso.with(getBaseContext())
-                        .load("http://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg")
-                        .into(target);
-
-//                                        Toast.makeText(Facebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        btnShareVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("video/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select video"), REQUEST_VIDEO_CODE);
-            }
-        });
+//        btnSharePhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+//                    @Override
+//                    public void onSuccess(Sharer.Result result) {
+//                        Toast.makeText(Settings.this, "Share Successful", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onCancel() {
+//                        Toast.makeText(Settings.this, "Share Cancel", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(FacebookException error) {
+//                        Toast.makeText(Settings.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//
+//                Picasso.with(getBaseContext())
+//                        .load("http://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg")
+//                        .into(target);
+//
+////                                        Toast.makeText(Facebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//        btnShareVideo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//                intent.setType("video/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select video"), REQUEST_VIDEO_CODE);
+//            }
+//        });
 
 
         //We dont need this.

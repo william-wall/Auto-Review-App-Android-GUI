@@ -26,6 +26,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 
@@ -144,6 +146,7 @@ public class UpdatingReviewImage extends AppCompatActivity {
                     Person user = (Person) intent.getSerializableExtra("MyClass");
 
 
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
 //                    Intent intent = getIntent();
 //                    Person user = (Person) intent.getSerializableExtra("MyClass");
@@ -159,7 +162,7 @@ public class UpdatingReviewImage extends AppCompatActivity {
 //                    Editable title = mTitle.getText();
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-
+//                    String TIME = user.getUserTime();
 //                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
 //                    databaseReference.child(person.getUid()).setValue(person);
 
@@ -168,6 +171,8 @@ public class UpdatingReviewImage extends AppCompatActivity {
 
                     databaseReference.child(user.getUid()).child("email").setValue(EMAIL);
                     databaseReference.child(user.getUid()).child("imageUri").setValue(taskSnapshot.getDownloadUrl().toString());
+                    databaseReference.child(user.getUid()).child("userTime").setValue(currentDateTimeString);
+
 //                    databaseReference.child("name").setValue(NAME);
 //                    databaseReference.child("uid").setValue(UUID.randomUUID().toString());
 
