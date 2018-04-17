@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.navigationdrawer;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage;
@@ -412,9 +413,13 @@ public class HomeNavigation extends AppCompatActivity
                 Intent g= new Intent(HomeNavigation.this,MapsActivity.class);
                 startActivity(g);
                 break;
-            case R.id.nav_slideshow:
-                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
-                startActivity(s);
+//            case R.id.nav_slideshow:
+//                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
+//                startActivity(s);
+            case R.id.nav_settings:
+                Intent se= new Intent(HomeNavigation.this,Settings.class);
+                startActivity(se);
+                break;
             case R.id.nav_tools:
                 Intent t= new Intent(HomeNavigation.this,AccountNavigation.class);
                 startActivity(t);

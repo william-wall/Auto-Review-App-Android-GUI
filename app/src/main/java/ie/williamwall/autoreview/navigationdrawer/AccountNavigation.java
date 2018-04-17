@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.navigationdrawer;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
@@ -333,9 +334,13 @@ public class AccountNavigation extends AppCompatActivity
                 Intent g= new Intent(AccountNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
-            case R.id.nav_slideshow:
-                Intent s= new Intent(AccountNavigation.this,ShareNavigation.class);
-                startActivity(s);
+//            case R.id.nav_slideshow:
+//                Intent s= new Intent(AccountNavigation.this,ShareNavigation.class);
+//                startActivity(s);
+            case R.id.nav_settings:
+                Intent se= new Intent(AccountNavigation.this,Settings.class);
+                startActivity(se);
+                break;
             case R.id.nav_tools:
                 Intent t= new Intent(AccountNavigation.this,AccountNavigation.class);
                 startActivity(t);

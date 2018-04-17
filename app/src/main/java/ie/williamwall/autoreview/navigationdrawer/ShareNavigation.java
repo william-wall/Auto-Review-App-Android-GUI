@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.navigationdrawer;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -41,7 +41,7 @@ import com.squareup.picasso.Target;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import ie.williamwall.autoreview.facebook.Facebook;
+import ie.williamwall.autoreview.R;
 
 public class ShareNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -285,9 +285,13 @@ public class ShareNavigation extends AppCompatActivity
                 Intent g= new Intent(ShareNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
-            case R.id.nav_slideshow:
-                Intent s= new Intent(ShareNavigation.this,ShareNavigation.class);
-                startActivity(s);
+//            case R.id.nav_slideshow:
+//                Intent s= new Intent(ShareNavigation.this,ShareNavigation.class);
+//                startActivity(s);
+            case R.id.nav_settings:
+                Intent se= new Intent(ShareNavigation.this,Settings.class);
+                startActivity(se);
+                break;
             case R.id.nav_tools:
                 Intent t= new Intent(ShareNavigation.this,AccountNavigation.class);
                 startActivity(t);

@@ -89,24 +89,28 @@
         <activity android:name=".facebook.Facebook" />
         <activity android:name=".navigation.Navigation" />
         <activity
-            android:name=".HomeNavigation"
+            android:name=".navigationdrawer.HomeNavigation"
             android:label="Home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".WeatherNavigation"
+            android:name=".navigationdrawer.WeatherNavigation"
             android:label="Weather"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MapsNavigation"
+            android:name=".navigationdrawer.MapsNavigation"
             android:label="Gallery"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ShareNavigation"
+            android:name=".navigationdrawer.ShareNavigation"
             android:label="Slideshow"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AccountNavigation"
+            android:name=".navigationdrawer.Settings"
+            android:label="Settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".navigationdrawer.AccountNavigation"
             android:label="Tools"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
