@@ -99,7 +99,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".navigationdrawer.MapsNavigation"
-            android:label="Gallery"
+            android:label="Location"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".navigationdrawer.ShareNavigation"
@@ -107,11 +107,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".navigationdrawer.Settings"
-            android:label="Settings"
+            android:label="Share"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".navigationdrawer.AccountNavigation"
-            android:label="Tools"
+            android:label="Account Settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -131,7 +131,7 @@ public class WeatherNavigation extends AppCompatActivity
         switch (id){
 
             case R.id.nav_home:
-                Toast.makeText(this, "FFFFFFFFFFFFFFFF", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
 
                 Intent h= new Intent(WeatherNavigation.this,HomeNavigation.class);
                 startActivity(h);

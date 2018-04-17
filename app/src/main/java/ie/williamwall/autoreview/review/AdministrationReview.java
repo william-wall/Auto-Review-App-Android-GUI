@@ -131,7 +131,7 @@ public class AdministrationReview extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_user) {
-            Toast.makeText(this, "Administration ie.williamwall.autoreview.firebaseUser.UserInstanceFirebase", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Administration", Toast.LENGTH_SHORT).show();
             Intent Intent = new Intent(AdministrationReview.this, AdministrationUser.class);
             startActivity(Intent);
             return true;

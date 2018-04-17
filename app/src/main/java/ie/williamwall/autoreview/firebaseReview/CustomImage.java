@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
 
 public class CustomImage extends AppCompatActivity {
 
@@ -126,6 +127,8 @@ public class CustomImage extends AppCompatActivity {
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
+                    Intent move= new Intent(CustomImage.this,HomeNavigation.class);
+                    startActivity(move);
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {
@@ -148,7 +151,7 @@ public class CustomImage extends AppCompatActivity {
         }
     }
     public void viewAllData(View view){
-        Intent intent = new Intent(CustomImage.this, ViewData.class);
+        Intent intent = new Intent(CustomImage.this, HomeNavigation.class);
         startActivity(intent);
 
     }

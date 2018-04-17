@@ -40,10 +40,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage;
 import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.review.CustomAdapterReview;
 
 import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH;
 
@@ -73,6 +76,14 @@ public class HomeNavigation extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 //        userNameDisplayNav = (TextView) findViewById(R.id.usersNameNav);
         userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
@@ -251,15 +262,6 @@ public class HomeNavigation extends AppCompatActivity
         });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -276,6 +278,7 @@ public class HomeNavigation extends AppCompatActivity
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
+
 
 
     }
@@ -387,6 +390,10 @@ public class HomeNavigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent move= new Intent(HomeNavigation.this,CustomImage.class);
+            startActivity(move);
+//            Toast.makeText(HomeNavigation.this, "Deleted Review", Toast.LENGTH_SHORT).show();
+
             return true;
         }
 
