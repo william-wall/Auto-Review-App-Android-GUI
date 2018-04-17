@@ -1,8 +1,10 @@
 package ie.williamwall.autoreview.navigationdrawer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
@@ -18,7 +20,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.weather.Function;
 
 public class WeatherNavigation extends AppCompatActivity
@@ -27,6 +33,7 @@ public class WeatherNavigation extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
+    private FirebaseAuth auth;
 
     TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
     Typeface weatherFont;
@@ -37,7 +44,24 @@ public class WeatherNavigation extends AppCompatActivity
         setContentView(R.layout.activity_import);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        auth = FirebaseAuth.getInstance();
 
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
+
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
+                    finish();
+                }
+            }
+        };
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
         cityField = (TextView) findViewById(R.id.city_field);
@@ -155,7 +179,22 @@ public class WeatherNavigation extends AppCompatActivity
                 Intent t= new Intent(WeatherNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
-
+            case R.id.nav_logout:
+                auth.signOut();
+// this listener will be called when there is change in firebase user session
+                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null) {
+                            // user auth state is changed - user is null
+                            // launch login activity
+                            startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
+                            finish();
+                        }
+                    }
+                };
+                break;
             // after this lets start copying the above.
             // FOLLOW MEEEEE>>>
             //copy this now.
@@ -166,5 +205,43 @@ public class WeatherNavigation extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
+                finish();
+            } else {
+                setDataToView(user);
+
+            }
+        }
+
+
+    };
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+//        userNameDisplay.setText(user.getEmail());
+//        userNameDisplayNav.setText(user.getEmail());
+
     }
 }

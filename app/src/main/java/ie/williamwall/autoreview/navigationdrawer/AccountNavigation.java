@@ -32,6 +32,7 @@ import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
+import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 
 public class AccountNavigation extends AppCompatActivity
@@ -331,7 +332,7 @@ public class AccountNavigation extends AppCompatActivity
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(AccountNavigation.this,MapsNavigation.class);
+                Intent g= new Intent(AccountNavigation.this,MapsActivity.class);
                 startActivity(g);
                 break;
 //            case R.id.nav_slideshow:
@@ -345,7 +346,11 @@ public class AccountNavigation extends AppCompatActivity
                 Intent t= new Intent(AccountNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
+            case R.id.nav_logout:
+                Toast.makeText(AccountNavigation.this, "You are in Logout section already", Toast.LENGTH_SHORT).show();
+// this listener will be called when there is change in firebase user session
 
+                break;
             // after this lets start copying the above.
             // FOLLOW MEEEEE>>>
             //copy this now.

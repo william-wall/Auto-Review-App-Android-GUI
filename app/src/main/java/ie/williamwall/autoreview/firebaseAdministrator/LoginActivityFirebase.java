@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie

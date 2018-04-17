@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
@@ -56,6 +59,7 @@ public class HomeNavigation extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
+    private FirebaseAuth auth;
 
     Activity activity;
 //    TextView userNameDisplay;
@@ -84,18 +88,30 @@ public class HomeNavigation extends AppCompatActivity
         });
 
 
+
 //        userNameDisplayNav = (TextView) findViewById(R.id.usersNameNav);
 //        userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
 
 
-
+        auth = FirebaseAuth.getInstance();
 
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(userId);
 
 
-
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
+                    finish();
+                }
+            }
+        };
 
 
 
@@ -431,6 +447,23 @@ public class HomeNavigation extends AppCompatActivity
                 Intent t= new Intent(HomeNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
+                case R.id.nav_logout:
+                    auth.signOut();
+// this listener will be called when there is change in firebase user session
+                    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                        @Override
+                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            if (user == null) {
+                                // user auth state is changed - user is null
+                                // launch login activity
+                                startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
+                                finish();
+                            }
+                        }
+                    };
+                    break;
+
             // this is done, now let us go and intialise the home page.
             // after this lets start copying the above.
             // FOLLOW MEEEEE>>>
@@ -441,5 +474,37 @@ public class HomeNavigation extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
+                finish();
+            } else {
+                setDataToView(user);
+
+            }
+        }
+
+
+    };
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package ie.williamwall.autoreview.navigationdrawer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Base64;
@@ -35,6 +37,8 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.model.ShareVideo;
 import com.facebook.share.model.ShareVideoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -42,6 +46,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 
 public class Settings extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +54,7 @@ public class Settings extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
+    private FirebaseAuth auth;
 
     private static final int REQUEST_VIDEO_CODE =1000 ;
     Button btnShareLink;
@@ -90,7 +96,24 @@ public class Settings extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        auth = FirebaseAuth.getInstance();
 
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
+
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                    finish();
+                }
+            }
+        };
         btnShareLink = (Button)findViewById(R.id.btnShareLink);
 //        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
 //        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
@@ -297,6 +320,22 @@ public class Settings extends AppCompatActivity
                 Intent t= new Intent(Settings.this,AccountNavigation.class);
                 startActivity(t);
                 break;
+            case R.id.nav_logout:
+                auth.signOut();
+// this listener will be called when there is change in firebase user session
+                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null) {
+                            // user auth state is changed - user is null
+                            // launch login activity
+                            startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                            finish();
+                        }
+                    }
+                };
+                break;
 
             // after this lets start copying the above.
             // FOLLOW MEEEEE>>>
@@ -308,5 +347,43 @@ public class Settings extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                finish();
+            } else {
+                setDataToView(user);
+
+            }
+        }
+
+
+    };
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+//        userNameDisplay.setText(user.getEmail());
+//        userNameDisplayNav.setText(user.getEmail());
+
     }
 }
