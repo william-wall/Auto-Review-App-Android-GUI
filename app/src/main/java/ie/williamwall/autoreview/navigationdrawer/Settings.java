@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -219,7 +220,27 @@ public class Settings extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
+        String gotNameNav = getDataToView(userNav);
+        userNameDisplayNav.setText(gotNameNav);
     }
+
+
+
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
+    }
+  
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK)

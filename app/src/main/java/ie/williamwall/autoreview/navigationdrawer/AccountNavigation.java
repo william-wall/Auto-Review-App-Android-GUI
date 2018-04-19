@@ -206,16 +206,28 @@ public class AccountNavigation extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
+        String gotNameNav = getDataToView(userNav);
+        userNameDisplayNav.setText(gotNameNav);
     }
 
 
 
-
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
+    }
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         email.setText("Email: " + user.getEmail());
 
     }
+
 
     // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
@@ -374,4 +386,6 @@ public class AccountNavigation extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

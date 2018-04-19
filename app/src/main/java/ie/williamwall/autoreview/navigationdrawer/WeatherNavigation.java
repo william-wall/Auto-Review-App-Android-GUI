@@ -111,8 +111,22 @@ public class WeatherNavigation extends AppCompatActivity
 
 
 
+        View headerView = navigationView.getHeaderView(0);
 
+        TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
+        String gotNameNav = getDataToView(userNav);
+        userNameDisplayNav.setText(gotNameNav);
     }
+
+
+
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
+    }
+
 
 
 
