@@ -5,42 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+
     tools:context="ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage">
 
 
 
     <ImageView
+        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/insertImages"
         android:src="@mipmap/updateimage"
         android:onClick="browseImages"/>
     <EditText
+        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter name"
+        android:hint="Title, E.G. Opel Vectra 1.6 16v"
         android:id="@+id/insertName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter email"
+        android:hint="Description, E.G. Terrible fuel consumption..."
         android:id="@+id/insertEmail"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+
         />
     <Button
+        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Data"
-        android:onClick="uploadData"/>
+        android:onClick="uploadData"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/black"/>
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="viewAllData"
-        android:text="View all Data"/>
-    <Button
+        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="deleteInstance"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/black"
         android:text="Delete Review"/>
+
+    <Button
+        android:layout_marginTop="10dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="viewAllData"
+        android:text="Home"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:onClick="viewAllData"
+
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/caricon" />
 
 </LinearLayout>

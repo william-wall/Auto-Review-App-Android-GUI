@@ -348,9 +348,20 @@ public class AccountNavigation extends AppCompatActivity
                 startActivity(t);
                 break;
             case R.id.nav_logout:
-                Toast.makeText(AccountNavigation.this, "You are in Logout section already", Toast.LENGTH_SHORT).show();
+                auth.signOut();
 // this listener will be called when there is change in firebase user session
-
+                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null) {
+                            // user auth state is changed - user is null
+                            // launch login activity
+                            startActivity(new Intent(AccountNavigation.this, LoginActivityFirebase.class));
+                            finish();
+                        }
+                    }
+                };
                 break;
             // after this lets start copying the above.
             // FOLLOW MEEEEE>>>

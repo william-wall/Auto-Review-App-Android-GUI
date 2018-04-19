@@ -92,8 +92,10 @@ public class CustomImage extends AppCompatActivity {
     }
 
     public void uploadData(View view){
-        if(imageUri != null)
+        if(imageUri != null )
         {            //insert data
+
+
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");

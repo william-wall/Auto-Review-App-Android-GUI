@@ -2,11 +2,13 @@ package ie.williamwall.autoreview.firebaseReview;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,8 @@ import java.util.Date;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
+import ie.williamwall.autoreview.review.AdministrationReview;
+import ie.williamwall.autoreview.review.Review;
 
 public class UpdatingReviewImage extends AppCompatActivity {
     ImageView imageView;
@@ -200,8 +204,11 @@ public class UpdatingReviewImage extends AppCompatActivity {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double totalProgress = (100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage("Uploaded % "+ (int)totalProgress);
+
                         }
                     });
+            Intent intentMove = new Intent(UpdatingReviewImage.this, HomeNavigation.class);
+            startActivity(intentMove);
         }else{
             Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
         }
@@ -214,12 +221,31 @@ public class UpdatingReviewImage extends AppCompatActivity {
     public void deleteInstance(View view){
 
 //        databaseReference.child(user.getUid()).child("name").setValue(NAME);
-        Intent intent = getIntent();
-        Person user = (Person) intent.getSerializableExtra("MyClass");
-        databaseReference.child(user.getUid()).removeValue();
-        Intent intentMove = new Intent(UpdatingReviewImage.this, ViewData.class);
-        startActivity(intentMove);
-        Toast.makeText(getApplicationContext(), "Successfully deleted review", Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdatingReviewImage.this);
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure you want to delete?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = getIntent();
+                Person user = (Person) intent.getSerializableExtra("MyClass");
+                databaseReference.child(user.getUid()).removeValue();
+                Intent intentMove = new Intent(UpdatingReviewImage.this, HomeNavigation.class);
+                startActivity(intentMove);
+                Toast.makeText(getApplicationContext(), "Successfully deleted review", Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdatingReviewImage.this, "Deleted", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
+
+
+
+
 
 
     }

@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.weather.Function;
 
 public class WeatherNavigation extends AppCompatActivity
@@ -166,7 +167,7 @@ public class WeatherNavigation extends AppCompatActivity
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(WeatherNavigation.this,MapsNavigation.class);
+                Intent g= new Intent(WeatherNavigation.this,MapsActivity.class);
                 startActivity(g);
                 break;
 //            case R.id.nav_slideshow:

@@ -47,6 +47,7 @@ import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
 
 public class Settings extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -307,7 +308,7 @@ public class Settings extends AppCompatActivity
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(Settings.this,MapsNavigation.class);
+                Intent g= new Intent(Settings.this,MapsActivity.class);
                 startActivity(g);
                 break;
 //            case R.id.nav_slideshow:

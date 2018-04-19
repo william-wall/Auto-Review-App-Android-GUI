@@ -42,6 +42,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.maps.MapsActivity;
 
 public class ShareNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -283,7 +284,7 @@ public class ShareNavigation extends AppCompatActivity
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g= new Intent(ShareNavigation.this,MapsNavigation.class);
+                Intent g= new Intent(ShareNavigation.this,MapsActivity.class);
                 startActivity(g);
                 break;
 //            case R.id.nav_slideshow:
