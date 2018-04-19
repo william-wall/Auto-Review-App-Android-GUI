@@ -30,6 +30,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
 
 public class UpdatingReviewImage extends AppCompatActivity {
     ImageView imageView;
@@ -206,7 +207,7 @@ public class UpdatingReviewImage extends AppCompatActivity {
         }
     }
     public void viewAllData(View view){
-        Intent intent = new Intent(UpdatingReviewImage.this, ViewData.class);
+        Intent intent = new Intent(UpdatingReviewImage.this, HomeNavigation.class);
         startActivity(intent);
 
     }
