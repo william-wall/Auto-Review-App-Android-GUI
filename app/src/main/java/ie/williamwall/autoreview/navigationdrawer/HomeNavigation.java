@@ -200,7 +200,7 @@ public class HomeNavigation extends AppCompatActivity
                 }
                 else {
 
-                    Intent move = new Intent(HomeNavigation.this, UpdatingReviewImage.class);
+                    Intent move = new Intent(HomeNavigation.this, Updating.class);
                     move.putExtra("message_key", title);
                     move.putExtra("message_key2", review);
 //                move.putExtra("message_key3", UID);

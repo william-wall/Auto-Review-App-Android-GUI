@@ -19,7 +19,7 @@
         android:padding="10dp"
         android:text="Name here"
         android:textColor="#FFF"
-        android:textSize="22sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/getEmail"
@@ -30,7 +30,7 @@
         android:text="Email here"
 
         android:textColor="#FFF"
-        android:textSize="10sp" />
+        android:textSize="18sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
