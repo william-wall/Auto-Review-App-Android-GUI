@@ -149,6 +149,27 @@ public class HomeNavigation extends AppCompatActivity
 
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Person user = (Person) adapterView.getItemAtPosition(i);
+                selectedUser = user;
+                String userInstanceReview = user.getUserName();
+
+                String titleReview = user.getName();
+                String commentReview = user.getEmail();
+
+
+
+
+
+                Intent moving = new Intent(HomeNavigation.this,ViewReview.class);
+                moving.putExtra("message_title", titleReview);
+                moving.putExtra("message_comment", commentReview);
+                startActivity(moving);
+                return false;
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
