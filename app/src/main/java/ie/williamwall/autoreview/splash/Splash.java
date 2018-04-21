@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import ie.williamwall.autoreview.TestNav;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.navigationdrawer.WeatherNavigation;
 
 // Designed and Developed @ William Wall
 // Email @ william@williamwall.ie
@@ -35,7 +37,7 @@ public class Splash extends AppCompatActivity {
 
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivityFirebase.class);
+                    Intent intent = new Intent(getApplicationContext(), TestNav.class);
                     startActivity(intent);
                     finish();
                 }

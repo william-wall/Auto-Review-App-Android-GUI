@@ -107,7 +107,7 @@ public class AccountNavigation extends AppCompatActivity
             @Override
             public void onClick(View view) {
 //                String sendingUsername = user.getEmail();
-                Intent Intent = new Intent(AccountNavigation.this, HomeScreen.class);
+                Intent Intent = new Intent(AccountNavigation.this, HomeNavigation.class);
 //                Intent.putExtra("message_key_user", sendingUsername);
                 startActivity(Intent);
             }

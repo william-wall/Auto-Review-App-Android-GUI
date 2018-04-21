@@ -117,13 +117,17 @@
             android:label="Account Settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-        android:name=".navigationdrawer.ViewReview"
-        android:label="View Review"
-        android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".navigationdrawer.ViewReview"
+            android:label="View Review"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".navigationdrawer.Updating"
             android:label="Update Review"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestNav"
+            android:label="@string/title_activity_test_nav"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
