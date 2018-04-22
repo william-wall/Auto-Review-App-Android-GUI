@@ -59,18 +59,18 @@ public class HomeNavigation extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
-    private FirebaseAuth auth;
+            private FirebaseAuth auth;
 
-    Activity activity;
-//    TextView userNameDisplay;
-    TextView userNameDisplayNav;
-    ListView listView;
-    List<Person> list;
-    ProgressDialog progressDialog;
-    MyAdapter myAdapter;
-    private DatabaseReference databaseReference;
-    private Person selectedUser;
-    private Uri imageUri;
+            Activity activity;
+        //    TextView userNameDisplay;
+            TextView userNameDisplayNav;
+            ListView listView;
+            List<Person> list;
+            ProgressDialog progressDialog;
+            MyAdapter myAdapter;
+            private DatabaseReference databaseReference;
+            private Person selectedUser;
+            private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

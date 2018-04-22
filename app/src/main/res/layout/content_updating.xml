@@ -10,7 +10,18 @@ android:paddingTop="55dp"
     tools:context="ie.williamwall.autoreview.navigationdrawer.Updating"
     tools:showIn="@layout/app_bar_home">
 
+    <Button
+        android:layout_marginTop="10dp"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Browse Image"
+        android:onClick="browseImages"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="5dp"
+
+        />
 
 
 
@@ -61,15 +72,7 @@ android:paddingTop="55dp"
         android:textColor="@android:color/black"
         android:text="Delete Review"/>
 
-    <Button
-        android:layout_marginTop="10dp"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="viewAllData"
-        android:text="Home"
-        android:background="@color/colorAccent"
-        android:textColor="@android:color/black"/>
 
     <ImageView
         android:onClick="viewAllData"

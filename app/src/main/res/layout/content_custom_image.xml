@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/colorPrimaryDark"
+tools:context="ie.williamwall.autoreview.firebaseReview.CustomImage">
+
+<Button
+    android:layout_marginTop="10dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Browse Image"
+    android:onClick="browseImages"
+    android:background="@color/colorAccent"
+    android:textColor="@android:color/black"
+    android:layout_marginBottom="5dp"
+
+    />
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:id="@+id/insertImages"
+    android:src="@mipmap/updateimage"
+    />
+<EditText
+    android:layout_marginTop="20dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Title, E.G. Opel Vectra 1.6 16v"
+    android:id="@+id/insertName"
+    android:textColor="@android:color/white"
+    android:textColorHint="@android:color/white"
+    />
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Description, E.G. Terrible fuel consumption..."
+    android:id="@+id/insertEmail"
+    android:textColor="@android:color/white"
+    android:textColorHint="@android:color/white"
+    />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Upload Data"
+    android:onClick="uploadData"
+    android:background="@color/colorAccent"
+    android:textColor="@android:color/black"/>
+
+
+
+<ImageView
+    android:id="@+id/imageView5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:onClick="viewAllData"
+
+    app:srcCompat="@mipmap/caricon" />
+
+</LinearLayout>

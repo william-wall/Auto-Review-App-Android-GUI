@@ -8,12 +8,21 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,12 +43,22 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
 import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
+import ie.williamwall.autoreview.navigationdrawer.Settings;
+import ie.williamwall.autoreview.navigationdrawer.WeatherNavigation;
 
-public class CustomImage extends AppCompatActivity {
+public class CustomImage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar=null;
+    private FirebaseAuth auth;
 
     ImageView imageView;
     EditText name, email;
+    TextView userNameDisplayNav;
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -52,13 +71,52 @@ public class CustomImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_image);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide();
 
+        auth = FirebaseAuth.getInstance();
+
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
+
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(CustomImage.this, LoginActivityFirebase.class));
+                    finish();
+                }
+            }
+        };
         imageView = (ImageView) findViewById(R.id.insertImages);
         name = (EditText) findViewById(R.id.insertName);
         email = (EditText) findViewById(R.id.insertEmail);
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference(DATABASE_PATH);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        View headerView = navigationView.getHeaderView(0);
+        userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
+        String gotNameNav = getDataToView(userNav);
+        userNameDisplayNav.setText(gotNameNav);
     }
 
     public void browseImages(View view){
@@ -157,9 +215,147 @@ public class CustomImage extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home_navigation, menu);
+
+//        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
+//        setDataToView(userId2);
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent move= new Intent(CustomImage.this,CustomImage.class);
+            startActivity(move);
+//            Toast.makeText(HomeNavigation.this, "Deleted Review", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        //here is the main place where we need to work on.
+        int id=item.getItemId();
+        switch (id){
+
+            case R.id.nav_home:
+                Intent h= new Intent(CustomImage.this,HomeNavigation.class);
+                startActivity(h);
+                break;
+            case R.id.nav_import:
+                Intent i= new Intent(CustomImage.this,WeatherNavigation.class);
+                startActivity(i);
+                break;
+            case R.id.nav_gallery:
+                Intent g= new Intent(CustomImage.this,MapsActivity.class);
+                startActivity(g);
+                break;
+//            case R.id.nav_slideshow:
+//                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
+//                startActivity(s);
+            case R.id.nav_settings:
+                Intent se= new Intent(CustomImage.this,Settings.class);
+                startActivity(se);
+                break;
+            case R.id.nav_tools:
+                Intent t= new Intent(CustomImage.this,AccountNavigation.class);
+                startActivity(t);
+                break;
+            case R.id.nav_logout:
+                auth.signOut();
+// this listener will be called when there is change in firebase user session
+                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null) {
+                            // user auth state is changed - user is null
+                            // launch login activity
+                            startActivity(new Intent(CustomImage.this, LoginActivityFirebase.class));
+                            finish();
+                        }
+                    }
+                };
+                break;
+
+            // this is done, now let us go and intialise the home page.
+            // after this lets start copying the above.
+            // FOLLOW MEEEEE>>>
+        }
+
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(CustomImage.this, LoginActivityFirebase.class));
+                finish();
+            } else {
+                setDataToView(user);
+
+            }
+        }
+    };
+
     @SuppressLint("SetTextI18n")
     private String setDataToView(FirebaseUser user) {
         String jjjj = user.getEmail();
-return jjjj;
+        return jjjj;
     }
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
+
 }

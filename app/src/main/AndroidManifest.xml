@@ -82,7 +82,8 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".firebaseReview.CustomImage"
-            android:label="Add Review" />
+            android:label="Add Review"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".firebaseReview.ViewData" />
         <activity
             android:name=".firebaseUser.FirebaseUser"
@@ -124,10 +125,6 @@
             android:name=".navigationdrawer.Updating"
             android:label="Update Review"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".TestNav"
-            android:label="@string/title_activity_test_nav"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
