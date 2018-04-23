@@ -83,7 +83,7 @@
         <activity
             android:name=".firebaseReview.CustomImage"
             android:label="Add Review"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".firebaseReview.ViewData" />
         <activity
             android:name=".firebaseUser.FirebaseUser"
@@ -125,6 +125,18 @@
             android:name=".navigationdrawer.Updating"
             android:label="Update Review"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WeatherReport"
+            android:label="Weather Report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReviewHome"
+            android:label="Auto Review Home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShareFacebook"
+            android:label="@string/title_activity_share_facebook"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

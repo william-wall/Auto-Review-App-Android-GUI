@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -40,59 +40,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ShareFacebook;
 import ie.williamwall.autoreview.facebook.Facebook;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
-import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
-import ie.williamwall.autoreview.firebaseReview.UpdatingReviewImage;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.review.CustomAdapterReview;
+import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
+import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
+import ie.williamwall.autoreview.navigationdrawer.Settings;
+import ie.williamwall.autoreview.navigationdrawer.ShareNavigation;
+import ie.williamwall.autoreview.navigationdrawer.Updating;
+import ie.williamwall.autoreview.navigationdrawer.ViewReview;
+import ie.williamwall.autoreview.review.Review;
 
 import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH;
 
-public class HomeNavigation extends AppCompatActivity
+public class ReviewHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    Toolbar toolbar=null;
-            private FirebaseAuth auth;
-
-            Activity activity;
-        //    TextView userNameDisplay;
-            TextView userNameDisplayNav;
-            ListView listView;
-            List<Person> list;
-            ProgressDialog progressDialog;
-            MyAdapter myAdapter;
-            private DatabaseReference databaseReference;
-            private Person selectedUser;
-            private Uri imageUri;
-
+    private FirebaseAuth auth;
+    Activity activity;
+    //    TextView userNameDisplay;
+    TextView userNameDisplayNav;
+    ListView listView;
+    List<Person> list;
+    ProgressDialog progressDialog;
+    MyAdapter myAdapter;
+    private DatabaseReference databaseReference;
+    private Person selectedUser;
+    private Uri imageUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_review_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent move= new Intent(HomeNavigation.this,CustomImage.class);
+                Intent move= new Intent(ReviewHome.this,CustomImage.class);
                 startActivity(move);
             }
         });
-
-
-
-//        userNameDisplayNav = (TextView) findViewById(R.id.usersNameNav);
-//        userNameDisplay = (TextView) findViewById(R.id.userSignInName);
         listView = (ListView) findViewById(R.id.list1);
 
 
@@ -109,19 +100,11 @@ public class HomeNavigation extends AppCompatActivity
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
+                    startActivity(new Intent(ReviewHome.this, LoginActivityFirebase.class));
                     finish();
                 }
             }
         };
-
-
-
-
-
-//        String gettingUserName = getDataToView(userId);
-//        userNameDisplayNav.setText(gettingUserName);
-
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Fetching please wait");
@@ -142,7 +125,7 @@ public class HomeNavigation extends AppCompatActivity
                     list.add(person);
 
                 }
-                myAdapter = new MyAdapter(HomeNavigation.this, R.layout.data_items, list);
+                myAdapter = new MyAdapter(ReviewHome.this, R.layout.data_items, list);
                 listView.setAdapter(myAdapter);
             }
 
@@ -165,7 +148,7 @@ public class HomeNavigation extends AppCompatActivity
 
 
 
-                Intent moving = new Intent(HomeNavigation.this,ViewReview.class);
+                Intent moving = new Intent(ReviewHome.this,ViewReview.class);
                 moving.putExtra("message_title", titleReview);
                 moving.putExtra("message_comment", commentReview);
                 startActivity(moving);
@@ -202,41 +185,33 @@ public class HomeNavigation extends AppCompatActivity
                 }
                 else {
 
-                    Intent move = new Intent(HomeNavigation.this, Updating.class);
+                    Intent move = new Intent(ReviewHome.this, Updating.class);
                     move.putExtra("message_key", title);
                     move.putExtra("message_key2", review);
 //                move.putExtra("message_key3", UID);
                     move.putExtra("MyClass", user);
                     startActivity(move);
+//
                 }
             }
         });
 
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         View headerView = navigationView.getHeaderView(0);
         userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
-
-
-
     }
-
-
-
-
 
     public void browseImages(View view){
         Intent intent = new Intent();
@@ -276,40 +251,17 @@ public class HomeNavigation extends AppCompatActivity
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-    @SuppressLint("SetTextI18n")
-    private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
+        @SuppressLint("SetTextI18n")
+        private void setDataToView(FirebaseUser user) {
+    //        userNameDisplay.setText(user.getEmail());
+    //        userNameDisplayNav.setText(user.getEmail());
 
-    }
-    @SuppressLint("SetTextI18n")
-    private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        @SuppressLint("SetTextI18n")
+        private String getDataToView(FirebaseUser user) {
+            String jjjj = user.getEmail();
+            return jjjj;
+        }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -323,12 +275,7 @@ public class HomeNavigation extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
-
-//        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
-//        setDataToView(userId2);
-
-
+        getMenuInflater().inflate(R.menu.review_home, menu);
         return true;
     }
 
@@ -341,10 +288,6 @@ public class HomeNavigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent move= new Intent(HomeNavigation.this,CustomImage.class);
-            startActivity(move);
-//            Toast.makeText(HomeNavigation.this, "Deleted Review", Toast.LENGTH_SHORT).show();
-
             return true;
         }
 
@@ -352,65 +295,47 @@ public class HomeNavigation extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
-            case R.id.nav_home:
-                Intent h= new Intent(HomeNavigation.this,HomeNavigation.class);
+            if (id == R.id.nav_camera) {
+                Intent h= new Intent(ReviewHome.this,ReviewHome.class);
                 startActivity(h);
-                break;
-            case R.id.nav_import:
-                Intent i= new Intent(HomeNavigation.this,WeatherNavigation.class);
-                startActivity(i);
-                break;
-            case R.id.nav_gallery:
-                Intent g= new Intent(HomeNavigation.this,MapsActivity.class);
-                startActivity(g);
-                break;
-//            case R.id.nav_slideshow:
-//                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
-//                startActivity(s);
-            case R.id.nav_settings:
-                Intent se= new Intent(HomeNavigation.this,ShareFacebook.class);
-                startActivity(se);
-                break;
-            case R.id.nav_tools:
-                Intent t= new Intent(HomeNavigation.this,AccountNavigation.class);
-                startActivity(t);
-                break;
-                case R.id.nav_logout:
-                    auth.signOut();
+            } else if (id == R.id.nav_gallery) {
+                Intent h= new Intent(ReviewHome.this,WeatherReport.class);
+                startActivity(h);
+            } else if (id == R.id.nav_slideshow) {
+                Intent h= new Intent(ReviewHome.this,MapsActivity.class);
+                startActivity(h);
+            } else if (id == R.id.nav_manage) {
+                Intent h= new Intent(ReviewHome.this,ShareFacebook.class);
+                startActivity(h);
+            } else if (id == R.id.nav_share) {
+                Intent h= new Intent(ReviewHome.this,AccountNavigation.class);
+                startActivity(h);
+            } else if (id == R.id.nav_send) {
+                auth.signOut();
 // this listener will be called when there is change in firebase user session
-                    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                        @Override
-                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            if (user == null) {
-                                // user auth state is changed - user is null
-                                // launch login activity
-                                startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
-                                finish();
-                            }
+                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null) {
+                            // user auth state is changed - user is null
+                            // launch login activity
+                            startActivity(new Intent(ReviewHome.this, LoginActivityFirebase.class));
+                            finish();
                         }
-                    };
-                    break;
-
-            // this is done, now let us go and intialise the home page.
-            // after this lets start copying the above.
-            // FOLLOW MEEEEE>>>
-        }
-
-
+                    }
+                };
+            }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -419,7 +344,7 @@ public class HomeNavigation extends AppCompatActivity
             if (user == null) {
                 // user auth state is changed - user is null
                 // launch login activity
-                startActivity(new Intent(HomeNavigation.this, LoginActivityFirebase.class));
+                startActivity(new Intent(ReviewHome.this, LoginActivityFirebase.class));
                 finish();
             } else {
                 setDataToView(user);

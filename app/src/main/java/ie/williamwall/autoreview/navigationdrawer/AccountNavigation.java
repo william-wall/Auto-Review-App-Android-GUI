@@ -29,6 +29,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.ReviewHome;
+import ie.williamwall.autoreview.ShareFacebook;
+import ie.williamwall.autoreview.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
 import ie.williamwall.autoreview.home.HomeScreen;
@@ -107,7 +110,7 @@ public class AccountNavigation extends AppCompatActivity
             @Override
             public void onClick(View view) {
 //                String sendingUsername = user.getEmail();
-                Intent Intent = new Intent(AccountNavigation.this, HomeNavigation.class);
+                Intent Intent = new Intent(AccountNavigation.this, ReviewHome.class);
 //                Intent.putExtra("message_key_user", sendingUsername);
                 startActivity(Intent);
             }
@@ -333,51 +336,38 @@ public class AccountNavigation extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
 
-            case R.id.nav_home:
-                Intent h= new Intent(AccountNavigation.this,HomeNavigation.class);
-                startActivity(h);
-                break;
-            case R.id.nav_import:
-                Intent i= new Intent(AccountNavigation.this,WeatherNavigation.class);
-                startActivity(i);
-                break;
-            case R.id.nav_gallery:
-                Intent g= new Intent(AccountNavigation.this,MapsActivity.class);
-                startActivity(g);
-                break;
-//            case R.id.nav_slideshow:
-//                Intent s= new Intent(AccountNavigation.this,ShareNavigation.class);
-//                startActivity(s);
-            case R.id.nav_settings:
-                Intent se= new Intent(AccountNavigation.this,Settings.class);
-                startActivity(se);
-                break;
-            case R.id.nav_tools:
-                Intent t= new Intent(AccountNavigation.this,AccountNavigation.class);
-                startActivity(t);
-                break;
-            case R.id.nav_logout:
-                auth.signOut();
+        if (id == R.id.nav_camera) {
+            Intent h= new Intent(AccountNavigation.this,ReviewHome.class);
+            startActivity(h);
+        } else if (id == R.id.nav_gallery) {
+            Intent h= new Intent(AccountNavigation.this,WeatherReport.class);
+            startActivity(h);
+        } else if (id == R.id.nav_slideshow) {
+            Intent h= new Intent(AccountNavigation.this,MapsActivity.class);
+            startActivity(h);
+        } else if (id == R.id.nav_manage) {
+            Intent h= new Intent(AccountNavigation.this,ShareFacebook.class);
+            startActivity(h);
+        } else if (id == R.id.nav_share) {
+            Intent h= new Intent(AccountNavigation.this,AccountNavigation.class);
+            startActivity(h);
+        } else if (id == R.id.nav_send) {
+            auth.signOut();
 // this listener will be called when there is change in firebase user session
-                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user == null) {
-                            // user auth state is changed - user is null
-                            // launch login activity
-                            startActivity(new Intent(AccountNavigation.this, LoginActivityFirebase.class));
-                            finish();
-                        }
+            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        // user auth state is changed - user is null
+                        // launch login activity
+                        startActivity(new Intent(AccountNavigation.this, LoginActivityFirebase.class));
+                        finish();
                     }
-                };
-                break;
-            // after this lets start copying the above.
-            // FOLLOW MEEEEE>>>
-            //copy this now.
+                }
+            };
         }
 
 

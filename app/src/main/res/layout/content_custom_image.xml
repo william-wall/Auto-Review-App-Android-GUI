@@ -6,7 +6,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:background="@color/colorPrimaryDark"
-tools:context="ie.williamwall.autoreview.firebaseReview.CustomImage">
+    android:paddingTop="55dp"
+
+    tools:context="ie.williamwall.autoreview.firebaseReview.CustomImage">
 
 <Button
     android:layout_marginTop="10dp"

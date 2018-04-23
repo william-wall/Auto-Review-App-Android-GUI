@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,39 +18,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
 import ie.williamwall.autoreview.weather.Function;
 
-public class ViewReview extends AppCompatActivity
+public class WeatherReport extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    Toolbar toolbar=null;
     private FirebaseAuth auth;
 
-
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
+    Typeface weatherFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewreview);
+        setContentView(R.layout.activity_review_weather);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
-
-        TextView reviewTitle = (TextView) findViewById(R.id.reviewTitleData);
-        TextView reviewComment = (TextView) findViewById(R.id.reviewCommentData);
-
 
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(userId);
@@ -63,40 +53,45 @@ public class ViewReview extends AppCompatActivity
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(ViewReview.this, LoginActivityFirebase.class));
+                    startActivity(new Intent(WeatherReport.this, LoginActivityFirebase.class));
                     finish();
                 }
             }
         };
 
-
-        String title = getIntent().getStringExtra("message_title");
-        String review = getIntent().getStringExtra("message_comment");
-
-reviewTitle.setText(title);
-reviewComment.setText(review);
+        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        cityField = (TextView) findViewById(R.id.city_field);
+        updatedField = (TextView) findViewById(R.id.updated_field);
+        detailsField = (TextView) findViewById(R.id.details_field);
+        currentTemperatureField = (TextView) findViewById(R.id.current_temperature_field);
+        humidity_field = (TextView) findViewById(R.id.humidity_field);
+        pressure_field = (TextView) findViewById(R.id.pressure_field);
+        weatherIcon = (TextView) findViewById(R.id.weather_icon);
+        weatherIcon.setTypeface(weatherFont);
+        Function.placeIdTask asyncTask = new Function.placeIdTask(new Function.AsyncResponse() {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
+                cityField.setText(weather_city);
+                updatedField.setText(weather_updatedOn);
+                detailsField.setText(weather_description);
+                currentTemperatureField.setText(weather_temperature);
+                humidity_field.setText("Humidity: " + weather_humidity);
+                pressure_field.setText("Pressure: " + weather_pressure);
+                weatherIcon.setText(Html.fromHtml(weather_iconText));
+            }
+        });
+        asyncTask.execute("52.245036", "-7.136621");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
         View headerView = navigationView.getHeaderView(0);
 
         TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
@@ -104,18 +99,11 @@ reviewComment.setText(review);
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
     }
-
-
-
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
         String jjjj = user.getEmail();
         return jjjj;
     }
-
-
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -129,7 +117,7 @@ reviewComment.setText(review);
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.testnav, menu);
         return true;
     }
 
@@ -155,28 +143,41 @@ reviewComment.setText(review);
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(ViewReview.this,ReviewHome.class);
+            Intent h= new Intent(WeatherReport.this,ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(ViewReview.this,WeatherReport.class);
+            Intent h= new Intent(WeatherReport.this,WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-
+            Intent h= new Intent(WeatherReport.this,MapsActivity.class);
+            startActivity(h);
         } else if (id == R.id.nav_manage) {
-
+            Intent h= new Intent(WeatherReport.this,ShareFacebook.class);
+            startActivity(h);
         } else if (id == R.id.nav_share) {
-
+            Intent h= new Intent(WeatherReport.this,AccountNavigation.class);
+            startActivity(h);
         } else if (id == R.id.nav_send) {
-
+            auth.signOut();
+// this listener will be called when there is change in firebase user session
+            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        // user auth state is changed - user is null
+                        // launch login activity
+                        startActivity(new Intent(WeatherReport.this, LoginActivityFirebase.class));
+                        finish();
+                    }
+                }
+            };
         }
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -185,7 +186,7 @@ reviewComment.setText(review);
             if (user == null) {
                 // user auth state is changed - user is null
                 // launch login activity
-                startActivity(new Intent(ViewReview.this, LoginActivityFirebase.class));
+                startActivity(new Intent(WeatherReport.this, LoginActivityFirebase.class));
                 finish();
             } else {
                 setDataToView(user);

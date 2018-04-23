@@ -43,6 +43,9 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.ReviewHome;
+import ie.williamwall.autoreview.ShareFacebook;
+import ie.williamwall.autoreview.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
@@ -187,7 +190,7 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
-                    Intent move= new Intent(CustomImage.this,HomeNavigation.class);
+                    Intent move= new Intent(CustomImage.this,ReviewHome.class);
                     startActivity(move);
                 }
             })
@@ -211,7 +214,7 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
         }
     }
     public void viewAllData(View view){
-        Intent intent = new Intent(CustomImage.this, HomeNavigation.class);
+        Intent intent = new Intent(CustomImage.this, ReviewHome.class);
         startActivity(intent);
 
     }
@@ -261,55 +264,39 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
 
-            case R.id.nav_home:
-                Intent h= new Intent(CustomImage.this,HomeNavigation.class);
-                startActivity(h);
-                break;
-            case R.id.nav_import:
-                Intent i= new Intent(CustomImage.this,WeatherNavigation.class);
-                startActivity(i);
-                break;
-            case R.id.nav_gallery:
-                Intent g= new Intent(CustomImage.this,MapsActivity.class);
-                startActivity(g);
-                break;
-//            case R.id.nav_slideshow:
-//                Intent s= new Intent(HomeNavigation.this,ShareNavigation.class);
-//                startActivity(s);
-            case R.id.nav_settings:
-                Intent se= new Intent(CustomImage.this,Settings.class);
-                startActivity(se);
-                break;
-            case R.id.nav_tools:
-                Intent t= new Intent(CustomImage.this,AccountNavigation.class);
-                startActivity(t);
-                break;
-            case R.id.nav_logout:
-                auth.signOut();
+        if (id == R.id.nav_camera) {
+            Intent h= new Intent(CustomImage.this,ReviewHome.class);
+            startActivity(h);
+        } else if (id == R.id.nav_gallery) {
+            Intent h= new Intent(CustomImage.this,WeatherReport.class);
+            startActivity(h);
+        } else if (id == R.id.nav_slideshow) {
+            Intent h= new Intent(CustomImage.this,MapsActivity.class);
+            startActivity(h);
+        } else if (id == R.id.nav_manage) {
+            Intent h= new Intent(CustomImage.this,ShareFacebook.class);
+            startActivity(h);
+        } else if (id == R.id.nav_share) {
+            Intent h= new Intent(CustomImage.this,AccountNavigation.class);
+            startActivity(h);
+        } else if (id == R.id.nav_send) {
+            auth.signOut();
 // this listener will be called when there is change in firebase user session
-                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user == null) {
-                            // user auth state is changed - user is null
-                            // launch login activity
-                            startActivity(new Intent(CustomImage.this, LoginActivityFirebase.class));
-                            finish();
-                        }
+            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        // user auth state is changed - user is null
+                        // launch login activity
+                        startActivity(new Intent(CustomImage.this, LoginActivityFirebase.class));
+                        finish();
                     }
-                };
-                break;
-
-            // this is done, now let us go and intialise the home page.
-            // after this lets start copying the above.
-            // FOLLOW MEEEEE>>>
+                }
+            };
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

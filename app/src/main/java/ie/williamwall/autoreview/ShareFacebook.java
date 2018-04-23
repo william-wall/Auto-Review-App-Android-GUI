@@ -1,10 +1,7 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,8 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +25,6 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
@@ -43,26 +37,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
+import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
+import ie.williamwall.autoreview.navigationdrawer.ShareNavigation;
 
-public class Settings extends AppCompatActivity
+public class ShareFacebook extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    Toolbar toolbar=null;
     private FirebaseAuth auth;
-
+    TextView userNameDisplayNav;
     private static final int REQUEST_VIDEO_CODE =1000 ;
     Button btnShareLink;
-//    btnSharePhoto, btnShareVideo;
+    //            btnSharePhoto, btnShareVideo;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -91,15 +77,53 @@ public class Settings extends AppCompatActivity
 
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_share_facebook);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        btnShareLink = (Button)findViewById(R.id.btnShareLink);
 
+//        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
+//        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
+
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+
+        btnShareLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+                        Toast.makeText(ShareFacebook.this, "Share Successful", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(ShareFacebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Toast.makeText(ShareFacebook.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                        .setQuote("Hey, Check out this app it is really cool!")
+                        .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.wapit.carbuzz"))
+                        .build();
+                if(ShareDialog.canShow(ShareLinkContent.class))
+                {
+                    shareDialog.show(linkContent);
+                }
+            }
+        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide();
         auth = FirebaseAuth.getInstance();
 
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
@@ -113,136 +137,26 @@ public class Settings extends AppCompatActivity
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                    startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
                     finish();
                 }
             }
         };
-        btnShareLink = (Button)findViewById(R.id.btnShareLink);
-//        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
-//        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
-
-        callbackManager = CallbackManager.Factory.create();
-        shareDialog = new ShareDialog(this);
-
-        btnShareLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(Settings.this, "Share Successful", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(Settings.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(Settings.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-                ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                        .setQuote("Hey, Check out this app it is really cool!")
-                        .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.wapit.carbuzz"))
-                        .build();
-                if(ShareDialog.canShow(ShareLinkContent.class))
-                {
-                    shareDialog.show(linkContent);
-                }
-            }
-        });
-
-//        btnSharePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-//                    @Override
-//                    public void onSuccess(Sharer.Result result) {
-//                        Toast.makeText(Settings.this, "Share Successful", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        Toast.makeText(Settings.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException error) {
-//                        Toast.makeText(Settings.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//
-//                Picasso.with(getBaseContext())
-//                        .load("http://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg")
-//                        .into(target);
-//
-////                                        Toast.makeText(Facebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//        btnShareVideo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("video/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select video"), REQUEST_VIDEO_CODE);
-//            }
-//        });
-
-
-        //We dont need this.
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.hide();
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View headerView = navigationView.getHeaderView(0);
 
-        TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+        View headerView = navigationView.getHeaderView(0);
+        userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
     }
-
-
-
-    @SuppressLint("SetTextI18n")
-    private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
-    }
-  
-
-
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK)
@@ -256,30 +170,14 @@ public class Settings extends AppCompatActivity
                         .build();
 
                 ShareVideoContent videoContent = new ShareVideoContent.Builder()
-                        .setContentTitle("This is a useful video")
-                        .setContentDescription("Youtube video")
+                        .setContentTitle("Auto Review is great!")
+                        .setContentDescription("Autos App")
                         .setVideo(video)
                         .build();
 
                 if(shareDialog.canShow(ShareVideoContent.class))
                     shareDialog.show(videoContent);
             }
-        }
-    }
-
-    private void printKeyHash() {
-        try{
-            PackageInfo info = getPackageManager().getPackageInfo("ie.williamwall.autoreview", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures)
-            {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(),Base64.DEFAULT));
-            }
-        }catch (PackageManager.NameNotFoundException e){
-            e.printStackTrace();
-        }catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
         }
     }
     @Override
@@ -295,7 +193,7 @@ public class Settings extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
         return true;
     }
 
@@ -321,19 +219,19 @@ public class Settings extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(Settings.this,ReviewHome.class);
+            Intent h= new Intent(ShareFacebook.this,ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(Settings.this,WeatherReport.class);
+            Intent h= new Intent(ShareFacebook.this,WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(Settings.this,MapsActivity.class);
+            Intent h= new Intent(ShareFacebook.this,MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(Settings.this,Settings.class);
+            Intent h= new Intent(ShareFacebook.this,ShareFacebook.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(Settings.this,AccountNavigation.class);
+            Intent h= new Intent(ShareFacebook.this,AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -345,20 +243,17 @@ public class Settings extends AppCompatActivity
                     if (user == null) {
                         // user auth state is changed - user is null
                         // launch login activity
-                        startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                        startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
                         finish();
                     }
                 }
             };
         }
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -367,7 +262,7 @@ public class Settings extends AppCompatActivity
             if (user == null) {
                 // user auth state is changed - user is null
                 // launch login activity
-                startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
                 finish();
             } else {
                 setDataToView(user);
@@ -378,13 +273,13 @@ public class Settings extends AppCompatActivity
 
     };
     @Override
-    public void onStart() {
+    public void onStart () {
         super.onStart();
         auth.addAuthStateListener(authListener);
     }
 
     @Override
-    public void onStop() {
+    public void onStop () {
         super.onStop();
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
@@ -395,5 +290,10 @@ public class Settings extends AppCompatActivity
 //        userNameDisplay.setText(user.getEmail());
 //        userNameDisplayNav.setText(user.getEmail());
 
+    }
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String jjjj = user.getEmail();
+        return jjjj;
     }
 }

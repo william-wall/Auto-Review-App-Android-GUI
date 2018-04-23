@@ -103,8 +103,8 @@ public class Facebook extends AppCompatActivity {
                 });
 
                 ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                        .setQuote("This is a useful link")
-                        .setContentUrl(Uri.parse("https://youtube.com"))
+                        .setQuote("Hey, Check out this app it is really cool!")
+                        .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.wapit.carbuzz"))
                         .build();
                 if(ShareDialog.canShow(ShareLinkContent.class))
                 {
@@ -172,8 +172,8 @@ public class Facebook extends AppCompatActivity {
                         .build();
 
                 ShareVideoContent videoContent = new ShareVideoContent.Builder()
-                        .setContentTitle("This is a useful video")
-                          .setContentDescription("Youtube video")
+                        .setContentTitle("Auto Review is great!")
+                          .setContentDescription("Autos App")
                         .setVideo(video)
                         .build();
 

@@ -5,8 +5,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark"
+
     tools:openDrawer="start">
 
     <include
@@ -14,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-    <include layout="@layout/content_viewreview" />
+    <include layout="@layout/content_share_facebook" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -24,10 +24,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_review_home"
-        app:menu="@menu/activity_review_home_drawer"/>
-
-
-
+        app:menu="@menu/activity_review_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
-    <!-- copy from activity_home and paste it here.-->
