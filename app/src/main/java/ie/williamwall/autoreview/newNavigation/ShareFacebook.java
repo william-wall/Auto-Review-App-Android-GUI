@@ -205,6 +205,8 @@ public class ShareFacebook extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent h= new Intent(ShareFacebook.this,About.class);
+            startActivity(h);
             return true;
         }
 

@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +44,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.newNavigation.About;
 import ie.williamwall.autoreview.newNavigation.ReviewHome;
 import ie.williamwall.autoreview.newNavigation.ShareFacebook;
 import ie.williamwall.autoreview.newNavigation.WeatherReport;
@@ -149,12 +151,40 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    public boolean validate() {
+        boolean valid = true;
+        if (name.getText().toString().isEmpty() || name.length() <10) {
+            name.setError("Title must be at least 10 characters");
+            valid = false;
+        }
+        if (email.getText().toString().isEmpty()|| email.length() <20) {
+            email.setError("Review must be at least 20 characters");
+            valid = false;
+        }
+        if(imageUri == null  )
+        {
+            valid = false;
+        }
+        return valid;
+    }
+
+
     public void uploadData(View view){
-        if(imageUri != null )
+
+
+
+        if(!validate() )
         {            //insert data
 
+            Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
 
 
+
+        }
+
+
+
+        else{
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
@@ -169,7 +199,7 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 //                    gotTheUser = setDataToView(FirebaseUser user);
 
                     final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
-                   String gotIT=   setDataToView(userId);
+                    String gotIT=   setDataToView(userId);
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
 
@@ -206,8 +236,6 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
                             progressDialog.setMessage("Uploaded % "+ (int)totalProgress);
                         }
                     });
-        }else{
-            Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
         }
     }
     public void viewAllData(View view){
@@ -229,7 +257,7 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
 
 //        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
 //        setDataToView(userId2);
@@ -247,10 +275,8 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent move= new Intent(CustomImage.this,CustomImage.class);
-            startActivity(move);
-//            Toast.makeText(HomeNavigation.this, "Deleted Review", Toast.LENGTH_SHORT).show();
-
+            Intent h= new Intent(CustomImage.this,About.class);
+            startActivity(h);
             return true;
         }
 

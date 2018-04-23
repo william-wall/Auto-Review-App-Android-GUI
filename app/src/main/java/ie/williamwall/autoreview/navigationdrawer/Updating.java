@@ -44,6 +44,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.newNavigation.About;
 import ie.williamwall.autoreview.newNavigation.ReviewHome;
 import ie.williamwall.autoreview.newNavigation.ShareFacebook;
 import ie.williamwall.autoreview.newNavigation.WeatherReport;
@@ -219,7 +220,7 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
 
 //        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
 //        setDataToView(userId2);
@@ -237,9 +238,8 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent move= new Intent(Updating.this,CustomImage.class);
-            startActivity(move);
-//            Toast.makeText(HomeNavigation.this, "Deleted Review", Toast.LENGTH_SHORT).show();
+            Intent h= new Intent(Updating.this,About.class);
+            startActivity(h);
 
             return true;
         }
@@ -323,9 +323,34 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
             auth.removeAuthStateListener(authListener);
         }
     }
-    public void uploadData(View view){
-        if(imageUri != null)
+
+    public boolean validate() {
+        boolean valid = true;
+        if (name.getText().toString().isEmpty() || name.length() <10) {
+            name.setError("Title must be at least 10 characters");
+            valid = false;
+        }
+        if (email.getText().toString().isEmpty()|| email.length() <20) {
+            email.setError("Review must be at least 20 characters");
+            valid = false;
+        }
+        if(imageUri == null  )
         {
+            valid = false;
+        }
+        return valid;
+    }
+    public void uploadData(View view){
+
+
+
+        if(!validate())
+        {
+            Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
+
+
+        }else{
+
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
@@ -342,23 +367,9 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-//                    Intent intent = getIntent();
-//                    Person user = (Person) intent.getSerializableExtra("MyClass");
-//                    String UID = getIntent().getStringExtra("message_key3");
-//                final Person user = (Person) adapterView.getItemAtPosition(i);
-//                selectedUser = user;
-//                    final EditText mTitle = (EditText) findViewById(R.id.insertName);
 
-//                    String title = getIntent().getStringExtra("message_key");
-//
-//                    databaseReference.child(user.getUid()).child("name").setValue(title);
-
-//                    Editable title = mTitle.getText();
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-//                    String TIME = user.getUserTime();
-//                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
-//                    databaseReference.child(person.getUid()).setValue(person);
 
                     databaseReference.child(user.getUid()).child("name").setValue(NAME);
 
@@ -367,14 +378,7 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
                     databaseReference.child(user.getUid()).child("imageUri").setValue(taskSnapshot.getDownloadUrl().toString());
                     databaseReference.child(user.getUid()).child("userTime").setValue(currentDateTimeString);
 
-//                    databaseReference.child("name").setValue(NAME);
-//                    databaseReference.child("uid").setValue(UUID.randomUUID().toString());
 
-//
-
-//                    String id = databaseReference.push().getKey();
-//
-//                    databaseReference.child(id).setValue(person);
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
@@ -398,8 +402,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
                     });
             Intent intentMove = new Intent(Updating.this, ReviewHome.class);
             startActivity(intentMove);
-        }else{
-            Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
         }
     }
     public void viewAllData(View view){

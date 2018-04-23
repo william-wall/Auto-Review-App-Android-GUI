@@ -117,7 +117,7 @@ public class WeatherReport extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.testnav, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
         return true;
     }
 
@@ -130,6 +130,8 @@ public class WeatherReport extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+                        Intent h= new Intent(WeatherReport.this,About.class);
+            startActivity(h);
             return true;
         }
 

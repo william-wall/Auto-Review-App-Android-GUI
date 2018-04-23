@@ -131,11 +131,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".newNavigation.ReviewHome"
-            android:label="Auto Review Home"
+
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".newNavigation.ShareFacebook"
-            android:label="@string/title_activity_share_facebook"
+            android:label="Facebook Share"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".newNavigation.About"

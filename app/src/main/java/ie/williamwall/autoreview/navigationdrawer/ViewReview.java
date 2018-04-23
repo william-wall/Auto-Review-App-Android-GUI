@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.newNavigation.About;
 import ie.williamwall.autoreview.newNavigation.ReviewHome;
 import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
@@ -123,7 +124,7 @@ reviewComment.setText(review);
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
         return true;
     }
 
@@ -136,6 +137,8 @@ reviewComment.setText(review);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent h= new Intent(ViewReview.this,About.class);
+            startActivity(h);
             return true;
         }
 

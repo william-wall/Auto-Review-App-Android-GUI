@@ -70,7 +70,7 @@ public class ReviewHome extends AppCompatActivity
         setContentView(R.layout.activity_review_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+toolbar.setLogo(R.drawable.caricon);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

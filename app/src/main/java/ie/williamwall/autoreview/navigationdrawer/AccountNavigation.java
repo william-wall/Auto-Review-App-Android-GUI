@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.newNavigation.About;
 import ie.williamwall.autoreview.newNavigation.ReviewHome;
 import ie.williamwall.autoreview.newNavigation.ShareFacebook;
 import ie.williamwall.autoreview.newNavigation.WeatherReport;
@@ -310,7 +311,7 @@ public class AccountNavigation extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_navigation, menu);
+        getMenuInflater().inflate(R.menu.review_home, menu);
         return true;
     }
 
@@ -323,6 +324,8 @@ public class AccountNavigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent h= new Intent(AccountNavigation.this,About.class);
+            startActivity(h);
             return true;
         }
 
