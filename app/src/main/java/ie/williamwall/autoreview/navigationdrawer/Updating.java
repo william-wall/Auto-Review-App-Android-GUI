@@ -44,16 +44,13 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.ShareFacebook;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
+import ie.williamwall.autoreview.newNavigation.ShareFacebook;
+import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
-import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.review.Review;
 
 public class Updating extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ImageView imageView;

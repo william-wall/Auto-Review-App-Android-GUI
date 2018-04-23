@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="50dp"
-    tools:context=".ReviewHome"
+    tools:context=".newNavigation.ReviewHome"
     tools:showIn="@layout/app_bar_review_home">
 
     <TextView

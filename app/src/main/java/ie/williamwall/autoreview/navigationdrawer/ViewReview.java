@@ -2,12 +2,9 @@ package ie.williamwall.autoreview.navigationdrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,17 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
+import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
-import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.weather.Function;
 
 public class ViewReview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

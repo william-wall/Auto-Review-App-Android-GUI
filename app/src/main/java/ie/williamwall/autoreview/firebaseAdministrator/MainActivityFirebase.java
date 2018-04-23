@@ -19,8 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
 import ie.williamwall.autoreview.review.AdministrationReview;
 import ie.williamwall.autoreview.R;
 

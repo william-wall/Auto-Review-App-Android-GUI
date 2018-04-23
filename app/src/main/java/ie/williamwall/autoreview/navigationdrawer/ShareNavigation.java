@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -47,8 +46,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
+import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 

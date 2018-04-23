@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview;
+package ie.williamwall.autoreview.newNavigation;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,19 +39,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.williamwall.autoreview.facebook.Facebook;
+import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.MyAdapter;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
-import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
-import ie.williamwall.autoreview.navigationdrawer.Settings;
-import ie.williamwall.autoreview.navigationdrawer.ShareNavigation;
 import ie.williamwall.autoreview.navigationdrawer.Updating;
 import ie.williamwall.autoreview.navigationdrawer.ViewReview;
-import ie.williamwall.autoreview.review.Review;
 
 import static ie.williamwall.autoreview.firebaseReview.CustomImage.DATABASE_PATH;
 
@@ -276,6 +271,7 @@ public class ReviewHome extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.review_home, menu);
+
         return true;
     }
 
@@ -288,6 +284,8 @@ public class ReviewHome extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent h= new Intent(ReviewHome.this,About.class);
+            startActivity(h);
             return true;
         }
 

@@ -126,16 +126,20 @@
             android:label="Update Review"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".WeatherReport"
+            android:name=".newNavigation.WeatherReport"
             android:label="Weather Report"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ReviewHome"
+            android:name=".newNavigation.ReviewHome"
             android:label="Auto Review Home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ShareFacebook"
+            android:name=".newNavigation.ShareFacebook"
             android:label="@string/title_activity_share_facebook"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".newNavigation.About"
+            android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -29,12 +28,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.ShareFacebook;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
+import ie.williamwall.autoreview.newNavigation.ShareFacebook;
+import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
-import ie.williamwall.autoreview.home.HomeScreen;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
 

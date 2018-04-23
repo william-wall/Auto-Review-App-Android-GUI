@@ -43,15 +43,12 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.ReviewHome;
-import ie.williamwall.autoreview.ShareFacebook;
-import ie.williamwall.autoreview.WeatherReport;
+import ie.williamwall.autoreview.newNavigation.ReviewHome;
+import ie.williamwall.autoreview.newNavigation.ShareFacebook;
+import ie.williamwall.autoreview.newNavigation.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
-import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
-import ie.williamwall.autoreview.navigationdrawer.Settings;
-import ie.williamwall.autoreview.navigationdrawer.WeatherNavigation;
 
 public class CustomImage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;

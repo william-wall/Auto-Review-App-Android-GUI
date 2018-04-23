@@ -160,5 +160,6 @@
     <string name="title_activity_testnav">testnav</string>
     <string name="title_activity_review_home">ReviewHome</string>
     <string name="title_activity_share_facebook">ShareFacebook</string>
+    <string name="title_activity_about">About</string>
 
 </resources>
