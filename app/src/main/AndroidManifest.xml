@@ -131,6 +131,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".newNavigation.ReviewHome"
+            android:label=""
 
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
