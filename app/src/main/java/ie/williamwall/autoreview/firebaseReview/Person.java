@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 
-/**
- * Created by william on 26/03/2018.
- */
-
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class Person implements Serializable{
 
     String uid;

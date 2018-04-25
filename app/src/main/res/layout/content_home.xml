@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="50dp"
-    tools:context="ie.williamwall.autoreview.navigationdrawer.HomeNavigation"
+    tools:context="ie.williamwall.autoreview.oldNavigationDrawer.HomeNavigation"
     tools:showIn="@layout/app_bar_home">
 
 

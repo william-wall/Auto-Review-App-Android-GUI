@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -28,21 +28,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.newNavigation.About;
-import ie.williamwall.autoreview.newNavigation.ReviewHome;
-import ie.williamwall.autoreview.newNavigation.ShareFacebook;
-import ie.williamwall.autoreview.newNavigation.WeatherReport;
+import ie.williamwall.autoreview.newNavigationDrawer.About;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.ShareFacebook;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.firebaseAdministrator.SignupActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 import ie.williamwall.autoreview.review.AdministrationReview;
-
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class AccountNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    Toolbar toolbar = null;
 
     private Button btnChangePassword, btnRemoveUser, btnContinue,
             changePassword, remove, signOut;
@@ -50,8 +52,7 @@ public class AccountNavigation extends AppCompatActivity
     private EditText oldEmail, password, newPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-// its a good pratice to clean and rebuild your project now and then.
-    // now lets run our app.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +109,7 @@ public class AccountNavigation extends AppCompatActivity
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String sendingUsername = user.getEmail();
                 Intent Intent = new Intent(AccountNavigation.this, ReviewHome.class);
-//                Intent.putExtra("message_key_user", sendingUsername);
                 startActivity(Intent);
             }
         });
@@ -192,13 +191,7 @@ public class AccountNavigation extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -218,20 +211,18 @@ public class AccountNavigation extends AppCompatActivity
     }
 
 
-
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         email.setText("Email: " + user.getEmail());
 
     }
 
-
-    // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -251,7 +242,6 @@ public class AccountNavigation extends AppCompatActivity
 
     };
 
-    //sign out method
     public void signOut() {
         auth.signOut();
 // this listener will be called when there is change in firebase user session
@@ -297,7 +287,6 @@ public class AccountNavigation extends AppCompatActivity
     }
 
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -324,7 +313,7 @@ public class AccountNavigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent h= new Intent(AccountNavigation.this,About.class);
+            Intent h = new Intent(AccountNavigation.this, About.class);
             startActivity(h);
             return true;
         }
@@ -340,19 +329,19 @@ public class AccountNavigation extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(AccountNavigation.this,ReviewHome.class);
+            Intent h = new Intent(AccountNavigation.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(AccountNavigation.this,WeatherReport.class);
+            Intent h = new Intent(AccountNavigation.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(AccountNavigation.this,MapsActivity.class);
+            Intent h = new Intent(AccountNavigation.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(AccountNavigation.this,ShareFacebook.class);
+            Intent h = new Intent(AccountNavigation.this, ShareFacebook.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(AccountNavigation.this,AccountNavigation.class);
+            Intent h = new Intent(AccountNavigation.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -370,7 +359,6 @@ public class AccountNavigation extends AppCompatActivity
                 }
             };
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

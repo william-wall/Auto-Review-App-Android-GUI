@@ -16,7 +16,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,18 +43,18 @@ import java.util.Date;
 import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.newNavigation.About;
-import ie.williamwall.autoreview.newNavigation.ReviewHome;
-import ie.williamwall.autoreview.newNavigation.ShareFacebook;
-import ie.williamwall.autoreview.newNavigation.WeatherReport;
+import ie.williamwall.autoreview.newNavigationDrawer.About;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.ShareFacebook;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
+import ie.williamwall.autoreview.oldNavigationDrawer.AccountNavigation;
 
 public class CustomImage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    Toolbar toolbar = null;
     private FirebaseAuth auth;
 
     ImageView imageView;
@@ -113,7 +112,6 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         View headerView = navigationView.getHeaderView(0);
         userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
@@ -121,7 +119,7 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
         userNameDisplayNav.setText(gotNameNav);
     }
 
-    public void browseImages(View view){
+    public void browseImages(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -131,21 +129,21 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0 && resultCode == RESULT_OK){
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             imageUri = data.getData();
 
-            try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 imageView.setImageBitmap(bitmap);
-            }catch (FileNotFoundException e){
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public String getActualImage(Uri uri){
+    public String getActualImage(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
@@ -153,38 +151,27 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 
     public boolean validate() {
         boolean valid = true;
-        if (name.getText().toString().isEmpty() || name.length() <10) {
+        if (name.getText().toString().isEmpty() || name.length() < 10) {
             name.setError("Title must be at least 10 characters");
             valid = false;
         }
-        if (email.getText().toString().isEmpty()|| email.length() <20) {
+        if (email.getText().toString().isEmpty() || email.length() < 20) {
             email.setError("Review must be at least 20 characters");
             valid = false;
         }
-        if(imageUri == null  )
-        {
+        if (imageUri == null) {
             valid = false;
         }
         return valid;
     }
 
 
-    public void uploadData(View view){
+    public void uploadData(View view) {
 
 
-
-        if(!validate() )
-        {            //insert data
-
+        if (!validate()) {
             Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
-
-
-
-        }
-
-
-
-        else{
+        } else {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
@@ -193,31 +180,16 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
             reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-
-//                    String gotTheUser="";
-//                    gotTheUser = setDataToView(FirebaseUser user);
-
                     final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
-                    String gotIT=   setDataToView(userId);
+                    String gotIT = setDataToView(userId);
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-
-
-//                    String USERNAME =
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString(), gotIT, currentDateTimeString);
-
+                    Person person = new Person(UUID.randomUUID().toString(), NAME, EMAIL, taskSnapshot.getDownloadUrl().toString(), gotIT, currentDateTimeString);
                     databaseReference.child(person.getUid()).setValue(person);
-
-//                    String id = databaseReference.push().getKey();
-//
-//                    databaseReference.child(id).setValue(person);
-
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
-                    Intent move= new Intent(CustomImage.this,ReviewHome.class);
+                    Intent move = new Intent(CustomImage.this, ReviewHome.class);
                     startActivity(move);
                 }
             })
@@ -232,13 +204,14 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
                         @SuppressWarnings("VisibleForTests")
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double totalProgress = (100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded % "+ (int)totalProgress);
+                            double totalProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage("Uploaded % " + (int) totalProgress);
                         }
                     });
         }
     }
-    public void viewAllData(View view){
+
+    public void viewAllData(View view) {
         Intent intent = new Intent(CustomImage.this, ReviewHome.class);
         startActivity(intent);
 
@@ -258,11 +231,6 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.review_home, menu);
-
-//        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
-//        setDataToView(userId2);
-
-
         return true;
     }
 
@@ -275,11 +243,10 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent h= new Intent(CustomImage.this,About.class);
+            Intent h = new Intent(CustomImage.this, About.class);
             startActivity(h);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -290,19 +257,19 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(CustomImage.this,ReviewHome.class);
+            Intent h = new Intent(CustomImage.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(CustomImage.this,WeatherReport.class);
+            Intent h = new Intent(CustomImage.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(CustomImage.this,MapsActivity.class);
+            Intent h = new Intent(CustomImage.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(CustomImage.this,ShareFacebook.class);
+            Intent h = new Intent(CustomImage.this, ShareFacebook.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(CustomImage.this,AccountNavigation.class);
+            Intent h = new Intent(CustomImage.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -320,7 +287,6 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
                 }
             };
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -346,14 +312,16 @@ public class CustomImage extends AppCompatActivity implements NavigationView.OnN
 
     @SuppressLint("SetTextI18n")
     private String setDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String setDataString = user.getEmail();
+        return setDataString;
     }
+
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
+
     @Override
     public void onStart() {
         super.onStart();

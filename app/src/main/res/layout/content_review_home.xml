@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="50dp"
-    tools:context=".newNavigation.ReviewHome"
+    tools:context=".newNavigationDrawer.ReviewHome"
     tools:showIn="@layout/app_bar_review_home">
 
     <TextView
@@ -56,7 +56,7 @@
         android:id="@+id/list1"
 
         android:layout_width="403dp"
-        android:layout_height="551dp"
+        android:layout_height="540dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -67,5 +67,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.649" />
-
 </android.support.constraint.ConstraintLayout>

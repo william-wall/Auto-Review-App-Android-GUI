@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.text.DateFormat;
 import java.util.Date;
 
-import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
+import ie.williamwall.autoreview.oldNavigationDrawer.HomeNavigation;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.MainActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;

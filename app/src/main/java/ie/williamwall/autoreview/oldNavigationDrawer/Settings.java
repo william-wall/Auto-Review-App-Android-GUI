@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -46,24 +46,24 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.newNavigation.ReviewHome;
-import ie.williamwall.autoreview.newNavigation.WeatherReport;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
 
-public class ShareNavigation extends AppCompatActivity
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
+public class Settings extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
-
-
+    Toolbar toolbar = null;
     private FirebaseAuth auth;
-    TextView userNameDisplayNav;
-    private static final int REQUEST_VIDEO_CODE =1000 ;
+
+    private static final int REQUEST_VIDEO_CODE = 1000;
     Button btnShareLink;
-    //            btnSharePhoto, btnShareVideo;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -73,8 +73,7 @@ public class ShareNavigation extends AppCompatActivity
             SharePhoto sharePhoto = new SharePhoto.Builder()
                     .setBitmap(bitmap)
                     .build();
-            if(ShareDialog.canShow(SharePhotoContent.class))
-            {
+            if (ShareDialog.canShow(SharePhotoContent.class)) {
                 SharePhotoContent content = new SharePhotoContent.Builder()
                         .addPhoto(sharePhoto)
                         .build();
@@ -97,14 +96,29 @@ public class ShareNavigation extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        setContentView(R.layout.activity_slideshow);
+        setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        auth = FirebaseAuth.getInstance();
 
-        btnShareLink = (Button)findViewById(R.id.btnShareLink);
-//        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
-//        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
+        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
+        setDataToView(userId);
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                    finish();
+                }
+            }
+        };
+        btnShareLink = (Button) findViewById(R.id.btnShareLink);
+
 
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
@@ -115,105 +129,35 @@ public class ShareNavigation extends AppCompatActivity
                 shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
                     @Override
                     public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(ShareNavigation.this, "Share Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Share Successful", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(ShareNavigation.this, "Share Cancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Share Cancel", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        Toast.makeText(ShareNavigation.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
+
                 ShareLinkContent linkContent = new ShareLinkContent.Builder()
                         .setQuote("Hey, Check out this app it is really cool!")
                         .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.wapit.carbuzz"))
                         .build();
-                if(ShareDialog.canShow(ShareLinkContent.class))
-                {
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
                     shareDialog.show(linkContent);
                 }
             }
         });
 
-//        btnSharePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-//                    @Override
-//                    public void onSuccess(Sharer.Result result) {
-//                        Toast.makeText(ShareNavigation.this, "Share Successful", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        Toast.makeText(ShareNavigation.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException error) {
-//                        Toast.makeText(ShareNavigation.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//
-//                Picasso.with(getBaseContext())
-//                        .load("http://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg")
-//                        .into(target);
-//
-////                                        Toast.makeText(Facebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//        btnShareVideo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("video/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select video"), REQUEST_VIDEO_CODE);
-//            }
-//        });
-
-
-        //We dont need this.
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
-        auth = FirebaseAuth.getInstance();
-
-        final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
-        setDataToView(userId);
-
-
-        authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
-                    startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
-                    finish();
-                }
-            }
-        };
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -224,17 +168,24 @@ public class ShareNavigation extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
+
+        TextView userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
     }
+
+
+    @SuppressLint("SetTextI18n")
+    private String getDataToView(FirebaseUser user) {
+        String getDataString = user.getEmail();
+        return getDataString;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK)
-        {
-            if(requestCode == REQUEST_VIDEO_CODE)
-            {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_VIDEO_CODE) {
                 Uri selectedVideo = data.getData();
 
                 ShareVideo video = new ShareVideo.Builder()
@@ -242,32 +193,32 @@ public class ShareNavigation extends AppCompatActivity
                         .build();
 
                 ShareVideoContent videoContent = new ShareVideoContent.Builder()
-                        .setContentTitle("Auto Review is great!")
-                        .setContentDescription("Autos App")
+                        .setContentTitle("This is a useful video")
+                        .setContentDescription("Youtube video")
                         .setVideo(video)
                         .build();
 
-                if(shareDialog.canShow(ShareVideoContent.class))
+                if (shareDialog.canShow(ShareVideoContent.class))
                     shareDialog.show(videoContent);
             }
         }
     }
 
     private void printKeyHash() {
-        try{
+        try {
             PackageInfo info = getPackageManager().getPackageInfo("ie.williamwall.autoreview", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures)
-            {
+            for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(),Base64.DEFAULT));
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        }catch (PackageManager.NameNotFoundException e){
+        } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-        }catch (NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -300,27 +251,26 @@ public class ShareNavigation extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
-        @SuppressWarnings("StatementWithEmptyBody")
-        @Override
-        public boolean onNavigationItemSelected(MenuItem item) {
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h = new Intent(ShareNavigation.this, ReviewHome.class);
+            Intent h = new Intent(Settings.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h = new Intent(ShareNavigation.this, WeatherReport.class);
+            Intent h = new Intent(Settings.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h = new Intent(ShareNavigation.this, MapsActivity.class);
+            Intent h = new Intent(Settings.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h = new Intent(ShareNavigation.this, ShareNavigation.class);
+            Intent h = new Intent(Settings.this, Settings.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h = new Intent(ShareNavigation.this, AccountNavigation.class);
+            Intent h = new Intent(Settings.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -332,57 +282,55 @@ public class ShareNavigation extends AppCompatActivity
                     if (user == null) {
                         // user auth state is changed - user is null
                         // launch login activity
-                        startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
+                        startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
                         finish();
                     }
                 }
             };
         }
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        }
-        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
-                    startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
-                    finish();
-                } else {
-                    setDataToView(user);
 
-                }
-            }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
-
-        };
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
         @Override
-        public void onStart () {
-            super.onStart();
-            auth.addAuthStateListener(authListener);
-        }
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(Settings.this, LoginActivityFirebase.class));
+                finish();
+            } else {
+                setDataToView(user);
 
-        @Override
-        public void onStop () {
-            super.onStop();
-            if (authListener != null) {
-                auth.removeAuthStateListener(authListener);
             }
         }
+
+
+    };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
+
 
     }
-    @SuppressLint("SetTextI18n")
-    private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
-    }
-    }
+}

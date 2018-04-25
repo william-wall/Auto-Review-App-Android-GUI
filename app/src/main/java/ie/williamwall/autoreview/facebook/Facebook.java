@@ -33,7 +33,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ie.williamwall.autoreview.R;
-
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class Facebook extends AppCompatActivity {
 
     private static final int REQUEST_VIDEO_CODE =1000 ;
@@ -140,7 +142,6 @@ public class Facebook extends AppCompatActivity {
                         .load("http://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg")
                         .into(target);
 
-//                                        Toast.makeText(Facebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -155,7 +156,6 @@ public class Facebook extends AppCompatActivity {
             }
         });
 
-//        printKeyHash();
     }
 
 

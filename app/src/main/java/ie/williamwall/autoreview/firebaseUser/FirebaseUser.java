@@ -24,6 +24,9 @@ import java.util.UUID;
 
 import ie.williamwall.autoreview.R;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class FirebaseUser extends AppCompatActivity {
 
     private EditText input_name, input_email;
@@ -63,14 +66,11 @@ public class FirebaseUser extends AppCompatActivity {
         initFirebase();
         addEventFirebaseListner();
 
-
     }
 
     private void addEventFirebaseListner() {
         circular_progress.setVisibility(View.VISIBLE);
-
         list_data.setVisibility(View.INVISIBLE);
-
         mDatabaseReferenceUser.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -112,16 +112,13 @@ public class FirebaseUser extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add) {
             createUser();
-        }
-        else if(item.getItemId()==R.id.menu_save)
-        {
-            UserInstanceFirebase user = new UserInstanceFirebase(selectedUser.getUid(),input_name.getText().toString(),input_email.getText().toString());
+        } else if (item.getItemId() == R.id.menu_save) {
+            UserInstanceFirebase user = new UserInstanceFirebase(selectedUser.getUid(), input_name.getText().toString(), input_email.getText().toString());
             updateUser(user);
-        }
-        else if(item.getItemId() == R.id.menu_remove){
+        } else if (item.getItemId() == R.id.menu_remove) {
             deleteUser(selectedUser);
         }
-            return true;
+        return true;
     }
 
     private void deleteUser(UserInstanceFirebase selectedUser) {
@@ -137,9 +134,8 @@ public class FirebaseUser extends AppCompatActivity {
     }
 
 
-    private void createUser()
-    {
-        UserInstanceFirebase user = new UserInstanceFirebase(UUID.randomUUID().toString(),input_name.getText().toString(),input_email.getText().toString());
+    private void createUser() {
+        UserInstanceFirebase user = new UserInstanceFirebase(UUID.randomUUID().toString(), input_name.getText().toString(), input_email.getText().toString());
         mDatabaseReferenceUser.child("users").child(user.getUid()).setValue(user);
         clearEditText();
     }

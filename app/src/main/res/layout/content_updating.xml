@@ -7,7 +7,7 @@
     android:orientation="vertical"
 android:paddingTop="55dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ie.williamwall.autoreview.navigationdrawer.Updating"
+    tools:context="ie.williamwall.autoreview.oldNavigationDrawer.Updating"
     tools:showIn="@layout/app_bar_home">
 
     <Button

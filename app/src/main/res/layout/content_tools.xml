@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="50dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ie.williamwall.autoreview.navigationdrawer.AccountNavigation"
+    tools:context="ie.williamwall.autoreview.oldNavigationDrawer.AccountNavigation"
     tools:showIn="@layout/app_bar_home">
 
     <EditText

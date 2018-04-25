@@ -1,13 +1,18 @@
-package ie.williamwall.autoreview.newNavigation;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +29,7 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
@@ -36,13 +42,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import ie.williamwall.autoreview.R;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
-
-public class ShareFacebook extends AppCompatActivity
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
+public class ShareNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar=null;
+
+
     private FirebaseAuth auth;
     TextView userNameDisplayNav;
     private static final int REQUEST_VIDEO_CODE =1000 ;
@@ -76,16 +94,17 @@ public class ShareFacebook extends AppCompatActivity
 
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share_facebook);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        setContentView(R.layout.activity_slideshow);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        btnShareLink = (Button)findViewById(R.id.btnShareLink);
 
-//        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
-//        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
+
+        btnShareLink = (Button)findViewById(R.id.btnShareLink);
 
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
@@ -96,18 +115,18 @@ public class ShareFacebook extends AppCompatActivity
                 shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
                     @Override
                     public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(ShareFacebook.this, "Share Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShareNavigation.this, "Share Successful", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(ShareFacebook.this, "Share Cancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShareNavigation.this, "Share Cancel", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        Toast.makeText(ShareFacebook.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShareNavigation.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -121,6 +140,9 @@ public class ShareFacebook extends AppCompatActivity
                 }
             }
         });
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
         auth = FirebaseAuth.getInstance();
@@ -136,20 +158,20 @@ public class ShareFacebook extends AppCompatActivity
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
+                    startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
                     finish();
                 }
             }
         };
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         View headerView = navigationView.getHeaderView(0);
         userNameDisplayNav = (TextView) headerView.findViewById(R.id.usersNameNav);
         final FirebaseUser userNav = FirebaseAuth.getInstance().getCurrentUser();
@@ -179,6 +201,22 @@ public class ShareFacebook extends AppCompatActivity
             }
         }
     }
+
+    private void printKeyHash() {
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo("ie.williamwall.autoreview", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures)
+            {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(),Base64.DEFAULT));
+            }
+        }catch (PackageManager.NameNotFoundException e){
+            e.printStackTrace();
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -192,7 +230,7 @@ public class ShareFacebook extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review_home, menu);
+        getMenuInflater().inflate(R.menu.home_navigation, menu);
         return true;
     }
 
@@ -205,34 +243,33 @@ public class ShareFacebook extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent h= new Intent(ShareFacebook.this,About.class);
-            startActivity(h);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+
+        @SuppressWarnings("StatementWithEmptyBody")
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(ShareFacebook.this,ReviewHome.class);
+            Intent h = new Intent(ShareNavigation.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(ShareFacebook.this,WeatherReport.class);
+            Intent h = new Intent(ShareNavigation.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(ShareFacebook.this,MapsActivity.class);
+            Intent h = new Intent(ShareNavigation.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(ShareFacebook.this,ShareFacebook.class);
+            Intent h = new Intent(ShareNavigation.this, ShareNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(ShareFacebook.this,AccountNavigation.class);
+            Intent h = new Intent(ShareNavigation.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -244,57 +281,55 @@ public class ShareFacebook extends AppCompatActivity
                     if (user == null) {
                         // user auth state is changed - user is null
                         // launch login activity
-                        startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
+                        startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
                         finish();
                     }
                 }
             };
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user == null) {
-                // user auth state is changed - user is null
-                // launch login activity
-                startActivity(new Intent(ShareFacebook.this, LoginActivityFirebase.class));
-                finish();
-            } else {
-                setDataToView(user);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(ShareNavigation.this, LoginActivityFirebase.class));
+                    finish();
+                } else {
+                    setDataToView(user);
 
+                }
+            }
+
+
+        };
+        @Override
+        public void onStart () {
+            super.onStart();
+            auth.addAuthStateListener(authListener);
+        }
+
+        @Override
+        public void onStop () {
+            super.onStop();
+            if (authListener != null) {
+                auth.removeAuthStateListener(authListener);
             }
         }
-
-
-    };
-    @Override
-    public void onStart () {
-        super.onStart();
-        auth.addAuthStateListener(authListener);
-    }
-
-    @Override
-    public void onStop () {
-        super.onStop();
-        if (authListener != null) {
-            auth.removeAuthStateListener(authListener);
-        }
-    }
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
 
     }
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
-}
+    }

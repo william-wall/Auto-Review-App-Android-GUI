@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -44,33 +44,26 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.newNavigation.About;
-import ie.williamwall.autoreview.newNavigation.ReviewHome;
-import ie.williamwall.autoreview.newNavigation.ShareFacebook;
-import ie.williamwall.autoreview.newNavigation.WeatherReport;
+import ie.williamwall.autoreview.newNavigationDrawer.About;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.ShareFacebook;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
-import ie.williamwall.autoreview.firebaseReview.CustomImage;
 import ie.williamwall.autoreview.firebaseReview.Person;
 import ie.williamwall.autoreview.maps.MapsActivity;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class Updating extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ImageView imageView;
     EditText name, email;
     private Person selectedUser;
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    Toolbar toolbar = null;
     private FirebaseAuth auth;
     TextView userNameDisplayNav;
-
-//    Person user;
-//
-//   public void setPerson(Person user)
-//   {
-//       this.user = user;
-//
-//
-//   }
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -91,7 +84,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference(DATABASE_PATH);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
@@ -133,41 +125,16 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
 
-
-
-//        Person user = (Person) getIntent().getParcelableExtra("MyClass");
-//
-//       String title = user.getName();
-//        String review=  user.getEmail();
-
         String title = getIntent().getStringExtra("message_key");
         String review = getIntent().getStringExtra("message_key2");
 
-
-
-//String title =  user.getName();
-//
-//String review =user.getEmail();
-//
         name.setText(title);
         email.setText(review);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
-    public void browseImages(View view){
+    public void browseImages(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -177,31 +144,33 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0 && resultCode == RESULT_OK){
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             imageUri = data.getData();
 
-            try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 imageView.setImageBitmap(bitmap);
-            }catch (FileNotFoundException e){
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
+
 
     }
+
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
         String jjjj = user.getEmail();
         return jjjj;
     }
-    public String getActualImage(Uri uri){
+
+    public String getActualImage(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
@@ -222,10 +191,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.review_home, menu);
 
-//        final FirebaseUser userId2 = FirebaseAuth.getInstance().getCurrentUser();
-//        setDataToView(userId2);
-
-
         return true;
     }
 
@@ -238,7 +203,7 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent h= new Intent(Updating.this,About.class);
+            Intent h = new Intent(Updating.this, About.class);
             startActivity(h);
 
             return true;
@@ -254,19 +219,19 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(Updating.this,ReviewHome.class);
+            Intent h = new Intent(Updating.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(Updating.this,WeatherReport.class);
+            Intent h = new Intent(Updating.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(Updating.this,MapsActivity.class);
+            Intent h = new Intent(Updating.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(Updating.this,ShareFacebook.class);
+            Intent h = new Intent(Updating.this, ShareFacebook.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(Updating.this,AccountNavigation.class);
+            Intent h = new Intent(Updating.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -284,7 +249,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
                 }
             };
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -310,6 +274,7 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
 
     };
+
     @Override
     public void onStart() {
         super.onStart();
@@ -326,30 +291,28 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
 
     public boolean validate() {
         boolean valid = true;
-        if (name.getText().toString().isEmpty() || name.length() <10) {
+        if (name.getText().toString().isEmpty() || name.length() < 10) {
             name.setError("Title must be at least 10 characters");
             valid = false;
         }
-        if (email.getText().toString().isEmpty()|| email.length() <20) {
+        if (email.getText().toString().isEmpty() || email.length() < 20) {
             email.setError("Review must be at least 20 characters");
             valid = false;
         }
-        if(imageUri == null  )
-        {
+        if (imageUri == null) {
             valid = false;
         }
         return valid;
     }
-    public void uploadData(View view){
+
+    public void uploadData(View view) {
 
 
-
-        if(!validate())
-        {
+        if (!validate()) {
             Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
 
 
-        }else{
+        } else {
 
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -379,7 +342,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
                     databaseReference.child(user.getUid()).child("userTime").setValue(currentDateTimeString);
 
 
-
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
                 }
@@ -395,8 +357,8 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
                         @SuppressWarnings("VisibleForTests")
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double totalProgress = (100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded % "+ (int)totalProgress);
+                            double totalProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage("Uploaded % " + (int) totalProgress);
 
                         }
                     });
@@ -404,14 +366,15 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(intentMove);
         }
     }
-    public void viewAllData(View view){
+
+    public void viewAllData(View view) {
         Intent intent = new Intent(Updating.this, ReviewHome.class);
         startActivity(intent);
 
     }
-    public void deleteInstance(View view){
 
-//        databaseReference.child(user.getUid()).child("name").setValue(NAME);
+    public void deleteInstance(View view) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(Updating.this);
         builder.setTitle("Confirm");
         builder.setMessage("Are you sure you want to delete?");
@@ -433,10 +396,6 @@ public class Updating extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
         builder.show();
-
-
-
-
 
 
     }

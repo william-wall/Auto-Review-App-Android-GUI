@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import ie.williamwall.autoreview.R;
-
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class MapsNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,29 +25,12 @@ public class MapsNavigation extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar=null;
 
-//    private GoogleMap mMap;
-//    private GpsTracker gpsTracker;
-//    private Location mLocation;
-//    double latitude, longitude;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//
-//        gpsTracker = new GpsTracker(getApplicationContext());
-//        mLocation = gpsTracker.getLocation();
-//        latitude = mLocation.getLatitude();
-//        longitude = mLocation.getLongitude();
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
-//        //We dont need this.
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +105,6 @@ public class MapsNavigation extends AppCompatActivity
                 Intent g= new Intent(MapsNavigation.this,MapsNavigation.class);
                 startActivity(g);
                 break;
-//            case R.id.nav_slideshow:
-//                Intent s= new Intent(MapsNavigation.this,ShareNavigation.class);
-//                startActivity(s);
             case R.id.nav_settings:
                 Intent se= new Intent(MapsNavigation.this,Settings.class);
                 startActivity(se);
@@ -131,13 +113,7 @@ public class MapsNavigation extends AppCompatActivity
                 Intent t= new Intent(MapsNavigation.this,AccountNavigation.class);
                 startActivity(t);
                 break;
-
-            // after this lets start copying the above.
-            // FOLLOW MEEEEE>>>
-            //copy this now.
         }
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

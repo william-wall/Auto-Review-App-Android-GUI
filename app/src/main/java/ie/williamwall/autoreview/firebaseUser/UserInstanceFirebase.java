@@ -1,8 +1,8 @@
 package ie.williamwall.autoreview.firebaseUser;
 
-/**
- * Created by william on 27/03/2018.
- */
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 
 public class UserInstanceFirebase {
 

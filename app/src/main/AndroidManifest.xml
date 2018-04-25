@@ -94,52 +94,52 @@
         <activity android:name=".facebook.Facebook" />
         <activity android:name=".navigation.Navigation" />
         <activity
-            android:name=".navigationdrawer.HomeNavigation"
+            android:name=".oldNavigationDrawer.HomeNavigation"
             android:label="Home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.WeatherNavigation"
+            android:name=".oldNavigationDrawer.WeatherNavigation"
             android:label="Weather"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.MapsNavigation"
+            android:name=".oldNavigationDrawer.MapsNavigation"
             android:label="Location"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.ShareNavigation"
+            android:name=".oldNavigationDrawer.ShareNavigation"
             android:label="Slideshow"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.Settings"
+            android:name=".oldNavigationDrawer.Settings"
             android:label="Share"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.AccountNavigation"
+            android:name=".oldNavigationDrawer.AccountNavigation"
             android:label="Account Settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.ViewReview"
+            android:name=".oldNavigationDrawer.ViewReview"
             android:label="View Review"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".navigationdrawer.Updating"
+            android:name=".oldNavigationDrawer.Updating"
             android:label="Update Review"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".newNavigation.WeatherReport"
+            android:name=".newNavigationDrawer.WeatherReport"
             android:label="Weather Report"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".newNavigation.ReviewHome"
+            android:name=".newNavigationDrawer.ReviewHome"
             android:label=""
 
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".newNavigation.ShareFacebook"
+            android:name=".newNavigationDrawer.ShareFacebook"
             android:label="Facebook Share"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".newNavigation.About"
+            android:name=".newNavigationDrawer.About"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

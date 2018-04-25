@@ -1,4 +1,4 @@
-package ie.williamwall.autoreview.newNavigation;
+package ie.williamwall.autoreview.newNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,9 +24,12 @@ import com.google.firebase.auth.FirebaseUser;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
+import ie.williamwall.autoreview.oldNavigationDrawer.AccountNavigation;
 import ie.williamwall.autoreview.weather.Function;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class WeatherReport extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth auth;
@@ -99,11 +102,13 @@ public class WeatherReport extends AppCompatActivity
         String gotNameNav = getDataToView(userNav);
         userNameDisplayNav.setText(gotNameNav);
     }
+
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,7 +135,7 @@ public class WeatherReport extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-                        Intent h= new Intent(WeatherReport.this,About.class);
+            Intent h = new Intent(WeatherReport.this, About.class);
             startActivity(h);
             return true;
         }
@@ -145,19 +150,19 @@ public class WeatherReport extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent h= new Intent(WeatherReport.this,ReviewHome.class);
+            Intent h = new Intent(WeatherReport.this, ReviewHome.class);
             startActivity(h);
         } else if (id == R.id.nav_gallery) {
-            Intent h= new Intent(WeatherReport.this,WeatherReport.class);
+            Intent h = new Intent(WeatherReport.this, WeatherReport.class);
             startActivity(h);
         } else if (id == R.id.nav_slideshow) {
-            Intent h= new Intent(WeatherReport.this,MapsActivity.class);
+            Intent h = new Intent(WeatherReport.this, MapsActivity.class);
             startActivity(h);
         } else if (id == R.id.nav_manage) {
-            Intent h= new Intent(WeatherReport.this,ShareFacebook.class);
+            Intent h = new Intent(WeatherReport.this, ShareFacebook.class);
             startActivity(h);
         } else if (id == R.id.nav_share) {
-            Intent h= new Intent(WeatherReport.this,AccountNavigation.class);
+            Intent h = new Intent(WeatherReport.this, AccountNavigation.class);
             startActivity(h);
         } else if (id == R.id.nav_send) {
             auth.signOut();
@@ -180,6 +185,7 @@ public class WeatherReport extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -198,6 +204,7 @@ public class WeatherReport extends AppCompatActivity
 
 
     };
+
     @Override
     public void onStart() {
         super.onStart();
@@ -211,10 +218,10 @@ public class WeatherReport extends AppCompatActivity
             auth.removeAuthStateListener(authListener);
         }
     }
+
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
+
 
     }
 }

@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import ie.williamwall.autoreview.notInUse.Location;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.notInUse.WeatherFrag;
-
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class Navigation extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;

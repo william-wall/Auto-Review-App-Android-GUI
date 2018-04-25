@@ -1,13 +1,10 @@
-package ie.williamwall.autoreview.navigationdrawer;
+package ie.williamwall.autoreview.oldNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,19 +15,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.newNavigation.About;
-import ie.williamwall.autoreview.newNavigation.ReviewHome;
-import ie.williamwall.autoreview.weather.Function;
-
-public class WeatherNavigation extends AppCompatActivity
+import ie.williamwall.autoreview.newNavigationDrawer.About;
+import ie.williamwall.autoreview.newNavigationDrawer.ReviewHome;
+import ie.williamwall.autoreview.newNavigationDrawer.ShareFacebook;
+import ie.williamwall.autoreview.newNavigationDrawer.WeatherReport;
+import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
+public class ViewReview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -38,16 +37,19 @@ public class WeatherNavigation extends AppCompatActivity
     Toolbar toolbar=null;
     private FirebaseAuth auth;
 
-    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
-    Typeface weatherFont;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import);
+        setContentView(R.layout.activity_viewreview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
+
+        TextView reviewTitle = (TextView) findViewById(R.id.reviewTitleData);
+        TextView reviewComment = (TextView) findViewById(R.id.reviewCommentData);
+
 
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(userId);
@@ -60,47 +62,21 @@ public class WeatherNavigation extends AppCompatActivity
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
+                    startActivity(new Intent(ViewReview.this, LoginActivityFirebase.class));
                     finish();
                 }
             }
         };
 
-        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
-        cityField = (TextView) findViewById(R.id.city_field);
-        updatedField = (TextView) findViewById(R.id.updated_field);
-        detailsField = (TextView) findViewById(R.id.details_field);
-        currentTemperatureField = (TextView) findViewById(R.id.current_temperature_field);
-        humidity_field = (TextView) findViewById(R.id.humidity_field);
-        pressure_field = (TextView) findViewById(R.id.pressure_field);
-        weatherIcon = (TextView) findViewById(R.id.weather_icon);
-        weatherIcon.setTypeface(weatherFont);
-        Function.placeIdTask asyncTask = new Function.placeIdTask(new Function.AsyncResponse() {
-            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
-                cityField.setText(weather_city);
-                updatedField.setText(weather_updatedOn);
-                detailsField.setText(weather_description);
-                currentTemperatureField.setText(weather_temperature);
-                humidity_field.setText("Humidity: " + weather_humidity);
-                pressure_field.setText("Pressure: " + weather_pressure);
-                weatherIcon.setText(Html.fromHtml(weather_iconText));
-            }
-        });
-        asyncTask.execute("52.245036", "-7.136621");
 
+        String title = getIntent().getStringExtra("message_title");
+        String review = getIntent().getStringExtra("message_comment");
 
-        //We dont need this.
-
+reviewTitle.setText(title);
+reviewComment.setText(review);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -110,8 +86,6 @@ public class WeatherNavigation extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         View headerView = navigationView.getHeaderView(0);
 
@@ -125,11 +99,9 @@ public class WeatherNavigation extends AppCompatActivity
 
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
-
-
 
 
     @Override
@@ -158,7 +130,7 @@ public class WeatherNavigation extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent h= new Intent(WeatherNavigation.this,About.class);
+            Intent h= new Intent(ViewReview.this,About.class);
             startActivity(h);
             return true;
         }
@@ -170,54 +142,38 @@ public class WeatherNavigation extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
 
-            case R.id.nav_home:
-//                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-
-                Intent h= new Intent(WeatherNavigation.this,HomeNavigation.class);
-                startActivity(h);
-                break;
-            case R.id.nav_import:
-                Intent i= new Intent(WeatherNavigation.this,WeatherNavigation.class);
-                startActivity(i);
-                break;
-            case R.id.nav_gallery:
-                Intent g= new Intent(WeatherNavigation.this,MapsActivity.class);
-                startActivity(g);
-                break;
-//            case R.id.nav_slideshow:
-//                Intent s= new Intent(WeatherNavigation.this,ShareNavigation.class);
-//                startActivity(s);
-            case R.id.nav_settings:
-                Intent se= new Intent(WeatherNavigation.this,Settings.class);
-                startActivity(se);
-                break;
-            case R.id.nav_tools:
-                Intent t= new Intent(WeatherNavigation.this,AccountNavigation.class);
-                startActivity(t);
-                break;
-            case R.id.nav_logout:
-                auth.signOut();
+        if (id == R.id.nav_camera) {
+            Intent h= new Intent(ViewReview.this,ReviewHome.class);
+            startActivity(h);
+        } else if (id == R.id.nav_gallery) {
+            Intent h= new Intent(ViewReview.this,WeatherReport.class);
+            startActivity(h);
+        } else if (id == R.id.nav_slideshow) {
+            Intent h= new Intent(ViewReview.this,MapsActivity.class);
+            startActivity(h);
+        } else if (id == R.id.nav_manage) {
+            Intent h= new Intent(ViewReview.this,ShareFacebook.class);
+            startActivity(h);
+        } else if (id == R.id.nav_share) {
+            Intent h= new Intent(ViewReview.this,AccountNavigation.class);
+            startActivity(h);
+        } else if (id == R.id.nav_send) {
+            auth.signOut();
 // this listener will be called when there is change in firebase user session
-                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user == null) {
-                            // user auth state is changed - user is null
-                            // launch login activity
-                            startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
-                            finish();
-                        }
+            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        // user auth state is changed - user is null
+                        // launch login activity
+                        startActivity(new Intent(ViewReview.this, LoginActivityFirebase.class));
+                        finish();
                     }
-                };
-                break;
-            // after this lets start copying the above.
-            // FOLLOW MEEEEE>>>
-            //copy this now.
+                }
+            };
         }
 
 
@@ -235,7 +191,7 @@ public class WeatherNavigation extends AppCompatActivity
             if (user == null) {
                 // user auth state is changed - user is null
                 // launch login activity
-                startActivity(new Intent(WeatherNavigation.this, LoginActivityFirebase.class));
+                startActivity(new Intent(ViewReview.this, LoginActivityFirebase.class));
                 finish();
             } else {
                 setDataToView(user);
@@ -260,8 +216,6 @@ public class WeatherNavigation extends AppCompatActivity
     }
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
 
     }
 }

@@ -1,11 +1,10 @@
-package ie.williamwall.autoreview.newNavigation;
+package ie.williamwall.autoreview.newNavigationDrawer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,8 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import ie.williamwall.autoreview.R;
 import ie.williamwall.autoreview.firebaseAdministrator.LoginActivityFirebase;
 import ie.williamwall.autoreview.maps.MapsActivity;
-import ie.williamwall.autoreview.navigationdrawer.AccountNavigation;
-
+import ie.williamwall.autoreview.oldNavigationDrawer.AccountNavigation;
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class About extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth auth;
@@ -40,7 +41,6 @@ public class About extends AppCompatActivity
 
         final FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(userId);
-
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -74,8 +74,8 @@ public class About extends AppCompatActivity
     }
     @SuppressLint("SetTextI18n")
     private String getDataToView(FirebaseUser user) {
-        String jjjj = user.getEmail();
-        return jjjj;
+        String getDataString = user.getEmail();
+        return getDataString;
     }
     @Override
     public void onBackPressed() {
@@ -105,8 +105,6 @@ public class About extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            Intent h= new Intent(About.this,About.class);
-//            startActivity(h);
 
             return true;
         }
@@ -191,8 +189,7 @@ public class About extends AppCompatActivity
     }
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-//        userNameDisplay.setText(user.getEmail());
-//        userNameDisplayNav.setText(user.getEmail());
+
 
     }
 }

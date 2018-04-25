@@ -32,23 +32,16 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import ie.williamwall.autoreview.R;
-import ie.williamwall.autoreview.navigationdrawer.HomeNavigation;
-import ie.williamwall.autoreview.review.AdministrationReview;
-import ie.williamwall.autoreview.review.Review;
+import ie.williamwall.autoreview.oldNavigationDrawer.HomeNavigation;
 
+// Designed and Developed @ William Wall
+// Email @ william@williamwall.ie
+// GitHub @ https://github.com/william-wall/Auto-Review-App-Android-GUI
 public class UpdatingReviewImage extends AppCompatActivity {
     ImageView imageView;
     EditText name, email;
     private Person selectedUser;
 
-//    Person user;
-//
-//   public void setPerson(Person user)
-//   {
-//       this.user = user;
-//
-//
-//   }
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -69,42 +62,14 @@ public class UpdatingReviewImage extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference(DATABASE_PATH);
 
-
-
-
-//        Person user = (Person) getIntent().getParcelableExtra("MyClass");
-//
-//       String title = user.getName();
-//        String review=  user.getEmail();
-
         String title = getIntent().getStringExtra("message_key");
         String review = getIntent().getStringExtra("message_key2");
 
-
-
-//String title =  user.getName();
-//
-//String review =user.getEmail();
-//
-                name.setText(title);
-                email.setText(review);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        name.setText(title);
+        email.setText(review);
     }
 
-    public void browseImages(View view){
+    public void browseImages(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -114,29 +79,28 @@ public class UpdatingReviewImage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0 && resultCode == RESULT_OK){
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             imageUri = data.getData();
 
-            try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 imageView.setImageBitmap(bitmap);
-            }catch (FileNotFoundException e){
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public String getActualImage(Uri uri){
+    public String getActualImage(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    public void uploadData(View view){
-        if(imageUri != null)
-        {
+    public void uploadData(View view) {
+        if (imageUri != null) {
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
@@ -150,42 +114,16 @@ public class UpdatingReviewImage extends AppCompatActivity {
                     Intent intent = getIntent();
                     Person user = (Person) intent.getSerializableExtra("MyClass");
 
-
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-//                    Intent intent = getIntent();
-//                    Person user = (Person) intent.getSerializableExtra("MyClass");
-//                    String UID = getIntent().getStringExtra("message_key3");
-//                final Person user = (Person) adapterView.getItemAtPosition(i);
-//                selectedUser = user;
-//                    final EditText mTitle = (EditText) findViewById(R.id.insertName);
-
-//                    String title = getIntent().getStringExtra("message_key");
-//
-//                    databaseReference.child(user.getUid()).child("name").setValue(title);
-
-//                    Editable title = mTitle.getText();
                     String NAME = name.getText().toString();
                     String EMAIL = email.getText().toString();
-//                    String TIME = user.getUserTime();
-//                    Person person = new Person(UUID.randomUUID().toString(),NAME, EMAIL, taskSnapshot.getDownloadUrl().toString());
-//                    databaseReference.child(person.getUid()).setValue(person);
 
                     databaseReference.child(user.getUid()).child("name").setValue(NAME);
-
 
                     databaseReference.child(user.getUid()).child("email").setValue(EMAIL);
                     databaseReference.child(user.getUid()).child("imageUri").setValue(taskSnapshot.getDownloadUrl().toString());
                     databaseReference.child(user.getUid()).child("userTime").setValue(currentDateTimeString);
-
-//                    databaseReference.child("name").setValue(NAME);
-//                    databaseReference.child("uid").setValue(UUID.randomUUID().toString());
-
-//
-
-//                    String id = databaseReference.push().getKey();
-//
-//                    databaseReference.child(id).setValue(person);
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Data uploaded", Toast.LENGTH_LONG).show();
@@ -202,25 +140,26 @@ public class UpdatingReviewImage extends AppCompatActivity {
                         @SuppressWarnings("VisibleForTests")
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double totalProgress = (100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded % "+ (int)totalProgress);
+                            double totalProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage("Uploaded % " + (int) totalProgress);
 
                         }
                     });
             Intent intentMove = new Intent(UpdatingReviewImage.this, HomeNavigation.class);
             startActivity(intentMove);
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Please select data first", Toast.LENGTH_LONG).show();
         }
     }
-    public void viewAllData(View view){
+
+    public void viewAllData(View view) {
         Intent intent = new Intent(UpdatingReviewImage.this, HomeNavigation.class);
         startActivity(intent);
 
     }
-    public void deleteInstance(View view){
 
-//        databaseReference.child(user.getUid()).child("name").setValue(NAME);
+    public void deleteInstance(View view) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdatingReviewImage.this);
         builder.setTitle("Confirm");
         builder.setMessage("Are you sure you want to delete?");
@@ -242,10 +181,6 @@ public class UpdatingReviewImage extends AppCompatActivity {
             }
         });
         builder.show();
-
-
-
-
 
 
     }
